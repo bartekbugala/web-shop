@@ -5,7 +5,8 @@ import PageContainer from '../PageContainer/PageContainer';
 const MainLayout = ({ children }) => (
   <div>
     <PageContainer>
-      <NavBar>{children}</NavBar>
+      <NavBar></NavBar>
+      {children}
     </PageContainer>
   </div>
 );
