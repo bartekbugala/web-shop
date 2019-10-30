@@ -16,3 +16,4 @@ finish:
 - task-1
 start:
 - task-2
+- task-3
