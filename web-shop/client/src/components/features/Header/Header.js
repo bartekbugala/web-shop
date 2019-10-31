@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPageLinks } from '../../../redux/shopRedux';
-import FooterMenu from '../../layout/FooterMenu/FooterMenu';
+import MainMenu from '../../layout/MainMenu/MainMenu';
 
 const mapStateToProps = state => ({
   links: getPageLinks(state)
 });
 
-class Footer extends Component {
+class Header extends Component {
   render() {
     const { links } = this.props;
 
     return (
-      <footer>
-        <div className="footer__copyright">{'All rights reserved'}</div>
+      <header>
         <nav>
-          <FooterMenu links={links} />
+          <MainMenu links={links} />
         </nav>
-      </footer>
+      </header>
     );
   }
 }
-
-export default connect(mapStateToProps)(Footer);
+export default connect(mapStateToProps)(Header);
