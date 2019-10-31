@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 const Logo = props => {
   const { logo } = props;
-  return <img className="header__logo" src={logo.src} alt={logo.alt} />;
+  return <img className="header__logo" src={logo.path} alt={logo.alt} />;
 };
 
 export default connect(mapStateToProps)(Logo);

@@ -1,8 +1,15 @@
 const initialState = {
-  logo: { src: './images/logo192.png', alt: 'App' }
+  logo: { path: './images/logo192.png', alt: 'App' },
+  menuLinks: [
+    { path: '/', title: 'Home' },
+    { path: '/faq', title: 'Faq' },
+    { path: `/terms`, title: 'Terms' },
+    { path: '/contact', title: 'Contact' }
+  ]
 };
 
 // Selectors
+export const getMenuLinks = ({ shop }) => shop.menuLinks;
 export const getLogo = ({ shop }) => shop.logo;
 
 //// Reducer

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-const MainMenu = ({ menuLinks, location }) => (
-  <ul className="main-menu">
+const FooterMenu = ({ menuLinks, location }) => (
+  <ul className="footer__menu">
     {menuLinks.map((link, index) => (
       <li key={index}>
-        <Link className={(location.pathname === menuLinks.path && 'active') || ''} to={link.path}>
+        <Link className={location.pathname === menuLinks.path || ''} to={link.path}>
           {link.title}
         </Link>
       </li>
@@ -15,8 +15,8 @@ const MainMenu = ({ menuLinks, location }) => (
   </ul>
 );
 
-MainMenu.propTypes = {
-  menuLinks: PropTypes.arrayOf(
+FooterMenu.propTypes = {
+  links: PropTypes.arrayOf(
     PropTypes.shape({
       path: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired
@@ -24,4 +24,4 @@ MainMenu.propTypes = {
   )
 };
 
-export default withRouter(props => <MainMenu {...props} />);
+export default withRouter(props => <FooterMenu {...props} />);
