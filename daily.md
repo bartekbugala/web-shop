@@ -25,3 +25,7 @@ finish:
 - task-4
 - task-3
 - task-5
+
+start:
+- task-6
+- task-7
