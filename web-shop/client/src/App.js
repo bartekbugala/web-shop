@@ -10,21 +10,26 @@ import Faq from './components/pages/Faq/FaqPage';
 import Terms from './components/pages/Terms/TermsPage';
 import Contact from './components/pages/Contact/ContactPage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <MainLayout>
-          <Switch>
+      <Provider store={store}>
+        <Router>
+          <MainLayout>
+            <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/faq" exact component={Faq} />
               <Route path="/terms" exact component={Terms} />
               <Route path="/contact" exact component={Contact} />
               <Route component={NotFound} />
-          </Switch>
-        </MainLayout>
-      </div>
+            </Switch>
+          </MainLayout>
+        </Router>
+      </Provider>
     );
   }
 }
