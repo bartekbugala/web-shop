@@ -1,5 +1,5 @@
 const initialState = {
-  links: [
+  menuLinks: [
     { path: '/', title: 'Home' },
     { path: '/faq', title: 'Faq' },
     { path: `/terms`, title: 'Terms' },
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 // Selectors
-export const getPageLinks = ({ shop }) => shop.links;
+export const getMenuLinks = ({ shop }) => shop.menuLinks;
 
 //// Reducer
 export default function reducer(statePart = initialState, action = {}) {

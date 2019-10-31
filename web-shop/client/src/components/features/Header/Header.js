@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getPageLinks } from '../../../redux/shopRedux';
+import { getMenuLinks } from '../../../redux/shopRedux';
 import MainMenu from '../../layout/MainMenu/MainMenu';
 
 const mapStateToProps = state => ({
-  links: getPageLinks(state)
+  menuLinks: getMenuLinks(state)
 });
 
-class Header extends Component {
-  render() {
-    const { links } = this.props;
+const Header = props => {
+  const { menuLinks } = props;
 
-    return (
-      <header>
-        <nav>
-          <MainMenu links={links} />
-        </nav>
-      </header>
-    );
-  }
-}
+  return (
+    <header>
+      <nav>
+        <MainMenu menuLinks={menuLinks} />
+      </nav>
+    </header>
+  );
+};
+
 export default connect(mapStateToProps)(Header);

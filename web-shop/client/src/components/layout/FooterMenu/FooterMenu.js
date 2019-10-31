@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-const FooterMenu = ({ links, location }) => (
+const FooterMenu = ({ menuLinks, location }) => (
   <ul className="footer__menu">
-    {links.map((link, index) => (
+    {menuLinks.map((link, index) => (
       <li key={index}>
-        <Link className={location.pathname === links.path || ''} to={link.path}>
+        <Link className={location.pathname === menuLinks.path || ''} to={link.path}>
           {link.title}
         </Link>
       </li>
