@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getMenuLinks } from '../../../redux/shopRedux';
 import FooterMenu from '../../layout/FooterMenu/FooterMenu';
