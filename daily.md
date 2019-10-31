@@ -14,6 +14,7 @@ finish:
 - task-components-list
 - task-web-shop
 - task-1
+
 start:
 - task-2
 - task-3
