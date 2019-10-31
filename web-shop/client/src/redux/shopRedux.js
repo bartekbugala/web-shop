@@ -1,4 +1,5 @@
 const initialState = {
+  logo: { path: './images/logo192.png', alt: 'App' },
   menuLinks: [
     { path: '/', title: 'Home' },
     { path: '/faq', title: 'Faq' },
@@ -9,6 +10,7 @@ const initialState = {
 
 // Selectors
 export const getMenuLinks = ({ shop }) => shop.menuLinks;
+export const getLogo = ({ shop }) => shop.logo;
 
 //// Reducer
 export default function reducer(statePart = initialState, action = {}) {
