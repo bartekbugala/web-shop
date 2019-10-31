@@ -1,5 +1,6 @@
 import React from 'react';
 import MainMenu from '../../layout/MainMenu/MainMenu';
+import Logo from '../../common/Logo/Logo';
 
 class NavBar extends React.Component {
   state = {
@@ -15,9 +16,12 @@ class NavBar extends React.Component {
     const { links } = this.state;
 
     return (
-      <nav>
-        <MainMenu links={links} />
-      </nav>
+      <header>
+        <Logo />
+        <nav>
+          <MainMenu links={links} />
+        </nav>
+      </header>
     );
   }
 }
