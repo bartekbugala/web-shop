@@ -1,5 +1,5 @@
 const initialState = {
-  logo: { path: './images/logo192.png', alt: 'App' },
+  logo: { path: './images/creativity_logo.jpg', alt: 'Creativity' },
   menuLinks: [
     { path: '/', title: 'Home' },
     { path: '/faq', title: 'Faq' },

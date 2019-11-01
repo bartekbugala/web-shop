@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import './MainMenu.scss';
 
 const MainMenu = ({ menuLinks, location }) => (
-  <ul className="main-menu">
+  <ul className="header__menu">
     {menuLinks.map((link, index) => (
       <li key={index}>
-        <Link className={(location.pathname === menuLinks.path && 'active') || ''} to={link.path}>
+        <Link className={(location.pathname === link.path && 'active') || ''} to={link.path}>
           {link.title}
         </Link>
       </li>
