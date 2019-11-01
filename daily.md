@@ -29,3 +29,8 @@ finish:
 start:
 - task-6
 - task-7
+
+## 01.11.2019
+continue:
+- task-6
+- task-7
