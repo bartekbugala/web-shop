@@ -1,12 +1,13 @@
-.header__menu {
+.footer__menu {
   display: flex;
-  flex: 1 1;
+  flex: 1 1 80%;
   flex-direction: row;
   list-style: none;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   li {
     text-transform: uppercase;
+    margin: 0 15px;
   }
   a.active {
     font-weight: bold;

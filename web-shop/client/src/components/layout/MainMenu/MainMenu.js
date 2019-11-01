@@ -3,16 +3,25 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import './MainMenu.scss';
+import { MdShoppingCart } from 'react-icons/md';
 
 const MainMenu = ({ menuLinks, location }) => (
   <ul className="header__menu">
-    {menuLinks.map((link, index) => (
-      <li key={index}>
-        <Link className={(location.pathname === link.path && 'active') || ''} to={link.path}>
-          {link.title}
-        </Link>
-      </li>
-    ))}
+    {menuLinks.map((link, index) =>
+      link.path === '/cart' ? (
+        <li>
+          <Link className={(location.pathname === menuLinks.path && 'active') || ''} to="/cart">
+            <MdShoppingCart />
+          </Link>
+        </li>
+      ) : (
+        <li key={index}>
+          <Link className={(location.pathname === link.path && 'active') || ''} to={link.path}>
+            {link.title}
+          </Link>
+        </li>
+      )
+    )}
   </ul>
 );
 

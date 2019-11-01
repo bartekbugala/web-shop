@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import './FooterMenu.scss';
 
 const FooterMenu = ({ menuLinks, location }) => (
   <ul className="footer__menu">
