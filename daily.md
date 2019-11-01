@@ -28,9 +28,9 @@ finish:
 
 start:
 - task-6
-- task-7
+- task-8
 
 ## 01.11.2019
 continue:
 - task-6
-- task-7
+- task-8
