@@ -9,7 +9,7 @@ const MainMenu = ({ menuLinks, location }) => (
   <ul className="header__menu">
     {menuLinks.map((link, index) =>
       link.path === '/cart' ? (
-        <li>
+        <li key={index}>
           <Link className={(location.pathname === menuLinks.path && 'active') || ''} to="/cart">
             <MdShoppingCart />
           </Link>
