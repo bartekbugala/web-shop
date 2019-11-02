@@ -39,7 +39,7 @@ continue:
 
 ## 02.11.2019
 continue:
--task-7
+- task-7
 
 finish:
 - task-9
