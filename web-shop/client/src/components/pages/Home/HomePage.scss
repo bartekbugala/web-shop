@@ -1,0 +1,10 @@
+.main__main-section {
+  margin: 50px 0;
+  display: flex;
+  .main__sorting-widget-container {
+    flex: 1 1 20%;
+  }
+  .main__product-list-container {
+    flex: 1 1 80%;
+  }
+}
