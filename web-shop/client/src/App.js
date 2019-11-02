@@ -11,12 +11,6 @@ import Terms from './components/pages/Terms/TermsPage';
 import Contact from './components/pages/Contact/ContactPage';
 import Cart from './components/pages/Cart/Cart';
 import NotFound from './components/pages/NotFound/NotFoundPage';
-import { getMenuLinks } from './redux/shopRedux';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state => ({
-  menuLinks: getMenuLinks(state)
-});
 
 class App extends React.Component {
   render() {
@@ -37,4 +31,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default App;
