@@ -2,7 +2,7 @@ import React from 'react';
 
 const SortingWidget = () => (
   <div>
-    <h1>Sorting Widget</h1>
+    <h2>Sortuj:</h2>
     <p>SORT</p>
     <p>SORT</p>
   </div>

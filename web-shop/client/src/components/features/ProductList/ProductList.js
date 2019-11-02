@@ -3,20 +3,20 @@ import { PropTypes } from 'prop-types';
 import { getProducts } from '../../../redux/shopRedux';
 import ListProduct from '../ListProduct/ListProduct';
 import { connect } from 'react-redux';
+import './ProductList.scss';
 
 const mapStateToProps = state => ({
   products: getProducts(state)
 });
 
 const ProductList = ({ products }) => {
-  console.log('Produkty', products);
   return (
     <div>
-      <section className="main__product-list">
+      <div className="main__product-list">
         {products.map(product => (
           <ListProduct key={product.id} {...product} />
         ))}
-      </section>
+      </div>
     </div>
   );
 };

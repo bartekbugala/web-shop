@@ -1,0 +1,23 @@
+.list-product__container {
+  position: relative;
+  display: inline-block;
+
+  margin: 5px 12px;
+  .list-product__img {
+    max-width: 100%;
+    background-color: lightgray;
+  }
+  p {
+    bottom: 0;
+  }
+  .list-product__name {
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+  }
+  .list-product__price {
+    position: absolute;
+    display: inline-block;
+    right: 5px;
+  }
+}
