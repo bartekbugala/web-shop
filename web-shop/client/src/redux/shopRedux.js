@@ -1,10 +1,11 @@
 const initialState = {
-  logo: { path: './images/logo192.png', alt: 'App' },
+  logo: { path: './images/creativity_logo.jpg', alt: 'Creativity' },
   menuLinks: [
     { path: '/', title: 'Home' },
     { path: '/faq', title: 'Faq' },
     { path: `/terms`, title: 'Terms' },
-    { path: '/contact', title: 'Contact' }
+    { path: '/contact', title: 'Contact' },
+    { path: '/cart', title: 'Cart' }
   ]
 };
 

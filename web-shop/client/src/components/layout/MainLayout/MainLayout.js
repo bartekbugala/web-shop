@@ -6,9 +6,9 @@ import Footer from '../../features/Footer/Footer';
 const MainLayout = ({ children }) => (
   <div>
     <PageContainer>
-      <Header></Header>
-      {children}
-      <Footer></Footer>
+      <Header />
+      <main>{children}</main>
+      <Footer />
     </PageContainer>
   </div>
 );
