@@ -33,14 +33,13 @@ start:
 ## 01.11.2019
 finish:
 - task-8
-- task-7
 
 continue:
-- task-6
+- task-7
 
 ## 02.11.2019
 continue:
--task-6
+-task-7
 
 finish:
 - task-9
