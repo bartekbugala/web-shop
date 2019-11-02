@@ -6,13 +6,15 @@ import './FooterMenu.scss';
 
 const FooterMenu = ({ menuLinks, location }) => (
   <ul className="footer__menu">
-    {menuLinks.map((link, index) => (
-      <li key={index}>
-        <Link className={location.pathname === menuLinks.path || ''} to={link.path}>
-          {link.title}
-        </Link>
-      </li>
-    ))}
+    {menuLinks.map((link, index) =>
+      link.path === '/cart' ? null : (
+        <li key={index}>
+          <Link className={location.pathname === menuLinks.path || ''} to={link.path}>
+            {link.title}
+          </Link>
+        </li>
+      )
+    )}
   </ul>
 );
 
