@@ -1,8 +1,6 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 import { getProducts } from '../../../redux/shopRedux';
 import ListProduct from '../ListProduct/ListProduct';
-import Pagination from '../../common/Pagination/Pagination';
 import { connect } from 'react-redux';
 import './ProductList.scss';
 
@@ -18,7 +16,6 @@ const ProductList = ({ products }) => {
           <ListProduct key={product.id} {...product} />
         ))}
       </div>
-      <Pagination presentPage={1} initialPage={1} pages={1} onPageChange={6} />
     </div>
   );
 };
