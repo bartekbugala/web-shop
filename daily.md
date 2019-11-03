@@ -48,8 +48,8 @@ finish:
 
 
 ## 03.11.2019
-start:
-- task-14
 
 finish:
 - task-7
+- task-14
+- task-server
