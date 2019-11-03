@@ -8,7 +8,7 @@ const mongoSanitize = require('mongo-sanitize');
 const loadTestData = require('./testData');
 
 // import routes
-const postRoutes = require('./routes/post.routes');
+const productRoutes = require('./routes/product.routes');
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   mongoSanitize(req.body);
   next();
 });
-app.use('/api', postRoutes);
+app.use('/api', productRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/../client/build')));
@@ -48,7 +48,7 @@ app.listen(config.PORT, function() {
 
 /// DUMMY ENDPOINT
 
-/* app.post('/login', function(req, res) {
+/* app.product('/login', function(req, res) {
   User.findOne({ email: req.body.email, password: req.body.password }, function(err, data) {
     if (err) {
       res.send(err);
