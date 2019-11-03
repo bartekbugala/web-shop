@@ -1,38 +1,212 @@
+import axios from 'axios';
+import { API_URL } from '../config';
+
+//// Selectors
+export const getMenuLinks = ({ shop }) => shop.menuLinks;
+export const getLogo = ({ shop }) => shop.logo;
+export const getProducts = ({ shop }) => shop.data;
+export const getSingleProduct = ({ shop }) => (shop.singleProduct === null ? {} : shop.singleProduct);
+export const countProducts = ({ shop }) => shop.amount;
+export const getRequest = ({ shop }) => shop.request;
+export const getUpdateRequest = ({ shop }) => shop.updateRequest;
+export const getPages = ({ shop }) => Math.ceil(shop.amount / shop.productsPerPage);
+
+//// Thunks
+export const loadProductsRequest = () => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      let res = await axios.get(`${API_URL}/products`);
+      dispatch(loadProducts(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadSingleProductRequest = id => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      let res = await axios.get(`${API_URL}/products/${id}`);
+      dispatch(loadSingleProduct(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadProductsByPageRequest = (page = 1, productsPerPage = 6) => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      const startAt = (page - 1) * productsPerPage;
+      const limit = productsPerPage;
+
+      let res = await axios.get(`${API_URL}/products/range/${startAt}/${limit}`);
+
+      const payload = {
+        products: res.data.products,
+        amount: res.data.amount,
+        productsPerPage,
+        presentPage: page
+      };
+
+      dispatch(loadProductsByPage(payload));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadRandomProductRequest = () => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      let res = await axios.get(`${API_URL}/products/random`);
+
+      dispatch(loadRandomProduct(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const updateProductRequest = (product, id) => {
+  return async dispatch => {
+    dispatch(startUpdateRequest());
+    try {
+      await axios.patch(`${API_URL}/products/${id}`, product);
+      dispatch(endUpdateRequest());
+    } catch (e) {
+      dispatch(errorUpdateRequest(e.message));
+    }
+  };
+};
+
+export const addProductRequest = product => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      await axios.post(`${API_URL}/products`, product);
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(JSON.stringify(e)));
+    }
+  };
+};
+
+export const deleteProductRequest = id => {
+  return async dispatch => {
+    dispatch(startUpdateRequest());
+    try {
+      await axios.delete(`${API_URL}/products/${id}`);
+      dispatch(endUpdateRequest());
+    } catch (e) {
+      dispatch(errorUpdateRequest(e.response));
+    }
+  };
+};
+
+//// Initial state
 const initialState = {
   logo: { path: './images/creativity_logo.jpg', alt: 'Creativity' },
   menuLinks: [
-    { path: '/', title: 'Home' },
+    { path: '/products', title: 'Home' },
     { path: '/faq', title: 'Faq' },
     { path: `/terms`, title: 'Terms' },
     { path: '/contact', title: 'Contact' },
     { path: '/cart', title: 'Cart' }
   ],
-  products: [
-    { id: '0-id1', name: 'Layout', price: 10000, img: './images/placeholder.png', amount: '' },
-    { id: '0-id2', name: 'Script', price: 10, img: './images/placeholder.png', amount: '' },
-    { id: '0-id3', name: 'Website', price: 109, img: './images/placeholder.png', amount: '' },
-    { id: '0-id4', name: 'Mongo Database', price: 100.14, img: './images/placeholder.png', amount: '' },
-    { id: '0-id5', name: 'Logo', price: 100.77, img: './images/placeholder.png', amount: '' },
-    { id: '0-id6', name: 'Ad', price: 100.22, img: './images/placeholder.png', amount: '' },
-    { id: '0-id7', name: 'React-App', price: 100.03, img: './images/placeholder.png', amount: '' },
-    { id: '0-id8', name: 'Design', price: 100.1, img: './images/placeholder.png', amount: '' },
-    { id: '0-id9', name: 'Wireframe', price: 99999, img: './images/placeholder.png', amount: '' },
-    { id: '0-id10', name: 'Gallery', price: 1.0, img: './images/placeholder.png', amount: '' },
-    { id: '0-id11', name: 'Slider', price: 100, img: './images/placeholder.png', amount: '' },
-    { id: '0-id12', name: 'Api', price: 100, img: './images/placeholder.png', amount: '' },
-    { id: '0-id13', name: 'MySQL Database', price: 100, img: './images/placeholder.png', amount: '' },
-    { id: '0-id14', name: 'Deployment', price: 100, img: './images/placeholder.png', amount: '' }
-  ]
+  data: [{ id: 'xxx', name: 'Layout', price: 10000, img: './images/placeholder.png', amount: 1 }],
+  singleProduct: {},
+  updateRequest: {
+    pending: false,
+    error: null,
+    success: null
+  },
+  amount: 0,
+  productsPerPage: 10,
+  presentPage: 1,
+  request: {
+    pending: false,
+    error: null,
+    success: null
+  }
 };
 
-// Selectors
-export const getMenuLinks = ({ shop }) => shop.menuLinks;
-export const getLogo = ({ shop }) => shop.logo;
-export const getProducts = ({ shop }) => shop.products;
+//// Actions
+// action name creator
+const reducerName = 'products';
+const createActionName = name => `app/${reducerName}/${name}`;
+
+// action exports
+export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
+export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
+export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
+export const START_REQUEST = createActionName('START_REQUEST');
+export const END_REQUEST = createActionName('END_REQUEST');
+export const RESET_REQUEST = createActionName('RESET_REQUEST');
+export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+
+export const START_UPDATE_REQUEST = createActionName('START_UPDATE_REQUEST');
+export const END_UPDATE_REQUEST = createActionName('END_UPDATE_REQUEST');
+export const RESET_UPDATE_REQUEST = createActionName('RESET_UPDATE_REQUEST');
+export const ERROR_UPDATE_REQUEST = createActionName('ERROR_UPDATE_REQUEST');
+
+export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
+export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
+export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS_PAGE });
+export const loadRandomProduct = payload => ({ payload, type: LOAD_RANDOM_PRODUCT });
+export const startRequest = () => ({ type: START_REQUEST });
+export const endRequest = () => ({ type: END_REQUEST });
+export const resetRequest = () => ({ type: RESET_REQUEST });
+export const errorRequest = error => ({ error, type: ERROR_REQUEST });
+
+export const startUpdateRequest = () => ({ type: START_UPDATE_REQUEST });
+export const endUpdateRequest = () => ({ type: END_UPDATE_REQUEST });
+export const resetUpdateRequest = () => ({ type: RESET_UPDATE_REQUEST });
+export const errorUpdateRequest = error => ({ error, type: ERROR_UPDATE_REQUEST });
 
 //// Reducer
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
+    case LOAD_PRODUCTS:
+      return { ...statePart, data: action.payload };
+    case LOAD_SINGLE_PRODUCT:
+      return { ...statePart, singleProduct: action.payload };
+    case LOAD_PRODUCTS_PAGE:
+      return {
+        ...statePart,
+        productsPerPage: action.payload.productsPerPage,
+        presentPage: action.payload.presentPage,
+        amount: action.payload.amount,
+        data: [...action.payload.products]
+      };
+    case LOAD_RANDOM_PRODUCT:
+      return { ...statePart, singleProduct: action.payload };
+    case START_REQUEST:
+      return { ...statePart, request: { pending: true, error: null, success: null } };
+    case END_REQUEST:
+      return { ...statePart, request: { pending: false, error: null, success: true } };
+    case RESET_REQUEST:
+      return { ...statePart, request: { pending: false, error: null, success: null } };
+    case ERROR_REQUEST:
+      return { ...statePart, request: { pending: false, error: action.error, success: true } };
+
+    case START_UPDATE_REQUEST:
+      return { ...statePart, updateRequest: { pending: true, error: null, success: null } };
+    case END_UPDATE_REQUEST:
+      return { ...statePart, updateRequest: { pending: false, error: null, success: true } };
+    case RESET_UPDATE_REQUEST:
+      return { ...statePart, updateRequest: { pending: false, error: null, success: null } };
+    case ERROR_UPDATE_REQUEST:
+      return { ...statePart, updateRequest: { pending: false, error: action.error, success: true } };
     default:
       return statePart;
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductList from '../../features/ProductList/ProductList';
+import Products from '../../features/Products/ProductsContainer';
 import SortingWidget from '../../features/SortingWidget/SortingWidget';
 import './HomePage.scss';
 
@@ -9,7 +9,7 @@ const HomePage = () => (
       <SortingWidget />
     </div>
     <div className="main__product-list-container">
-      <ProductList />
+      <Products initialPage={1} productsPerPage={6} pagination={true} />
     </div>
   </section>
 );
