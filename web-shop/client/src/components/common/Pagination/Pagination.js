@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 
 import './Pagination.scss';
 
@@ -32,7 +32,7 @@ class Pagination extends React.Component {
             className={`pagination__list__item${presentPage === 1 ? ' pagination__list__item--hidden' : ''}`}
             onClick={() => changePage(presentPage - 1)}
           >
-            <MdKeyboardArrowLeft />
+            <MdArrowBack />
           </li>
 
           {[...Array(pages)].map((el, page) => (
@@ -49,7 +49,7 @@ class Pagination extends React.Component {
             className={`pagination__list__item${presentPage === pages ? ' pagination__list__item--hidden' : ''}`}
             onClick={() => changePage(presentPage + 1)}
           >
-            <MdKeyboardArrowRight />
+            <MdArrowForward />
           </li>
         </ul>
       </div>
