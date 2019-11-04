@@ -47,7 +47,6 @@ finish:
 - task-6
 - task 10
 
-
 ## 03.11.2019
 
 finish:
