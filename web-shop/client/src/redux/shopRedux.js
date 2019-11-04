@@ -1,15 +1,17 @@
-import axios from 'axios';
-import { API_URL, BASE_URL } from '../config';
+import axios from "axios";
+import { API_URL, BASE_URL } from "../config";
 
 //// Selectors
 export const getMenuLinks = ({ shop }) => shop.menuLinks;
 export const getLogo = ({ shop }) => shop.logo;
 export const getProducts = ({ shop }) => shop.data;
-export const getSingleProduct = ({ shop }) => (shop.singleProduct === null ? {} : shop.singleProduct);
+export const getSingleProduct = ({ shop }) =>
+  shop.singleProduct === null ? {} : shop.singleProduct;
 export const countProducts = ({ shop }) => shop.amount;
 export const getRequest = ({ shop }) => shop.request;
 export const getUpdateRequest = ({ shop }) => shop.updateRequest;
-export const getPages = ({ shop }) => Math.ceil(shop.amount / shop.productsPerPage);
+export const getPages = ({ shop }) =>
+  Math.ceil(shop.amount / shop.productsPerPage);
 export const getCart = ({ shop }) => shop.cart;
 
 //// Thunks
@@ -39,14 +41,20 @@ export const loadSingleProductRequest = id => {
   };
 };
 
-export const loadProductsByPageRequest = (page = 1, productsPerPage = 6) => {
+export const loadProductsByPageRequest = (
+  page = 1,
+  productsPerPage = 6,
+  sortParam = `name`
+) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
       const startAt = (page - 1) * productsPerPage;
       const limit = productsPerPage;
 
-      let res = await axios.get(`${API_URL}/products/range/${startAt}/${limit}`);
+      let res = await axios.get(
+        `${API_URL}/products/range/${startAt}/${limit}/${sortParam}`
+      );
 
       const payload = {
         products: res.data.products,
@@ -81,14 +89,14 @@ export const addToCartRequest = (id, cart) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = cart.find(el => el.id === id)
+      const result = cart.find(el => el.id === id);
       if (result) {
         const payload = cart;
-        const currentIndex = cart.findIndex(el => el.id === id)
-        payload[currentIndex].amount += 1
-        dispatch(updateAmountInCart(payload))
+        const currentIndex = cart.findIndex(el => el.id === id);
+        payload[currentIndex].amount += 1;
+        dispatch(updateAmountInCart(payload));
       } else {
-        dispatch(addToCart(id))
+        dispatch(addToCart(id));
       }
       dispatch(endRequest());
     } catch (e) {
@@ -135,13 +143,13 @@ export const deleteProductRequest = id => {
 
 //// Initial state
 const initialState = {
-  logo: { path: `/images/creativity_logo.jpg`, alt: 'Creativity' },
+  logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
   menuLinks: [
-    { path: '/', title: 'Home' },
-    { path: '/faq', title: 'Faq' },
-    { path: `/terms`, title: 'Terms' },
-    { path: '/contact', title: 'Contact' },
-    { path: '/cart', title: 'Cart' }
+    { path: "/", title: "Home" },
+    { path: "/faq", title: "Faq" },
+    { path: `/terms`, title: "Terms" },
+    { path: "/contact", title: "Contact" },
+    { path: "/cart", title: "Cart" }
   ],
   data: [],
   cart: [],
@@ -163,36 +171,47 @@ const initialState = {
 
 //// Actions
 // action name creator
-const reducerName = 'products';
+const reducerName = "products";
 const createActionName = name => `app/${reducerName}/${name}`;
 
 // action exports
-export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
-export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
-export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
-export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
+export const LOAD_PRODUCTS = createActionName("LOAD_PRODUCTS");
+export const LOAD_SINGLE_PRODUCT = createActionName("LOAD_SINGLE_PRODUCT");
+export const LOAD_PRODUCTS_PAGE = createActionName("LOAD_PRODUCTS_PAGE");
+export const LOAD_RANDOM_PRODUCT = createActionName("LOAD_RANDOM_PRODUCT");
 
-export const ADD_TO_CART = createActionName('ADD_TO_CART');
-export const UPDATE_AMOUNT_IN_CART = createActionName('UPDATE_AMOUNT_IN_CART');
+export const ADD_TO_CART = createActionName("ADD_TO_CART");
+export const UPDATE_AMOUNT_IN_CART = createActionName("UPDATE_AMOUNT_IN_CART");
 
-export const START_REQUEST = createActionName('START_REQUEST');
-export const END_REQUEST = createActionName('END_REQUEST');
-export const RESET_REQUEST = createActionName('RESET_REQUEST');
-export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+export const START_REQUEST = createActionName("START_REQUEST");
+export const END_REQUEST = createActionName("END_REQUEST");
+export const RESET_REQUEST = createActionName("RESET_REQUEST");
+export const ERROR_REQUEST = createActionName("ERROR_REQUEST");
 
-export const START_UPDATE_REQUEST = createActionName('START_UPDATE_REQUEST');
-export const END_UPDATE_REQUEST = createActionName('END_UPDATE_REQUEST');
-export const RESET_UPDATE_REQUEST = createActionName('RESET_UPDATE_REQUEST');
-export const ERROR_UPDATE_REQUEST = createActionName('ERROR_UPDATE_REQUEST');
+export const START_UPDATE_REQUEST = createActionName("START_UPDATE_REQUEST");
+export const END_UPDATE_REQUEST = createActionName("END_UPDATE_REQUEST");
+export const RESET_UPDATE_REQUEST = createActionName("RESET_UPDATE_REQUEST");
+export const ERROR_UPDATE_REQUEST = createActionName("ERROR_UPDATE_REQUEST");
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
-export const loadSingleProduct = payload => ({ payload, type: LOAD_SINGLE_PRODUCT });
-export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS_PAGE });
-export const loadRandomProduct = payload => ({ payload, type: LOAD_RANDOM_PRODUCT });
+export const loadSingleProduct = payload => ({
+  payload,
+  type: LOAD_SINGLE_PRODUCT
+});
+export const loadProductsByPage = payload => ({
+  payload,
+  type: LOAD_PRODUCTS_PAGE
+});
+export const loadRandomProduct = payload => ({
+  payload,
+  type: LOAD_RANDOM_PRODUCT
+});
 
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
-export const updateAmountInCart = payload => ({ payload, type: UPDATE_AMOUNT_IN_CART });
-
+export const updateAmountInCart = payload => ({
+  payload,
+  type: UPDATE_AMOUNT_IN_CART
+});
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -202,7 +221,10 @@ export const errorRequest = error => ({ error, type: ERROR_REQUEST });
 export const startUpdateRequest = () => ({ type: START_UPDATE_REQUEST });
 export const endUpdateRequest = () => ({ type: END_UPDATE_REQUEST });
 export const resetUpdateRequest = () => ({ type: RESET_UPDATE_REQUEST });
-export const errorUpdateRequest = error => ({ error, type: ERROR_UPDATE_REQUEST });
+export const errorUpdateRequest = error => ({
+  error,
+  type: ERROR_UPDATE_REQUEST
+});
 
 //// Reducer
 export default function reducer(statePart = initialState, action = {}) {
@@ -222,25 +244,52 @@ export default function reducer(statePart = initialState, action = {}) {
     case LOAD_RANDOM_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
     case ADD_TO_CART:
-      return { ...statePart, cart: [...statePart.cart, { id: action.payload, amount: 1 }] };
+      return {
+        ...statePart,
+        cart: [...statePart.cart, { id: action.payload, amount: 1 }]
+      };
     case UPDATE_AMOUNT_IN_CART:
       return { ...statePart, cart: action.payload };
     case START_REQUEST:
-      return { ...statePart, request: { pending: true, error: null, success: null } };
+      return {
+        ...statePart,
+        request: { pending: true, error: null, success: null }
+      };
     case END_REQUEST:
-      return { ...statePart, request: { pending: false, error: null, success: true } };
+      return {
+        ...statePart,
+        request: { pending: false, error: null, success: true }
+      };
     case RESET_REQUEST:
-      return { ...statePart, request: { pending: false, error: null, success: null } };
+      return {
+        ...statePart,
+        request: { pending: false, error: null, success: null }
+      };
     case ERROR_REQUEST:
-      return { ...statePart, request: { pending: false, error: action.error, success: true } };
+      return {
+        ...statePart,
+        request: { pending: false, error: action.error, success: true }
+      };
     case START_UPDATE_REQUEST:
-      return { ...statePart, updateRequest: { pending: true, error: null, success: null } };
+      return {
+        ...statePart,
+        updateRequest: { pending: true, error: null, success: null }
+      };
     case END_UPDATE_REQUEST:
-      return { ...statePart, updateRequest: { pending: false, error: null, success: true } };
+      return {
+        ...statePart,
+        updateRequest: { pending: false, error: null, success: true }
+      };
     case RESET_UPDATE_REQUEST:
-      return { ...statePart, updateRequest: { pending: false, error: null, success: null } };
+      return {
+        ...statePart,
+        updateRequest: { pending: false, error: null, success: null }
+      };
     case ERROR_UPDATE_REQUEST:
-      return { ...statePart, updateRequest: { pending: false, error: action.error, success: true } };
+      return {
+        ...statePart,
+        updateRequest: { pending: false, error: action.error, success: true }
+      };
     default:
       return statePart;
   }

@@ -1,6 +1,6 @@
 // import model
-const Product = require('../models/product.model');
-const uuid = require('uuid');
+const Product = require("../models/product.model");
+const uuid = require("uuid");
 
 // get all products
 exports.getProducts = async (req, res) => {
@@ -39,11 +39,13 @@ exports.getRandomProduct = async (req, res) => {
 // get products by range
 exports.getProductsByRange = async function(req, res) {
   try {
-    let { startAt, limit } = req.params;
+    let { startAt, limit, sortParam } = req.params;
 
     startAt = parseInt(startAt);
     limit = parseInt(limit);
     const products = await Product.find()
+      .sort(sortParam)
+      .collation({ locale: "pl", strength: 1 })
       .skip(startAt)
       .limit(limit);
     // return total amount of documents in collection
@@ -65,7 +67,7 @@ exports.addProduct = async (req, res) => {
     newProduct.price = price;
     newProduct.img = img;
     newProduct.amount = amount;
-    newProduct.description;
+    newProduct.description = description;
     newProduct.tag = tag;
     newProduct.id = uuid();
 
@@ -81,7 +83,14 @@ exports.editProduct = async (req, res) => {
     const { name, price, img, amount, description, tag } = req.body;
     const productUpdated = await Product.findOneAndUpdate(
       { id: req.params.id },
-      { name: name, price: price, img: img, amount: amount,description:description, tag:tag }
+      {
+        name: name,
+        price: price,
+        img: img,
+        amount: amount,
+        description: description,
+        tag: tag
+      }
     );
     res.status(200).json(productUpdated);
   } catch (err) {
@@ -91,9 +100,11 @@ exports.editProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   try {
-    const productDeleted = await Product.findOneAndDelete({ id: req.params.id });
+    const productDeleted = await Product.findOneAndDelete({
+      id: req.params.id
+    });
     if (productDeleted === null) {
-      let noProduct = { error: 'already removed or not in database' };
+      let noProduct = { error: "already removed or not in database" };
       res.status(404).json(noProduct);
     } else res.status(200).json(productDeleted);
   } catch (err) {
