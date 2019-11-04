@@ -33,6 +33,7 @@ start:
 ## 01.11.2019
 finish:
 - task-8
+- task-17
 
 continue:
 - task-7
