@@ -1,6 +1,5 @@
 import React from 'react';
 import './ListProduct.scss';
-import Button from '../../common/Button/Button';
 import {Link} from 'react-router-dom'
 
 const ListProduct = props => {

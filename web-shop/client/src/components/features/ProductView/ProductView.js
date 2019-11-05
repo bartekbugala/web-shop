@@ -2,6 +2,7 @@ import React from 'react';
 import ListProduct from '../ListProduct/ListProduct';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
+import ProductFull from '../ProductFull/ProductFull';
 
 class ProductView extends React.Component {
   componentDidMount() {
@@ -9,8 +10,8 @@ class ProductView extends React.Component {
     loadSingleProduct();
   }
   render() {
-    const { product, request } = this.props;
-    const { name, price, img} = product;
+    const { product, request, productId } = this.props;
+    const {name, price, img, id} = product
     return (
       <div>
         {(request.pending || request.success === null) && <Spinner />}
@@ -19,7 +20,7 @@ class ProductView extends React.Component {
           <Alert variant="info">No product</Alert>
         )}
         {!request.pending && request.success && Object.entries(product).length !== 0 && product.constructor === Object && (
-          <ListProduct name={name} price={price} img={img} id={productId} />
+          <ProductFull name={name} price={price} img={img} id={id} />
         )}
       </div>
     );

@@ -122,7 +122,7 @@ const initialState = {
     { path: '/contact', title: 'Contact' },
     { path: '/cart', title: 'Cart' }
   ],
-  data: [{ id: 'xxx', name: 'Layout', price: 10000, img: './images/placeholder.png', amount: 1 }],
+  data: [],
   singleProduct: {},
   updateRequest: {
     pending: false,
