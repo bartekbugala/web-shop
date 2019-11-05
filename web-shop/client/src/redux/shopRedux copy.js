@@ -77,11 +77,19 @@ export const loadRandomProductRequest = () => {
   };
 };
 
-export const addToCartRequest = id => {
+export const addToCartRequest = (id, cart) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      dispatch(addToCart(id));
+      const result = cart.find(el => el.id === id)
+      if (result) {
+        const payload = cart;
+        const currentIndex = cart.findIndex(el => el.id === id)
+        payload[currentIndex].amount += amount
+        dispatch(updateAmountInCart(payload))
+      } else {
+        dispatch(addToCart(id))
+      }
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));
@@ -165,6 +173,8 @@ export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
 export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
 
 export const ADD_TO_CART = createActionName('ADD_TO_CART');
+export const UPDATE_AMOUNT_IN_CART = createActionName('UPDATE_AMOUNT_IN_CART');
+
 
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
@@ -182,6 +192,7 @@ export const loadProductsByPage = payload => ({ payload, type: LOAD_PRODUCTS_PAG
 export const loadRandomProduct = payload => ({ payload, type: LOAD_RANDOM_PRODUCT });
 
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
+export const updateAmountInCart = payload => ({ payload, type: UPDATE_AMOUNT_IN_CART });
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -211,7 +222,9 @@ export default function reducer(statePart = initialState, action = {}) {
     case LOAD_RANDOM_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
     case ADD_TO_CART:
-      return { ...statePart, cart: [...statePart.cart, { id: action.payload }] };
+      return { ...statePart, cart: [...statePart.cart, { id: action.payload.id, amount: action.payload.amount }] };
+    case UPDATE_AMOUNT_IN_CART:
+      return { ...statePart, cart: action.payload };
     case START_REQUEST:
       return { ...statePart, request: { pending: true, error: null, success: null } };
     case END_REQUEST:
