@@ -59,12 +59,14 @@ exports.getProductsByRange = async function(req, res) {
 //add new product
 exports.addProduct = async (req, res) => {
   try {
-    const { name, price, img, amount } = req.body;
+    const { name, price, img, amount, description, tag } = req.body;
     let newProduct = new Product();
     newProduct.name = name;
     newProduct.price = price;
     newProduct.img = img;
     newProduct.amount = amount;
+    newProduct.description;
+    newProduct.tag = tag;
     newProduct.id = uuid();
 
     const productSaved = await newProduct.save();
@@ -76,10 +78,10 @@ exports.addProduct = async (req, res) => {
 
 exports.editProduct = async (req, res) => {
   try {
-    const { name, price, img, amount } = req.body;
+    const { name, price, img, amount, description, tag } = req.body;
     const productUpdated = await Product.findOneAndUpdate(
       { id: req.params.id },
-      { name: name, price: price, img: img, amount: amount }
+      { name: name, price: price, img: img, amount: amount,description:description, tag:tag }
     );
     res.status(200).json(productUpdated);
   } catch (err) {

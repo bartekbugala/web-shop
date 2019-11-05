@@ -1,0 +1,19 @@
+.full-product__container {
+  position: relative;
+  display: flex;
+
+  margin: 5px 12px;
+  .full-product__img {
+    max-width: 100%;
+    background-color: lightgray;
+  }
+  p {
+    bottom: 0;
+  }
+  .full-product__name {
+    left: 5px;
+  }
+  .full-product__price {
+    right: 5px;
+  }
+}

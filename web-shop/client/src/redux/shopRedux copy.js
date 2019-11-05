@@ -74,7 +74,7 @@ export const loadRandomProductRequest = () => {
     } catch (e) {
       dispatch(errorRequest(e.message));
     }
-  };
+  }; ``
 };
 
 export const addToCartRequest = (id, cart) => {
@@ -85,7 +85,7 @@ export const addToCartRequest = (id, cart) => {
       if (result) {
         const payload = cart;
         const currentIndex = cart.findIndex(el => el.id === id)
-        payload[currentIndex].amount += 1
+        payload[currentIndex].amount += 1;
         dispatch(updateAmountInCart(payload))
       } else {
         dispatch(addToCart(id))
@@ -175,6 +175,7 @@ export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
 export const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const UPDATE_AMOUNT_IN_CART = createActionName('UPDATE_AMOUNT_IN_CART');
 
+
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
 export const RESET_REQUEST = createActionName('RESET_REQUEST');
@@ -192,7 +193,6 @@ export const loadRandomProduct = payload => ({ payload, type: LOAD_RANDOM_PRODUC
 
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const updateAmountInCart = payload => ({ payload, type: UPDATE_AMOUNT_IN_CART });
-
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -222,7 +222,7 @@ export default function reducer(statePart = initialState, action = {}) {
     case LOAD_RANDOM_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
     case ADD_TO_CART:
-      return { ...statePart, cart: [...statePart.cart, { id: action.payload, amount: 1 }] };
+      return { ...statePart, cart: [...statePart.cart, { id: action.payload.id, amount: action.payload.amount }] };
     case UPDATE_AMOUNT_IN_CART:
       return { ...statePart, cart: action.payload };
     case START_REQUEST:
