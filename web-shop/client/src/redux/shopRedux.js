@@ -116,7 +116,7 @@ export const deleteProductRequest = id => {
 const initialState = {
   logo: { path: './images/creativity_logo.jpg', alt: 'Creativity' },
   menuLinks: [
-    { path: '/products', title: 'Home' },
+    { path: '/', title: 'Home' },
     { path: '/faq', title: 'Faq' },
     { path: `/terms`, title: 'Terms' },
     { path: '/contact', title: 'Contact' },

@@ -10,6 +10,7 @@ import Faq from './components/pages/Faq/FaqPage';
 import Terms from './components/pages/Terms/TermsPage';
 import Contact from './components/pages/Contact/ContactPage';
 import Cart from './components/pages/Cart/Cart';
+import SingleProduct from './components/pages/SingleProduct/SingleProductPage';
 import NotFound from './components/pages/NotFound/NotFoundPage';
 
 class App extends React.Component {
@@ -18,7 +19,8 @@ class App extends React.Component {
       <div>
         <MainLayout>
           <Switch>
-            <Route path="/products" exact component={Home} />
+            <Route path="/" exact component={Home} />
+            <Route path="/products/:id" exact component={SingleProduct} />
             <Route path="/faq" exact component={Faq} />
             <Route path="/terms" exact component={Terms} />
             <Route path="/contact" exact component={Contact} />
