@@ -1,23 +1,19 @@
-.list-product__container {
+.full-product__container {
   position: relative;
-  display: inline-block;
+  display: flex;
 
   margin: 5px 12px;
-  .list-product__img {
+  .full-product__img {
     max-width: 100%;
     background-color: lightgray;
   }
   p {
     bottom: 0;
   }
-  .list-product__name {
-    display: inline-block;
-    position: absolute;
+  .full-product__name {
     left: 5px;
   }
-  .list-product__price {
-    position: absolute;
-    display: inline-block;
+  .full-product__price {
     right: 5px;
   }
 }

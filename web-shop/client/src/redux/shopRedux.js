@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from '../config';
+import { API_URL, BASE_URL } from '../config';
 
 //// Selectors
 export const getMenuLinks = ({ shop }) => shop.menuLinks;
@@ -114,7 +114,7 @@ export const deleteProductRequest = id => {
 
 //// Initial state
 const initialState = {
-  logo: { path: './images/creativity_logo.jpg', alt: 'Creativity' },
+  logo: { path: `/images/creativity_logo.jpg`, alt: 'Creativity' },
   menuLinks: [
     { path: '/', title: 'Home' },
     { path: '/faq', title: 'Faq' },

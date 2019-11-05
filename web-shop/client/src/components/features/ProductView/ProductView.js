@@ -11,7 +11,7 @@ class ProductView extends React.Component {
   }
   render() {
     const { product, request, productId } = this.props;
-    const {name, price, img, id} = product
+    const {name, price, img, id, description, tag } = product
     return (
       <div>
         {(request.pending || request.success === null) && <Spinner />}
@@ -20,7 +20,7 @@ class ProductView extends React.Component {
           <Alert variant="info">No product</Alert>
         )}
         {!request.pending && request.success && Object.entries(product).length !== 0 && product.constructor === Object && (
-          <ProductFull name={name} price={price} img={img} id={id} />
+          <ProductFull name={name} price={price} img={img} id={productId} description={description} tag={tag} />
         )}
       </div>
     );
