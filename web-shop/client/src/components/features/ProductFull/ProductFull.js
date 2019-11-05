@@ -14,14 +14,16 @@ const mapStateToProps = state => ({
   request: getRequest(state)
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addProductToCart: () => dispatch(addToCartRequest(ownProps.id))
+  addProductToCart: (id, cart) => dispatch(addToCartRequest(id, cart))
 });
 
 class ProductFull extends React.Component {
+
   addToCart = e => {
     e.preventDefault();
     const { addProductToCart, id, cart } = this.props;
-    addProductToCart(id);
+    console.log(cart);
+    addProductToCart(id, cart);
   };
 
   render() {

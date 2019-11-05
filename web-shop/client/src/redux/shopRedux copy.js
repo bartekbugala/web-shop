@@ -74,7 +74,7 @@ export const loadRandomProductRequest = () => {
     } catch (e) {
       dispatch(errorRequest(e.message));
     }
-  };
+  }; ``
 };
 
 export const addToCartRequest = (id, cart) => {
@@ -85,7 +85,7 @@ export const addToCartRequest = (id, cart) => {
       if (result) {
         const payload = cart;
         const currentIndex = cart.findIndex(el => el.id === id)
-        payload[currentIndex].amount += amount
+        payload[currentIndex].amount += 1;
         dispatch(updateAmountInCart(payload))
       } else {
         dispatch(addToCart(id))
