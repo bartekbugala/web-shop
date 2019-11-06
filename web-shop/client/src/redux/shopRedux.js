@@ -75,7 +75,7 @@ export const loadProductsByPageRequest = (
         productsPerPage,
         presentPage: page
       };
-
+      dispatch(changeSorting(sortParam));
       dispatch(loadProductsByPage(payload));
       dispatch(endRequest());
     } catch (e) {
@@ -157,7 +157,7 @@ export const deleteProductRequest = id => {
 //// Initial state
 const initialState = {
   logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
-  sortParam: null,
+  sortParam: "default",
   menuLinks: [
     { path: "/", title: "Home" },
     { path: "/faq", title: "Faq" },

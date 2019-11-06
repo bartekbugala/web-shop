@@ -1,16 +1,22 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import ProductList from '../ProductList/ProductList';
-import Spinner from '../../common/Spinner/Spinner';
-import Alert from '../../common/Alert/Alert';
-import Pagination from '../../common/Pagination/Pagination';
+import React from "react";
+import { PropTypes } from "prop-types";
+import ProductList from "../ProductList/ProductList";
+import Spinner from "../../common/Spinner/Spinner";
+import Alert from "../../common/Alert/Alert";
+import Pagination from "../../common/Pagination/Pagination";
+import SortingWidget from "../SortingWidget/SortingWidget";
 
 class Products extends React.Component {
   state = {
-    presentPage: this.props.initialPage || 1,
+    presentPage: this.props.initialPage || 1
   };
   componentDidMount() {
-    const { loadProductsByPage, initialPage, productsPerPage, sortParam } = this.props;
+    const {
+      loadProductsByPage,
+      initialPage,
+      productsPerPage,
+      sortParam
+    } = this.props;
     loadProductsByPage(initialPage, productsPerPage, sortParam);
   }
 
@@ -22,6 +28,30 @@ class Products extends React.Component {
     });
   };
 
+  sortByNameAsc = e => {
+    e.preventDefault();
+    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, "name");
+  };
+  sortByNameDesc = e => {
+    e.preventDefault();
+    console.log("sortByNameDesc");
+    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, "-name");
+  };
+  sortByPriceAsc = e => {
+    e.preventDefault();
+    console.log("sortByNameDesc");
+    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, "price");
+  };
+  sortByPriceDesc = e => {
+    e.preventDefault();
+    console.log("sortByNameDesc");
+    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, "-price");
+  };
+
   render() {
     const { products, pages, pagination, request, initialPage } = this.props;
     const { loadProductsPage } = this;
@@ -30,11 +60,15 @@ class Products extends React.Component {
       <div>
         <div>
           {request.pending && <Spinner />}
-          {!request.pending && request.error !== null && <Alert variant="error">{`Error: ${request.error}`}</Alert>}
+          {!request.pending && request.error !== null && (
+            <Alert variant="error">{`Error: ${request.error}`}</Alert>
+          )}
           {!request.pending && request.success && products.length === 0 && (
             <Alert variant="info">No products found</Alert>
           )}
-          {!request.pending && request.success && products.length > 0 && <ProductList products={products} />}
+          {!request.pending && request.success && products.length > 0 && (
+            <ProductList products={products} />
+          )}
           {pagination && !request.pending && request.success && (
             <Pagination
               presentPage={presentPage}
