@@ -1,4 +1,5 @@
 import React from 'react';
+import CartProduct from '../CartProduct/CartProduct';
 import './Cart.scss';
 
 class Cart extends React.Component {
@@ -6,9 +7,15 @@ class Cart extends React.Component {
     cart: this.props.cart
   };
   render() {
+    const { cart } = this.state;
     return (
       <div>
-        <h1>Cart</h1>
+        <div>
+          {cart.map(item => (
+            <div
+              key={item.id}>{`Name:${item.name} Amount: ${item.amount}`}</div>
+          ))}
+        </div>
       </div>
     );
   }

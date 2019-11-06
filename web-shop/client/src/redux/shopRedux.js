@@ -1,16 +1,16 @@
-import axios from "axios";
-import { API_URL } from "../config";
+import axios from 'axios';
+import { API_URL } from '../config';
 
 //// Initial state
 const initialState = {
-  logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
-  sortParam: "default",
+  logo: { path: `/images/creativity_logo.jpg`, alt: 'Creativity' },
+  sortParam: 'default',
   menuLinks: [
-    { path: "/", title: "Home" },
-    { path: "/faq", title: "Faq" },
-    { path: `/terms`, title: "Terms" },
-    { path: "/contact", title: "Contact" },
-    { path: "/cart", title: "Cart" }
+    { path: '/', title: 'Home' },
+    { path: '/faq', title: 'Faq' },
+    { path: `/terms`, title: 'Terms' },
+    { path: '/contact', title: 'Contact' },
+    { path: '/cart', title: 'Cart' }
   ],
   data: [],
   cart: [],
@@ -144,7 +144,8 @@ export const loadRandomProductRequest = () => {
   };
 };
 
-export const addToCartRequest = (id, cart) => {
+export const addToCartRequest = (cart, product) => {
+  const { id, name, img, description, tag } = product;
   return async dispatch => {
     dispatch(startRequest());
     try {
@@ -153,9 +154,13 @@ export const addToCartRequest = (id, cart) => {
         const payload = cart;
         const currentIndex = cart.findIndex(el => el.id === id);
         payload[currentIndex].amount += 1;
+        payload[currentIndex].name = name;
+        payload[currentIndex].img = img;
+        payload[currentIndex].description = description;
+        payload[currentIndex].tag = tag;
         dispatch(updateAmountInCart(payload));
       } else {
-        dispatch(addToCart(id));
+        dispatch(addToCart(product));
       }
       dispatch(endRequest());
     } catch (e) {
@@ -202,28 +207,28 @@ export const deleteProductRequest = id => {
 
 //// Actions
 // action name creator
-const reducerName = "products";
+const reducerName = 'products';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 // action exports
-export const LOAD_PRODUCTS = createActionName("LOAD_PRODUCTS");
-export const LOAD_SINGLE_PRODUCT = createActionName("LOAD_SINGLE_PRODUCT");
-export const LOAD_PRODUCTS_PAGE = createActionName("LOAD_PRODUCTS_PAGE");
-export const LOAD_RANDOM_PRODUCT = createActionName("LOAD_RANDOM_PRODUCT");
+export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
+export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
+export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
 
-export const ADD_TO_CART = createActionName("ADD_TO_CART");
-export const CHANGE_SORTING = createActionName("CHANGE_SORTING");
-export const UPDATE_AMOUNT_IN_CART = createActionName("UPDATE_AMOUNT_IN_CART");
+export const ADD_TO_CART = createActionName('ADD_TO_CART');
+export const CHANGE_SORTING = createActionName('CHANGE_SORTING');
+export const UPDATE_AMOUNT_IN_CART = createActionName('UPDATE_AMOUNT_IN_CART');
 
-export const START_REQUEST = createActionName("START_REQUEST");
-export const END_REQUEST = createActionName("END_REQUEST");
-export const RESET_REQUEST = createActionName("RESET_REQUEST");
-export const ERROR_REQUEST = createActionName("ERROR_REQUEST");
+export const START_REQUEST = createActionName('START_REQUEST');
+export const END_REQUEST = createActionName('END_REQUEST');
+export const RESET_REQUEST = createActionName('RESET_REQUEST');
+export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
 
-export const START_UPDATE_REQUEST = createActionName("START_UPDATE_REQUEST");
-export const END_UPDATE_REQUEST = createActionName("END_UPDATE_REQUEST");
-export const RESET_UPDATE_REQUEST = createActionName("RESET_UPDATE_REQUEST");
-export const ERROR_UPDATE_REQUEST = createActionName("ERROR_UPDATE_REQUEST");
+export const START_UPDATE_REQUEST = createActionName('START_UPDATE_REQUEST');
+export const END_UPDATE_REQUEST = createActionName('END_UPDATE_REQUEST');
+export const RESET_UPDATE_REQUEST = createActionName('RESET_UPDATE_REQUEST');
+export const ERROR_UPDATE_REQUEST = createActionName('ERROR_UPDATE_REQUEST');
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({
@@ -279,7 +284,7 @@ export default function reducer(statePart = initialState, action = {}) {
     case ADD_TO_CART:
       return {
         ...statePart,
-        cart: [...statePart.cart, { id: action.payload, amount: 1 }]
+        cart: [...statePart.cart, { ...action.payload, amount: 1 }]
       };
     case CHANGE_SORTING:
       return { ...statePart, sortParam: action.payload };
