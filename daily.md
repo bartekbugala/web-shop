@@ -69,11 +69,17 @@ finish:
 
 - task-7
 - task-14
-- task-server
 
 ## 04.11.2019
 
 finish:
-
 - task-15
 - task-16
+
+## 05.11.2019
+finish
+- task-server-17
+
+## 06.11.2019
+finish:
+- task-18
