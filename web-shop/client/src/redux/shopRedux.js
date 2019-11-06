@@ -42,6 +42,19 @@ export const loadSingleProductRequest = id => {
   };
 };
 
+export const changeSortingRequest = sortParam => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+
+      dispatch(changeSorting(sortParam));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
 export const loadProductsByPageRequest = (
   page = 1,
   productsPerPage = 6,
@@ -145,7 +158,6 @@ export const deleteProductRequest = id => {
 //// Initial state
 const initialState = {
   logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
-  sortParam: null,
   menuLinks: [
     { path: "/", title: "Home" },
     { path: "/faq", title: "Faq" },
@@ -183,6 +195,7 @@ export const LOAD_PRODUCTS_PAGE = createActionName("LOAD_PRODUCTS_PAGE");
 export const LOAD_RANDOM_PRODUCT = createActionName("LOAD_RANDOM_PRODUCT");
 
 export const ADD_TO_CART = createActionName("ADD_TO_CART");
+export const CHANGE_SORTING = createActionName("CHANGE_SORTING");
 export const UPDATE_AMOUNT_IN_CART = createActionName("UPDATE_AMOUNT_IN_CART");
 
 export const START_REQUEST = createActionName("START_REQUEST");
@@ -210,6 +223,7 @@ export const loadRandomProduct = payload => ({
 });
 
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
+export const changeSorting = payload => ({ payload, type: CHANGE_SORTING });
 export const updateAmountInCart = payload => ({
   payload,
   type: UPDATE_AMOUNT_IN_CART
