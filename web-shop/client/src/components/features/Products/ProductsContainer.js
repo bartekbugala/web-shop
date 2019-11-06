@@ -1,18 +1,19 @@
 import { connect } from 'react-redux';
-import { getProducts, getRequest, loadProductsByPageRequest, getPages } from '../../../redux/shopRedux';
+import { getProducts, getRequest, loadProductsByPageRequest, getPages, getSort } from '../../../redux/shopRedux';
 import Products from './Products';
 
 const mapStateToProps = (state, ownProps) => ({
   products: getProducts(state),
   request: getRequest(state),
   pages: getPages(state),
+  sortParam: getSort(state),
   initialPage: ownProps.initialPage || 1,
   productsPerPage: ownProps.productsPerPage || 10,
-  pagination: ownProps.pagination || false
+  pagination: ownProps.pagination || false,
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProductsByPage: (page, productsPerPage) => dispatch(loadProductsByPageRequest(page, productsPerPage))
+  loadProductsByPage: (page, productsPerPage, sortParam) => dispatch(loadProductsByPageRequest(page, productsPerPage, sortParam))
 });
 
 export default connect(

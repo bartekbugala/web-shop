@@ -13,6 +13,7 @@ export const getUpdateRequest = ({ shop }) => shop.updateRequest;
 export const getPages = ({ shop }) =>
   Math.ceil(shop.amount / shop.productsPerPage);
 export const getCart = ({ shop }) => shop.cart;
+export const getSort = ({ shop }) => shop.sortParam;
 
 //// Thunks
 export const loadProductsRequest = () => {
@@ -44,7 +45,7 @@ export const loadSingleProductRequest = id => {
 export const loadProductsByPageRequest = (
   page = 1,
   productsPerPage = 6,
-  sortParam = `name`
+  sortParam = null
 ) => {
   return async dispatch => {
     dispatch(startRequest());
@@ -144,6 +145,7 @@ export const deleteProductRequest = id => {
 //// Initial state
 const initialState = {
   logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
+  sortParam: null,
   menuLinks: [
     { path: "/", title: "Home" },
     { path: "/faq", title: "Faq" },

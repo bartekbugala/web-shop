@@ -7,16 +7,16 @@ import Pagination from '../../common/Pagination/Pagination';
 
 class Products extends React.Component {
   state = {
-    presentPage: this.props.initialPage || 1
+    presentPage: this.props.initialPage || 1,
   };
   componentDidMount() {
-    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage);
+    const { loadProductsByPage, initialPage, productsPerPage, sortParam } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, sortParam);
   }
 
   loadProductsPage = page => {
-    const { loadProductsByPage, productsPerPage } = this.props;
-    loadProductsByPage(page, productsPerPage);
+    const { loadProductsByPage, productsPerPage, sortParam } = this.props;
+    loadProductsByPage(page, productsPerPage, sortParam);
     this.setState({
       presentPage: page
     });
