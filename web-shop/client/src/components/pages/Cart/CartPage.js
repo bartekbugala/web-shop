@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
+import Cart from '../../features/Cart/CartContainer';
 
-const Cart = () => (
+const CartPage = () => (
   <div>
-    <h1>Cart2</h1>
+    <Cart />
   </div>
 );
 
-export default Cart;
+export default CartPage;
