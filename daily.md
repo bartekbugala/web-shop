@@ -83,3 +83,4 @@ finish
 ## 06.11.2019
 finish:
 - task-18
+- task-19
