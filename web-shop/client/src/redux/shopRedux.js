@@ -46,7 +46,6 @@ export const changeSortingRequest = sortParam => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-
       dispatch(changeSorting(sortParam));
       dispatch(endRequest());
     } catch (e) {
@@ -158,6 +157,7 @@ export const deleteProductRequest = id => {
 //// Initial state
 const initialState = {
   logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
+  sortParam: null,
   menuLinks: [
     { path: "/", title: "Home" },
     { path: "/faq", title: "Faq" },

@@ -11,19 +11,20 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class SortingWidget extends React.Component {
-  changeSorting = (sortParam) => {
+  changeSorting = (e) => {
+    e.preventDefault
     const { changeSorting } = this.props
-    changeSorting(sortParam)
+    changeSorting('name')
   }
 
   render() {
     const { changeSorting } = this
     return <div>
       <h2>Sortuj:</h2>
-      <p onClick={changeSorting('name')}>Nazwa A-Z</p>
-      <p onClick={changeSorting('-name')}>Nazwa Z-A</p>
-      <p onClick={changeSorting('price')}>Cena rosnąco</p>
-      <p onClick={changeSorting('-price')}>Cena malejąco</p>
+      <p onClick={changeSorting()}>Nazwa A-Z</p>
+      <p onClick={changeSorting()}>Nazwa Z-A</p>
+      <p onClick={changeSorting}>Cena rosnąco</p>
+      <p onClick={changeSorting}>Cena malejąco</p>
     </div>
   }
 }
