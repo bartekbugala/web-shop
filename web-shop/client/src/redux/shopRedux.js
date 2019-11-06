@@ -1,6 +1,35 @@
 import axios from "axios";
 import { API_URL } from "../config";
 
+//// Initial state
+const initialState = {
+  logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
+  sortParam: "default",
+  menuLinks: [
+    { path: "/", title: "Home" },
+    { path: "/faq", title: "Faq" },
+    { path: `/terms`, title: "Terms" },
+    { path: "/contact", title: "Contact" },
+    { path: "/cart", title: "Cart" }
+  ],
+  data: [],
+  cart: [],
+  singleProduct: {},
+  updateRequest: {
+    pending: false,
+    error: null,
+    success: null
+  },
+  amount: 0,
+  productsPerPage: 10,
+  presentPage: 1,
+  request: {
+    pending: false,
+    error: null,
+    success: null
+  }
+};
+
 //// Selectors
 export const getMenuLinks = ({ shop }) => shop.menuLinks;
 export const getLogo = ({ shop }) => shop.logo;
@@ -169,35 +198,6 @@ export const deleteProductRequest = id => {
       dispatch(errorUpdateRequest(e.response));
     }
   };
-};
-
-//// Initial state
-const initialState = {
-  logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
-  sortParam: "default",
-  menuLinks: [
-    { path: "/", title: "Home" },
-    { path: "/faq", title: "Faq" },
-    { path: `/terms`, title: "Terms" },
-    { path: "/contact", title: "Contact" },
-    { path: "/cart", title: "Cart" }
-  ],
-  data: [],
-  cart: [],
-  singleProduct: {},
-  updateRequest: {
-    pending: false,
-    error: null,
-    success: null
-  },
-  amount: 0,
-  productsPerPage: 10,
-  presentPage: 1,
-  request: {
-    pending: false,
-    error: null,
-    success: null
-  }
 };
 
 //// Actions
