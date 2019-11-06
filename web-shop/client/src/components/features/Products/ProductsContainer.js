@@ -21,8 +21,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   loadProductsByPage: (page, productsPerPage, sortParam) =>
-    dispatch(loadProductsByPageRequest(page, productsPerPage, sortParam)),
-  changeSorting: sortParam => dispatch(changeSortingRequest(sortParam))
+    dispatch(loadProductsByPageRequest(page, productsPerPage, sortParam))
 });
 
 export default connect(

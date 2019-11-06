@@ -2,8 +2,7 @@ import SortingWidget from "./SortingWidget";
 import { connect } from "react-redux";
 import {
   getSort,
-  changeSortingRequest,
-  loadProductsByPageRequest
+  loadSortedProductsByPageRequest
 } from "../../../redux/shopRedux";
 
 const mapStateToProps = state => ({
@@ -12,8 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadProductsByPage: (page, productsPerPage, sortParam) =>
-    dispatch(loadProductsByPageRequest(page, productsPerPage, sortParam)),
-  changeSorting: sortParam => dispatch(changeSortingRequest(sortParam))
+    dispatch(loadSortedProductsByPageRequest(page, productsPerPage, sortParam))
 });
 
 export default connect(

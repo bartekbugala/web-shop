@@ -4,7 +4,6 @@ import ProductList from "../ProductList/ProductList";
 import Spinner from "../../common/Spinner/Spinner";
 import Alert from "../../common/Alert/Alert";
 import Pagination from "../../common/Pagination/Pagination";
-import SortingWidget from "../SortingWidget/SortingWidget";
 
 class Products extends React.Component {
   state = {
@@ -26,30 +25,6 @@ class Products extends React.Component {
     this.setState({
       presentPage: page
     });
-  };
-
-  sortByNameAsc = e => {
-    e.preventDefault();
-    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage, "name");
-  };
-  sortByNameDesc = e => {
-    e.preventDefault();
-    console.log("sortByNameDesc");
-    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage, "-name");
-  };
-  sortByPriceAsc = e => {
-    e.preventDefault();
-    console.log("sortByNameDesc");
-    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage, "price");
-  };
-  sortByPriceDesc = e => {
-    e.preventDefault();
-    console.log("sortByNameDesc");
-    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage, "-price");
   };
 
   render() {

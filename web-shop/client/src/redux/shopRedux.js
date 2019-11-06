@@ -42,11 +42,28 @@ export const loadSingleProductRequest = id => {
   };
 };
 
-export const changeSortingRequest = sortParam => {
+export const loadProductsByPageRequest = (
+  page = 1,
+  productsPerPage = 6,
+  sortParam = null
+) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      dispatch(changeSorting(sortParam));
+      const startAt = (page - 1) * productsPerPage;
+      const limit = productsPerPage;
+
+      let res = await axios.get(
+        `${API_URL}/products/range/${startAt}/${limit}/${sortParam}`
+      );
+
+      const payload = {
+        products: res.data.products,
+        amount: res.data.amount,
+        productsPerPage,
+        presentPage: page
+      };
+      dispatch(loadProductsByPage(payload));
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));
@@ -54,7 +71,7 @@ export const changeSortingRequest = sortParam => {
   };
 };
 
-export const loadProductsByPageRequest = (
+export const loadSortedProductsByPageRequest = (
   page = 1,
   productsPerPage = 6,
   sortParam = null
