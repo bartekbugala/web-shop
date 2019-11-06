@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL, BASE_URL } from "../config";
+import { API_URL } from "../config";
 
 //// Selectors
 export const getMenuLinks = ({ shop }) => shop.menuLinks;
@@ -264,6 +264,8 @@ export default function reducer(statePart = initialState, action = {}) {
         ...statePart,
         cart: [...statePart.cart, { id: action.payload, amount: 1 }]
       };
+    case CHANGE_SORTING:
+      return { ...statePart, sortParam: action.payload };
     case UPDATE_AMOUNT_IN_CART:
       return { ...statePart, cart: action.payload };
     case START_REQUEST:

@@ -1,5 +1,4 @@
 import React from 'react';
-import ListProduct from '../ListProduct/ListProduct';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
 import ProductFull from '../ProductFull/ProductFull';
@@ -11,7 +10,7 @@ class ProductView extends React.Component {
   }
   render() {
     const { product, request, productId } = this.props;
-    const { name, price, img, id, description, tag } = product
+    const { name, price, img, description, tag } = product
     return (
       <div>
         {(request.pending || request.success === null) && <Spinner />}
