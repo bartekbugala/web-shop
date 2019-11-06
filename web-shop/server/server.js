@@ -1,18 +1,18 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-const config = require('./config');
-const mongoose = require('mongoose');
-const helmet = require('helmet');
-const mongoSanitize = require('mongo-sanitize');
-const loadTestData = require('./testData');
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const config = require("./config");
+const mongoose = require("mongoose");
+const helmet = require("helmet");
+const mongoSanitize = require("mongo-sanitize");
+const loadTestData = require("./testData");
 
 // import routes
-const productRoutes = require('./routes/product.routes');
+const productRoutes = require("./routes/product.routes");
 
 const app = express();
 
-mongoose.set('useFindAndModify', false);
+mongoose.set("useFindAndModify", false);
 
 app.use(helmet());
 app.use(cors());
@@ -22,13 +22,13 @@ app.use((req, res, next) => {
   mongoSanitize(req.body);
   next();
 });
-app.use('/api', productRoutes);
+app.use("/api", productRoutes);
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '/../client/build')));
+//app.use(express.static(path.join(__dirname, '/../client/build')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../client/build/index.html'));
+app.get("*", (req, res) => {
+  //res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
 // mongoDB - connect backend code with db
@@ -36,14 +36,14 @@ mongoose.connect(config.MONGO_URL, { useNewUrlParser: true });
 
 let db = mongoose.connection;
 
-db.once('open', () => {
-  console.log('Connected to the database');
+db.once("open", () => {
+  console.log("Connected to the database");
   loadTestData();
 });
-db.on('error', err => console.log('Error ' + err));
+db.on("error", err => console.log("Error " + err));
 
 app.listen(config.PORT, function() {
-  console.log('Server is running on port:', config.PORT);
+  console.log("Server is running on port:", config.PORT);
 });
 
 /// DUMMY ENDPOINT

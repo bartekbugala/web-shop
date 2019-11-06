@@ -1,22 +1,27 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import ProductList from '../ProductList/ProductList';
-import Spinner from '../../common/Spinner/Spinner';
-import Alert from '../../common/Alert/Alert';
-import Pagination from '../../common/Pagination/Pagination';
+import React from "react";
+import { PropTypes } from "prop-types";
+import ProductList from "../ProductList/ProductList";
+import Spinner from "../../common/Spinner/Spinner";
+import Alert from "../../common/Alert/Alert";
+import Pagination from "../../common/Pagination/Pagination";
 
 class Products extends React.Component {
   state = {
     presentPage: this.props.initialPage || 1
   };
   componentDidMount() {
-    const { loadProductsByPage, initialPage, productsPerPage } = this.props;
-    loadProductsByPage(initialPage, productsPerPage);
+    const {
+      loadProductsByPage,
+      initialPage,
+      productsPerPage,
+      sortParam
+    } = this.props;
+    loadProductsByPage(initialPage, productsPerPage, sortParam);
   }
 
   loadProductsPage = page => {
-    const { loadProductsByPage, productsPerPage } = this.props;
-    loadProductsByPage(page, productsPerPage);
+    const { loadProductsByPage, productsPerPage, sortParam } = this.props;
+    loadProductsByPage(page, productsPerPage, sortParam);
     this.setState({
       presentPage: page
     });
@@ -30,11 +35,15 @@ class Products extends React.Component {
       <div>
         <div>
           {request.pending && <Spinner />}
-          {!request.pending && request.error !== null && <Alert variant="error">{`Error: ${request.error}`}</Alert>}
+          {!request.pending && request.error !== null && (
+            <Alert variant="error">{`Error: ${request.error}`}</Alert>
+          )}
           {!request.pending && request.success && products.length === 0 && (
             <Alert variant="info">No products found</Alert>
           )}
-          {!request.pending && request.success && products.length > 0 && <ProductList products={products} />}
+          {!request.pending && request.success && products.length > 0 && (
+            <ProductList products={products} />
+          )}
           {pagination && !request.pending && request.success && (
             <Pagination
               presentPage={presentPage}
