@@ -5,7 +5,9 @@ import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import './Pagination.scss';
 
 class Pagination extends React.Component {
-  state = { presentPage: this.props.presentPage || (this.props.initialPage || 1) };
+  state = {
+    presentPage: this.props.presentPage || (this.props.initialPage || 1)
+  };
 
   changePage = page => {
     // for lifted up state
@@ -29,9 +31,10 @@ class Pagination extends React.Component {
       <div className="pagination">
         <ul className="pagination__list">
           <li
-            className={`pagination__list__item${presentPage === 1 ? ' pagination__list__item--hidden' : ''}`}
-            onClick={() => changePage(presentPage - 1)}
-          >
+            className={`pagination__list__item${
+              presentPage === 1 ? ' pagination__list__item--hidden' : ''
+            }`}
+            onClick={() => changePage(presentPage - 1)}>
             <MdArrowBack />
           </li>
 
@@ -39,16 +42,18 @@ class Pagination extends React.Component {
             <li
               key={++page}
               onClick={() => changePage(page)}
-              className={`pagination__list__item${page === presentPage ? ' pagination__list__item--active' : ''}`}
-            >
+              className={`pagination__list__item${
+                page === presentPage ? ' pagination__list__item--active' : ''
+              }`}>
               {page}
             </li>
           ))}
 
           <li
-            className={`pagination__list__item${presentPage === pages ? ' pagination__list__item--hidden' : ''}`}
-            onClick={() => changePage(presentPage + 1)}
-          >
+            className={`pagination__list__item${
+              presentPage === pages ? ' pagination__list__item--hidden' : ''
+            }`}
+            onClick={() => changePage(presentPage + 1)}>
             <MdArrowForward />
           </li>
         </ul>

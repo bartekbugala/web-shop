@@ -2,4 +2,10 @@
   list-style: none;
   display: flex;
   justify-content: flex-end;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.pagination__list__item--hidden {
+  display: none;
 }

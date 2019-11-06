@@ -1,9 +1,9 @@
-import React from "react";
-import { PropTypes } from "prop-types";
-import ProductList from "../ProductList/ProductList";
-import Spinner from "../../common/Spinner/Spinner";
-import Alert from "../../common/Alert/Alert";
-import Pagination from "../../common/Pagination/Pagination";
+import React from 'react';
+import { PropTypes } from 'prop-types';
+import ProductList from '../ProductList/ProductList';
+import Spinner from '../../common/Spinner/Spinner';
+import Alert from '../../common/Alert/Alert';
+import Pagination from '../../common/Pagination/Pagination';
 
 class Products extends React.Component {
   state = {
@@ -40,6 +40,14 @@ class Products extends React.Component {
           )}
           {!request.pending && request.success && products.length === 0 && (
             <Alert variant="info">No products found</Alert>
+          )}
+          {pagination && !request.pending && request.success && (
+            <Pagination
+              presentPage={presentPage}
+              initialPage={initialPage}
+              pages={pages}
+              onPageChange={loadProductsPage}
+            />
           )}
           {!request.pending && request.success && products.length > 0 && (
             <ProductList products={products} />
