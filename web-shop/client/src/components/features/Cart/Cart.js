@@ -8,18 +8,22 @@ class Cart extends React.Component {
   state = {
     cart: this.props.cart
   };
+  componentDidMount() {
+    const { cart } = this.props;
+    this.setState({ cart: cart })
+  }
 
-  addToCart = (item) => {
+  addToCart = item => {
     const { addProductToCart, cart } = this.props;
-    addProductToCart(cart, item);
+    addProductToCart(cart, item).then(this.setState({ cart: cart }));
   };
-  removeFromCart = () => {
-
+  removeFromCart = item => {
+    const { removeProductFromCart, cart } = this.props;
+    removeProductFromCart(cart, item).then(this.setState({ cart: cart }));
   }
 
   render() {
     const { cart } = this.state;
-    const { addToCart } = this;
     return (
       <div>
         <ul className="cart__list">
@@ -33,9 +37,9 @@ class Cart extends React.Component {
               <div className="cart__list-item__col-container">{`$${item.price}`}</div>
               <div className="cart__list-item__col-container">
                 <div className="cart__list-item__amount-container">
-                  <Button onClick={() => console.log('remove item from cart')}>-</Button>
+                  <Button onClick={() => this.removeFromCart(item)}>-</Button>
                   <span className="cart__list-item__amount">{`${item.amount}`}</span>
-                  <Button onClick={() => addToCart(item)}>+</Button>
+                  <Button onClick={() => this.addToCart(item)}>+</Button>
                   <span>szt.</span>
                 </div>
               </div>

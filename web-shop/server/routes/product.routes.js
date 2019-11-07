@@ -20,6 +20,9 @@ router.route("/products/:id").get(ProductController.getSingleProduct);
 // find and update product
 router.route("/products/:id").patch(ProductController.editProduct);
 
+// find decreace amount of 1 product
+router.route("/products/:id").put(ProductController.removeOneAmount);
+
 // find and delete product
 router.route("/products/:id").delete(ProductController.deleteProduct);
 

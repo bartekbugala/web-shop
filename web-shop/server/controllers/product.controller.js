@@ -23,11 +23,11 @@ exports.getSingleProduct = async (req, res) => {
 // get random product
 exports.getRandomProduct = async (req, res) => {
   try {
-    Product.countDocuments().exec(function(err, count) {
+    Product.countDocuments().exec(function (err, count) {
       const random = Math.floor(Math.random() * count);
       Product.findOne()
         .skip(random)
-        .exec(function(err, result) {
+        .exec(function (err, result) {
           res.status(200).json(result);
         });
     });
@@ -37,7 +37,7 @@ exports.getRandomProduct = async (req, res) => {
 };
 
 // get products by range
-exports.getProductsByRange = async function(req, res) {
+exports.getProductsByRange = async function (req, res) {
   try {
     let { startAt, limit, sortParam } = req.params;
 
@@ -97,6 +97,17 @@ exports.editProduct = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+////////////
+exports.removeOneAmount = async (req, res) => {
+  try {
+    const productUpdated = await Product.findOneAndUpdate({ id: req.params.id }, { $inc: { amount: -1 } });
+    res.status(200).json(productUpdated);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+////////////
 
 exports.deleteProduct = async (req, res) => {
   try {
