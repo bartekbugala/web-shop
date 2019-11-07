@@ -31,13 +31,14 @@ class ProductFull extends React.Component {
   render() {
     const { addToCart } = this;
     const { product } = this.props;
-    const { name, price, img, description, tag } = product;
+    const { name, price, img, description, tag, amount } = product;
     return (
       <div className="full-product__container">
         <img className="full-product__img" src={`${img}`} alt={`${name}`} />
         <div>
           <ProductTitle>{name}</ProductTitle>
           <Price>{price}</Price>
+          <p>{amount}</p>
           {description && (
             <ProductDescription>{description}</ProductDescription>
           )}
