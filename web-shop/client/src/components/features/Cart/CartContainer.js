@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import Cart from './Cart';
-import { getCart, addToCartRequest, removeFromCartRequest } from '../../../redux/shopRedux';
+import { getCart, addToCartRequest, removeFromCartRequest, getRequest } from '../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
-  cart: getCart(state)
+  cart: getCart(state),
+  request: getRequest(state)
 });
 
 const mapDispatchToProps = dispatch => ({
