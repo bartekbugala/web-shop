@@ -133,7 +133,6 @@ export const loadRandomProductRequest = () => {
     dispatch(startRequest());
     try {
       let res = await axios.get(`${API_URL}/products/random`);
-
       dispatch(loadRandomProduct(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -147,19 +146,18 @@ export const addToCartRequest = (cart, product) => {
   return async dispatch => {
     dispatch(startRequest());
     try {
-      const result = cart.find(el => el.id === id);
       const res = await axios.get(`${API_URL}/products/${id}`);
-      if (result && res) {
-        const payload = cart;
+      const result = cart.find(el => el.id === id);
+      if (result) {
         const currentIndex = cart.findIndex(el => el.id === id);
-        payload[currentIndex].amount = payload[currentIndex].amount + 1;
-        payload[currentIndex].name = res.data.name;
-        payload[currentIndex].img = res.data.img;
-        payload[currentIndex].description = res.data.description;
-        payload[currentIndex].tag = res.data.tag;
-        dispatch(updateAmountInCart(payload));
-      } else if (!result && res) {
-        dispatch(addToCart(product));
+        cart[currentIndex].amount += (res.data.amount > cart[currentIndex].amount) ? 1 : 0;
+        dispatch(updateAmountInCart(cart));
+      } else {
+        if (res.data.amount > 0) {
+          dispatch(addToCart(product))
+        } else {
+          throw new Error('Not enough items in stock');
+        }
       }
       dispatch(endRequest());
     } catch (e) {

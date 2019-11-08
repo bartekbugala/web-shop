@@ -9,7 +9,7 @@ import Alert from '../../common/Alert/Alert';
 class Cart extends React.Component {
   state = {
     cart: this.props.cart,
-    request: this.props.request
+    request: this.props.request,
   };
   componentDidMount() {
     const { cart } = this.props;
@@ -34,8 +34,8 @@ class Cart extends React.Component {
         {!request.pending && request.error !== null && (
           <Alert variant="error">{`Error: ${request.error}`}</Alert>
         )}
-        {!request.pending && request.success && cart.length === 0 && (
-          <Alert variant="info">No products found</Alert>
+        {!request.pending && cart.length === 0 && (
+          <Alert variant="info">Cart is empty</Alert>
         )}
         {!request.pending && request.success && cart.length > 0 && (
           <ul className="cart__list">
@@ -49,9 +49,9 @@ class Cart extends React.Component {
                 <div className="cart__list-item__col-container">{`$${item.price}`}</div>
                 <div className="cart__list-item__col-container">
                   <div className="cart__list-item__amount-container">
-                    <Button onClick={() => this.removeFromCart(item)}>-</Button>
+                    {<Button onClick={() => this.removeFromCart(item)}>-</Button>}
                     <span className="cart__list-item__amount">{`${item.amount}`}</span>
-                    <Button onClick={() => this.addToCart(item)}>+</Button>
+                    {<Button onClick={() => this.addToCart(item)}>+</Button>}
                     <span>szt.</span>
                   </div>
                 </div>

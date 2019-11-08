@@ -9,8 +9,7 @@ class ProductView extends React.Component {
     loadSingleProduct();
   }
   render() {
-    const { product, request, productId } = this.props;
-    const { name, price, img, description, tag } = product;
+    const { product, request } = this.props;
     return (
       <div>
         {(request.pending || request.success === null) && <Spinner />}
