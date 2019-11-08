@@ -8,19 +8,16 @@ class SortingWidget extends React.Component {
   };
   sortByNameDesc = e => {
     e.preventDefault();
-    console.log("sortByNameDesc");
     const { loadProductsByPage, initialPage, productsPerPage } = this.props;
     loadProductsByPage(initialPage, productsPerPage, "-name");
   };
   sortByPriceAsc = e => {
     e.preventDefault();
-    console.log("sortByNameDesc");
     const { loadProductsByPage, initialPage, productsPerPage } = this.props;
     loadProductsByPage(initialPage, productsPerPage, "price");
   };
   sortByPriceDesc = e => {
     e.preventDefault();
-    console.log("sortByNameDesc");
     const { loadProductsByPage, initialPage, productsPerPage } = this.props;
     loadProductsByPage(initialPage, productsPerPage, "-price");
   };

@@ -25,7 +25,6 @@ class ProductFull extends React.Component {
   addToCart = e => {
     e.preventDefault();
     const { addProductToCart, id, cart } = this.props;
-    console.log(cart);
     addProductToCart(id, cart);
   };
 
