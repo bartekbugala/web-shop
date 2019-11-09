@@ -1,16 +1,16 @@
-import axios from "axios";
-import { API_URL } from "../config";
+import axios from 'axios';
+import { API_URL } from '../config';
 
 //// Initial state
 const initialState = {
-  logo: { path: `/images/creativity_logo.jpg`, alt: "Creativity" },
-  sortParam: "default",
+  logo: { path: `/images/creativity_logo.jpg`, alt: 'Creativity' },
+  sortParam: 'default',
   menuLinks: [
-    { path: "/", title: "Home" },
-    { path: "/faq", title: "Faq" },
-    { path: `/terms`, title: "Terms" },
-    { path: "/contact", title: "Contact" },
-    { path: "/cart", title: "Cart" }
+    { path: '/', title: 'Home' },
+    { path: '/faq', title: 'Faq' },
+    { path: `/terms`, title: 'Terms' },
+    { path: '/contact', title: 'Contact' },
+    { path: '/cart', title: 'Cart' }
   ],
   data: [],
   cart: [],
@@ -110,11 +110,9 @@ export const loadSortedProductsByPageRequest = (
     try {
       const startAt = (page - 1) * productsPerPage;
       const limit = productsPerPage;
-
       let res = await axios.get(
         `${API_URL}/products/range/${startAt}/${limit}/${sortParam}`
       );
-
       const payload = {
         products: res.data.products,
         amount: res.data.amount,
@@ -135,7 +133,6 @@ export const loadRandomProductRequest = () => {
     dispatch(startRequest());
     try {
       let res = await axios.get(`${API_URL}/products/random`);
-
       dispatch(loadRandomProduct(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -144,23 +141,57 @@ export const loadRandomProductRequest = () => {
   };
 };
 
-export const addToCartRequest = (id, cart) => {
+export const addToCartRequest = (cart, product) => {
+  const { id } = product;
   return async dispatch => {
     dispatch(startRequest());
     try {
+      const res = await axios.get(`${API_URL}/products/${id}`);
       const result = cart.find(el => el.id === id);
       if (result) {
-        const payload = cart;
         const currentIndex = cart.findIndex(el => el.id === id);
-        payload[currentIndex].amount += 1;
-        dispatch(updateAmountInCart(payload));
+        cart[currentIndex].amount +=
+          res.data.amount > cart[currentIndex].amount ? 1 : 0;
+        dispatch(updateCart(cart));
       } else {
-        dispatch(addToCart(id));
+        if (res.data.amount > 0) {
+          dispatch(addToCart(product));
+        } else {
+          throw new Error('Not enough items in stock');
+        }
       }
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));
     }
+  };
+};
+
+export const removeOneFromCart = (cart, product, removeAll) => {
+  const { id } = product;
+  return dispatch => {
+    dispatch(startRequest());
+    try {
+      const result = cart.find(el => el.id === id);
+      const currentIndex = cart.findIndex(el => el.id === id);
+      if (result && !removeAll) {
+        cart[currentIndex].amount -= cart[currentIndex].amount > 0 ? 1 : 0;
+        dispatch(updateCart(cart));
+      } else if (result && removeAll) {
+        dispatch(updateCart(cart.filter(el => el.id !== id)));
+      }
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const removeProductFromCart = (cart, product) => {
+  const { id } = product;
+  return dispatch => {
+    const currentCart = cart.filter(el => el.id !== id);
+    dispatch(updateCart(currentCart));
   };
 };
 
@@ -202,28 +233,25 @@ export const deleteProductRequest = id => {
 
 //// Actions
 // action name creator
-const reducerName = "products";
+const reducerName = 'products';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 // action exports
-export const LOAD_PRODUCTS = createActionName("LOAD_PRODUCTS");
-export const LOAD_SINGLE_PRODUCT = createActionName("LOAD_SINGLE_PRODUCT");
-export const LOAD_PRODUCTS_PAGE = createActionName("LOAD_PRODUCTS_PAGE");
-export const LOAD_RANDOM_PRODUCT = createActionName("LOAD_RANDOM_PRODUCT");
-
-export const ADD_TO_CART = createActionName("ADD_TO_CART");
-export const CHANGE_SORTING = createActionName("CHANGE_SORTING");
-export const UPDATE_AMOUNT_IN_CART = createActionName("UPDATE_AMOUNT_IN_CART");
-
-export const START_REQUEST = createActionName("START_REQUEST");
-export const END_REQUEST = createActionName("END_REQUEST");
-export const RESET_REQUEST = createActionName("RESET_REQUEST");
-export const ERROR_REQUEST = createActionName("ERROR_REQUEST");
-
-export const START_UPDATE_REQUEST = createActionName("START_UPDATE_REQUEST");
-export const END_UPDATE_REQUEST = createActionName("END_UPDATE_REQUEST");
-export const RESET_UPDATE_REQUEST = createActionName("RESET_UPDATE_REQUEST");
-export const ERROR_UPDATE_REQUEST = createActionName("ERROR_UPDATE_REQUEST");
+export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
+export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
+export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
+export const ADD_TO_CART = createActionName('ADD_TO_CART');
+export const UPDATE_CART = createActionName('UPDATE_CART');
+export const CHANGE_SORTING = createActionName('CHANGE_SORTING');
+export const START_REQUEST = createActionName('START_REQUEST');
+export const END_REQUEST = createActionName('END_REQUEST');
+export const RESET_REQUEST = createActionName('RESET_REQUEST');
+export const ERROR_REQUEST = createActionName('ERROR_REQUEST');
+export const START_UPDATE_REQUEST = createActionName('START_UPDATE_REQUEST');
+export const END_UPDATE_REQUEST = createActionName('END_UPDATE_REQUEST');
+export const RESET_UPDATE_REQUEST = createActionName('RESET_UPDATE_REQUEST');
+export const ERROR_UPDATE_REQUEST = createActionName('ERROR_UPDATE_REQUEST');
 
 export const loadProducts = payload => ({ payload, type: LOAD_PRODUCTS });
 export const loadSingleProduct = payload => ({
@@ -241,10 +269,7 @@ export const loadRandomProduct = payload => ({
 
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const changeSorting = payload => ({ payload, type: CHANGE_SORTING });
-export const updateAmountInCart = payload => ({
-  payload,
-  type: UPDATE_AMOUNT_IN_CART
-});
+export const updateCart = payload => ({ payload, type: UPDATE_CART });
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -279,12 +304,12 @@ export default function reducer(statePart = initialState, action = {}) {
     case ADD_TO_CART:
       return {
         ...statePart,
-        cart: [...statePart.cart, { id: action.payload, amount: 1 }]
+        cart: [...statePart.cart, { ...action.payload, amount: 1 }]
       };
+    case UPDATE_CART:
+      return { ...statePart, cart: action.payload };
     case CHANGE_SORTING:
       return { ...statePart, sortParam: action.payload };
-    case UPDATE_AMOUNT_IN_CART:
-      return { ...statePart, cart: action.payload };
     case START_REQUEST:
       return {
         ...statePart,

@@ -1,13 +1,12 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   getProducts,
   getRequest,
   loadProductsByPageRequest,
   getPages,
-  getSort,
-  changeSortingRequest
-} from "../../../redux/shopRedux";
-import Products from "./Products";
+  getSort
+} from '../../../redux/shopRedux';
+import Products from './Products';
 
 const mapStateToProps = (state, ownProps) => ({
   products: getProducts(state),

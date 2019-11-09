@@ -1,16 +1,16 @@
-import React from "react";
-import "./ProductFull.scss";
-import ProductTitle from "../../common/ProductTitle/ProductTitle";
-import Price from "../../common/Price/Price";
-import ProductDescription from "../../common/ProductDescription/ProductDescription";
-import ProductTag from "../../common/ProductTag/ProductTag";
-import Button from "../../common/Button/Button";
-import { connect } from "react-redux";
+import React from 'react';
+import './ProductFull.scss';
+import ProductTitle from '../../common/ProductTitle/ProductTitle';
+import Price from '../../common/Price/Price';
+import ProductDescription from '../../common/ProductDescription/ProductDescription';
+import ProductTag from '../../common/ProductTag/ProductTag';
+import Button from '../../common/Button/Button';
+import { connect } from 'react-redux';
 import {
   addToCartRequest,
   getRequest,
   getCart
-} from "../../../redux/shopRedux";
+} from '../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
   /*   product: getSingleProduct(state), */
@@ -18,26 +18,27 @@ const mapStateToProps = state => ({
   request: getRequest(state)
 });
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (id, cart) => dispatch(addToCartRequest(id, cart))
+  addProductToCart: (cart, product) => dispatch(addToCartRequest(cart, product))
 });
 
 class ProductFull extends React.Component {
   addToCart = e => {
     e.preventDefault();
-    const { addProductToCart, id, cart } = this.props;
-    console.log(cart);
-    addProductToCart(id, cart);
+    const { addProductToCart, cart, product } = this.props;
+    addProductToCart(cart, product);
   };
 
   render() {
     const { addToCart } = this;
-    const { name, price, img, description, tag } = this.props;
+    const { product } = this.props;
+    const { name, price, img, description, tag, amount } = product;
     return (
       <div className="full-product__container">
         <img className="full-product__img" src={`${img}`} alt={`${name}`} />
         <div>
           <ProductTitle>{name}</ProductTitle>
           <Price>{price}</Price>
+          <p>{amount}</p>
           {description && (
             <ProductDescription>{description}</ProductDescription>
           )}
