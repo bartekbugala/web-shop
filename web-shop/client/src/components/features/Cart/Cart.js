@@ -12,24 +12,39 @@ class Cart extends React.Component {
     request: this.props.request
   };
   componentDidMount() {
-    const { cart } = this.props;
-    this.setState({ cart: cart });
+    const { resetRequest } = this.props;
+    resetRequest();
+    if (this.state.cart !== this.props.cart) {
+      this.setState({ cart: this.props.cart });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.cart !== this.props.cart) {
+      this.setState({ cart: this.props.cart });
+    }
   }
 
   addToCart = item => {
-    const { addProductToCart } = this.props;
-    const { cart } = this.props;
-    addProductToCart(cart, item).then(this.setState({ cart: cart }));
+    const { addProductToCart, cart } = this.props;
+    addProductToCart(cart, item);
   };
-  removeFromCart = item => {
+
+  removeOne = item => {
+    const { cart, removeOneFromCart } = this.props;
+    removeOneFromCart(cart, item);
+  };
+
+  removeProduct = item => {
     const { removeProductFromCart, cart } = this.props;
-    removeProductFromCart(cart, item).then(this.setState({ cart: cart }));
+    /* cart.filter(el => el.id !== item.id); */
+    removeProductFromCart(cart, item, true);
   };
 
   render() {
     const { cart, request } = this.state;
     return (
-      <div>
+      <div className="cart">
         {request.pending && <Spinner />}
         {!request.pending && request.error !== null && (
           <Alert variant="error">{`Error: ${request.error}`}</Alert>
@@ -51,20 +66,25 @@ class Cart extends React.Component {
                 <div className="cart__list-item__col-container">{`$${item.price}`}</div>
                 <div className="cart__list-item__col-container">
                   <div className="cart__list-item__amount-container">
-                    {
-                      <Button onClick={() => this.removeFromCart(item)}>
-                        -
-                      </Button>
-                    }
+                    {<Button onClick={() => this.removeOne(item)}>-</Button>}
                     <span className="cart__list-item__amount">{`${item.amount}`}</span>
                     {<Button onClick={() => this.addToCart(item)}>+</Button>}
                     <span>szt.</span>
+                  </div>
+                  <div
+                    className="cart__list-item__remove"
+                    onClick={() => this.removeProduct(item)}>
+                    remove item
                   </div>
                 </div>
               </li>
             ))}
           </ul>
         )}
+        <div className="cart__checkout">
+          <input placeholder="Discount Code"></input>
+          <Button>Checkout</Button>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,13 @@
 import { connect } from 'react-redux';
 import Cart from './Cart';
-import { getCart, addToCartRequest, removeFromCartRequest, getRequest } from '../../../redux/shopRedux';
+import {
+  getCart,
+  addToCartRequest,
+  removeOneFromCart,
+  getRequest,
+  resetRequest,
+  removeProductFromCart
+} from '../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
   cart: getCart(state),
@@ -8,8 +15,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (cart, product) => dispatch(addToCartRequest(cart, product)),
-  removeProductFromCart: (cart, product) => dispatch(removeFromCartRequest(cart, product))
+  resetRequest: () => dispatch(resetRequest()),
+  addProductToCart: (cart, product) =>
+    dispatch(addToCartRequest(cart, product)),
+  removeOneFromCart: (cart, product, removeAll) =>
+    dispatch(removeOneFromCart(cart, product, removeAll)),
+  removeProductFromCart: (cart, product, removeAll) =>
+    dispatch(removeProductFromCart(cart, product, removeAll))
 });
 
 export default connect(
