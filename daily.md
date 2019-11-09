@@ -97,4 +97,13 @@ continue:
 - bug fixes
 - task-20
 
+## 09.11.2019
+finish:
+- task 20
+- task 23
+
+start:
+- task: 22
+
+
 
