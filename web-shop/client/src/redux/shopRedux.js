@@ -13,17 +13,7 @@ const initialState = {
     { path: '/cart', title: 'Cart' }
   ],
   data: [],
-  cart: [
-    {
-      id: '09893eda-1d38-48a2-8db4-1ed714c29915',
-      name: 'A-Layout',
-      price: 10000,
-      img: '/images/placeholder.png',
-      amount: 2,
-      description:
-        'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?'
-    }
-  ],
+  cart: [],
   singleProduct: {},
   updateRequest: {
     pending: false,
@@ -143,7 +133,6 @@ export const loadRandomProductRequest = () => {
     dispatch(startRequest());
     try {
       let res = await axios.get(`${API_URL}/products/random`);
-
       dispatch(loadRandomProduct(res.data));
       dispatch(endRequest());
     } catch (e) {
@@ -153,57 +142,23 @@ export const loadRandomProductRequest = () => {
 };
 
 export const addToCartRequest = (cart, product) => {
-  const { id, name, img, description, tag } = product;
+  const { id } = product;
   return async dispatch => {
     dispatch(startRequest());
     try {
+      const res = await axios.get(`${API_URL}/products/${id}`);
       const result = cart.find(el => el.id === id);
       if (result) {
-        axios.get(`${API_URL}/products/${id}`).then(res => {
-          const payload = cart;
-          const currentIndex = cart.findIndex(el => el.id === id);
-          function go() {
-            res.data.amount < 0
-              ? (payload[currentIndex].amount = 0)
-              : (payload[currentIndex].amount += 1);
-            payload[currentIndex].name = name;
-            payload[currentIndex].img = img;
-            payload[currentIndex].description = description;
-            payload[currentIndex].tag = tag;
-            dispatch(updateAmountInCart(payload));
-          }
-        });
-      } else {
-        dispatch(addToCart(product));
-      }
-      dispatch(endRequest());
-    } catch (e) {
-      dispatch(errorRequest(e.message));
-    }
-  };
-};
-
-export const updateCart = (cart, product) => {
-  const { id, name, img, description, tag } = product;
-  return async dispatch => {
-    dispatch(startRequest());
-    try {
-      const result = cart.find(el => el.id === id);
-      //let res = await axios.get(`${API_URL}/products/${id}`);
-      //console.log(res);
-      if (result) {
-        const payload = cart;
         const currentIndex = cart.findIndex(el => el.id === id);
-        /* res.data.amount < 0 ? payload[currentIndex].amount = 0 :  */ payload[
-          currentIndex
-        ].amount += 1;
-        payload[currentIndex].name = name;
-        payload[currentIndex].img = img;
-        payload[currentIndex].description = description;
-        payload[currentIndex].tag = tag;
-        dispatch(updateAmountInCart(payload));
+        cart[currentIndex].amount +=
+          res.data.amount > cart[currentIndex].amount ? 1 : 0;
+        dispatch(updateAmountInCart(cart));
       } else {
-        dispatch(addToCart(product));
+        if (res.data.amount > 0) {
+          dispatch(addToCart(product));
+        } else {
+          throw new Error('Not enough items in stock');
+        }
       }
       dispatch(endRequest());
     } catch (e) {
