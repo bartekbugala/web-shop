@@ -24,13 +24,8 @@ const mapDispatchToProps = dispatch => ({
 class ProductFull extends React.Component {
   addToCart = e => {
     e.preventDefault();
-<<<<<<< HEAD
-    const { addProductToCart, cart, product } = this.props;
-    addProductToCart(cart, product);
-=======
     const { addProductToCart, id, cart } = this.props;
     addProductToCart(id, cart);
->>>>>>> bf29254c0cb663659a5766f5a60893ab4d9f90db
   };
 
   render() {
