@@ -1,8 +1,8 @@
 import React from 'react';
 import './Cart.scss';
 import ProductTitle from '../../common/ProductTitle/ProductTitle';
-import { cutText } from '../../../utils/cutText'
-import Button from '../../common/Button/Button'
+import { cutText } from '../../../utils/cutText';
+import Button from '../../common/Button/Button';
 
 class Cart extends React.Component {
   state = {
@@ -10,17 +10,18 @@ class Cart extends React.Component {
   };
   componentDidMount() {
     const { cart } = this.props;
-    this.setState({ cart: cart })
+    this.setState({ cart: cart });
   }
 
   addToCart = item => {
     const { addProductToCart, cart } = this.props;
-    addProductToCart(cart, item).then(this.setState({ cart: cart }));
+    addProductToCart(cart, item);
+    this.setState({ cart: cart });
   };
   removeFromCart = item => {
     const { removeProductFromCart, cart } = this.props;
     removeProductFromCart(cart, item).then(this.setState({ cart: cart }));
-  }
+  };
 
   render() {
     const { cart } = this.state;
@@ -29,7 +30,9 @@ class Cart extends React.Component {
         <ul className="cart__list">
           {cart.map(item => (
             <li key={item.id} className="cart__list-item">
-              <div className="cart__list-item__col-container"><img src={item.img} /></div>
+              <div className="cart__list-item__col-container">
+                <img src={item.img} />
+              </div>
               <div className="cart__list-item__col-container cart__list-item__description">
                 <ProductTitle>{`Name:${item.name}`}</ProductTitle>
                 <article>{cutText(item.description, 200)}</article>
