@@ -84,3 +84,17 @@ finish
 finish:
 - task-18
 - task-19
+
+## 07.11.2019
+finish:
+- task-21
+
+start:
+- task-20
+
+## 08.11.2019
+continue:
+- bug fixes
+- task-20
+
+
