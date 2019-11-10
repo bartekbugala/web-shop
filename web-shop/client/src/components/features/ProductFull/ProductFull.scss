@@ -1,19 +1,22 @@
 .full-product__container {
   position: relative;
   display: flex;
-
+  .full-product__title-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
   margin: 5px 12px;
-  .full-product__img {
-    max-width: 100%;
-    background-color: lightgray;
-  }
-  p {
-    bottom: 0;
-  }
-  .full-product__name {
-    left: 5px;
-  }
-  .full-product__price {
-    right: 5px;
+  .full-product__img-wrapper {
+    flex: 1 0 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      max-width: 100%;
+      height: auto;
+      background-color: lightgray;
+    }
   }
 }
