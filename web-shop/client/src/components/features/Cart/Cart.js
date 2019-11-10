@@ -1,10 +1,11 @@
 import React from 'react';
-import './Cart.scss';
-import ProductTitle from '../../common/ProductTitle/ProductTitle';
-import { cutText } from '../../../utils/cutText';
+import ProductName from '../../common/ProductName/ProductName';
+import Price from '../../common/Price/Price';
 import Button from '../../common/Button/Button';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
+import { cutText } from '../../../utils/cutText';
+import './Cart.scss';
 
 class Cart extends React.Component {
   state = {
@@ -60,16 +61,18 @@ class Cart extends React.Component {
                   <img src={item.img} />
                 </div>
                 <div className="cart__list-item__col-container cart__list-item__description">
-                  <ProductTitle>{`Name:${item.name}`}</ProductTitle>
+                  <ProductName>{item.name}</ProductName>
                   <article>{cutText(item.description, 200)}</article>
                 </div>
-                <div className="cart__list-item__col-container">{`$${item.price}`}</div>
+                <div className="cart__list-item__col-container">
+                  <Price>{item.price}</Price>
+                </div>
                 <div className="cart__list-item__col-container">
                   <div className="cart__list-item__amount-container">
                     {<Button onClick={() => this.removeOne(item)}>-</Button>}
                     <span className="cart__list-item__amount">{`${item.amount}`}</span>
                     {<Button onClick={() => this.addToCart(item)}>+</Button>}
-                    <span>szt.</span>
+                    <span>pcs.</span>
                   </div>
                   <div
                     className="cart__list-item__remove"
