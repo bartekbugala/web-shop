@@ -35,7 +35,7 @@ class ProductFull extends React.Component {
     const { name, price, img, description, tag, amount } = product;
     return (
       <div className="full-product__container">
-        <div class="full-product__img-wrapper">
+        <div className="full-product__img-wrapper">
           <img src={`${img}`} alt={`${name}`} />
         </div>
         <div>

@@ -4,13 +4,16 @@ import Price from '../../common/Price/Price';
 import Button from '../../common/Button/Button';
 import Spinner from '../../common/Spinner/Spinner';
 import Alert from '../../common/Alert/Alert';
+import Modal from '../../common/Modal/Modal';
 import { cutText } from '../../../utils/cutText';
 import './Cart.scss';
 
 class Cart extends React.Component {
   state = {
     cart: this.props.cart,
-    request: this.props.request
+    request: this.props.request,
+    total: 0,
+    checkout: false
   };
   componentDidMount() {
     const { resetRequest } = this.props;
@@ -42,10 +45,19 @@ class Cart extends React.Component {
     removeProductFromCart(cart, item, true);
   };
 
+  checkout = cart => {
+    let { total } = this.state;
+    cart.forEach(el => {
+      return (total += el.price * el.amount);
+    });
+    this.setState({ total: total });
+  };
+
   render() {
-    const { cart, request } = this.state;
+    const { cart, request, checkout } = this.state;
     return (
       <div className="cart">
+        {checkout && <Modal cart={cart} />}
         {request.pending && <Spinner />}
         {!request.pending && request.error !== null && (
           <Alert variant="error">{`Error: ${request.error}`}</Alert>
@@ -86,7 +98,9 @@ class Cart extends React.Component {
         )}
         <div className="cart__checkout">
           <input placeholder="Discount Code"></input>
-          <Button>Checkout</Button>
+          <Button onClick={() => this.setState({ checkout: true })}>
+            Checkout
+          </Button>
         </div>
       </div>
     );
