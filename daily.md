@@ -99,11 +99,16 @@ continue:
 
 ## 09.11.2019
 finish:
-- task 20
-- task 23
+- task-20
+- task-23
 
 start:
-- task: 22
+- task-22
 
+## 10.11.2019
+finish:
+- task-22
 
+start:
+- task-24 
 
