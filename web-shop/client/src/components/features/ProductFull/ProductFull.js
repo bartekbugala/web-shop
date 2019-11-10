@@ -2,6 +2,7 @@ import React from 'react';
 import './ProductFull.scss';
 import ProductTitle from '../../common/ProductTitle/ProductTitle';
 import Price from '../../common/Price/Price';
+import Amount from '../../common/Amount/Amount';
 import ProductDescription from '../../common/ProductDescription/ProductDescription';
 import ProductTag from '../../common/ProductTag/ProductTag';
 import Button from '../../common/Button/Button';
@@ -34,15 +35,22 @@ class ProductFull extends React.Component {
     const { name, price, img, description, tag, amount } = product;
     return (
       <div className="full-product__container">
-        <img className="full-product__img" src={`${img}`} alt={`${name}`} />
+        <div class="full-product__img-wrapper">
+          <img src={`${img}`} alt={`${name}`} />
+        </div>
         <div>
-          <ProductTitle>{name}</ProductTitle>
+          <div className="full-product__title-wrapper">
+            <ProductTitle>{name}</ProductTitle>
+            {tag && (
+              <ProductTag className="full-product__tag">{tag}</ProductTag>
+            )}
+          </div>
           <Price>{price}</Price>
-          <p>{amount}</p>
+          <Amount>{amount}</Amount>
           {description && (
             <ProductDescription>{description}</ProductDescription>
           )}
-          {tag && <ProductTag>{tag}</ProductTag>}
+
           <Button onClick={addToCart}>{`Add to cart`}</Button>
         </div>
       </div>
