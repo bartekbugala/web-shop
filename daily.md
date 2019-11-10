@@ -108,7 +108,8 @@ start:
 ## 10.11.2019
 finish:
 - task-22
-
-start:
 - task-24 
 
+start:
+- task-25
+- task-26 
