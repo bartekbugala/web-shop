@@ -1,24 +1,44 @@
+@import '../../../styles/settings.scss';
+
 .list-product__container {
   position: relative;
   display: block;
   width: 400px;
   height: 500px;
-  margin: 5px;
+  margin: 10px;
   .list-product__img {
     max-width: 100%;
     background-color: lightgray;
   }
-  p {
-    bottom: 0;
+  div[class^='list-product'] {
+    display: inline-block;
+    position: absolute;
+  }
+  .list-product__last-tag {
+    left: 5px;
+    top: 15px;
+    .product-tag {
+      background: $color-warning-back;
+    }
+  }
+  .out-of-stock {
+    .product-tag {
+      background: $color-error-back;
+    }
+  }
+  .list-product__tag {
+    right: 5px;
+    top: 15px;
   }
   .list-product__name {
-    display: inline-block;
-    position: absolute;
-    left: 5px;
+    left: 10px;
+    bottom: 5px;
+    .product-name {
+      font-size: 20px;
+    }
   }
   .list-product__price {
-    position: absolute;
-    display: inline-block;
-    right: 5px;
+    right: 10px;
+    bottom: 5px;
   }
 }

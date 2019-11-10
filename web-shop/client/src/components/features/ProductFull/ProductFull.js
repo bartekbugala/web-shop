@@ -1,6 +1,6 @@
 import React from 'react';
 import './ProductFull.scss';
-import ProductTitle from '../../common/ProductTitle/ProductTitle';
+import ProductName from '../../common/ProductName/ProductName';
 import Price from '../../common/Price/Price';
 import Amount from '../../common/Amount/Amount';
 import ProductDescription from '../../common/ProductDescription/ProductDescription';
@@ -40,7 +40,7 @@ class ProductFull extends React.Component {
         </div>
         <div>
           <div className="full-product__title-wrapper">
-            <ProductTitle>{name}</ProductTitle>
+            <ProductName>{name}</ProductName>
             {tag && (
               <ProductTag className="full-product__tag">{tag}</ProductTag>
             )}
