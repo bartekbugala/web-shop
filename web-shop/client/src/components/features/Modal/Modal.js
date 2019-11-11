@@ -1,6 +1,6 @@
 import React from 'react';
 import './Modal.scss';
-import Button from '../Button/Button';
+import Button from '../../common/Button/Button';
 
 const Modal = ({ children, cart, handleModal }) => (
   <div className="modal__overlay">

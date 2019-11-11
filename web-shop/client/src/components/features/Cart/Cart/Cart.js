@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../../common/Button/Button';
 import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';
-import Modal from '../../../common/Modal/Modal';
+import Modal from '../../../features/Modal/Modal';
 import './Cart.scss';
 import CartProductList from '../CartProductList/CartProductList';
 import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
