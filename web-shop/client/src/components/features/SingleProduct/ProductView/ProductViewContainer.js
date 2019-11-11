@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { getSingleProduct, getRequest, loadSingleProductRequest } from '../../../redux/shopRedux';
+import {
+  getSingleProduct,
+  getRequest,
+  loadSingleProductRequest
+} from '../../../../redux/shopRedux';
 import ProductView from './ProductView';
 
 const mapStateToProps = state => ({
@@ -7,7 +11,8 @@ const mapStateToProps = state => ({
   request: getRequest(state)
 });
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadSingleProduct: () => dispatch(loadSingleProductRequest(ownProps.productId))
+  loadSingleProduct: () =>
+    dispatch(loadSingleProductRequest(ownProps.productId))
 });
 
 export default connect(

@@ -5,7 +5,7 @@ import {
   loadProductsByPageRequest,
   getPages,
   getSort
-} from '../../../redux/shopRedux';
+} from '../../../../redux/shopRedux';
 import Products from './Products';
 
 const mapStateToProps = (state, ownProps) => ({

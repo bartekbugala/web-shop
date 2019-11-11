@@ -1,9 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import ProductList from '../ProductList/ProductList';
-import Spinner from '../../common/Spinner/Spinner';
-import Alert from '../../common/Alert/Alert';
-import Pagination from '../../common/Pagination/Pagination';
+import Spinner from '../../../common/Spinner/Spinner';
+import Alert from '../../../common/Alert/Alert';
+import Pagination from '../../../common/Pagination/Pagination';
 
 class Products extends React.Component {
   state = {

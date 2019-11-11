@@ -1,17 +1,17 @@
 import React from 'react';
-import './ProductFull.scss';
-import ProductName from '../../common/ProductName/ProductName';
-import Price from '../../common/Price/Price';
-import Amount from '../../common/Amount/Amount';
-import ProductDescription from '../../common/ProductDescription/ProductDescription';
-import ProductTag from '../../common/ProductTag/ProductTag';
-import Button from '../../common/Button/Button';
+import ProductName from '../../../common/ProductCommons/ProductName/ProductName';
+import Price from '../../../common/ProductCommons/Price/Price';
+import Amount from '../../../common/ProductCommons/Amount/Amount';
+import ProductDescription from '../../../common/ProductCommons/ProductDescription/ProductDescription';
+import ProductTag from '../../../common/ProductCommons/ProductTag/ProductTag';
+import Button from '../../../common/Button/Button';
 import { connect } from 'react-redux';
 import {
   addToCartRequest,
   getRequest,
   getCart
-} from '../../../redux/shopRedux';
+} from '../../../../redux/shopRedux';
+import './ProductFull.scss';
 
 const mapStateToProps = state => ({
   /*   product: getSingleProduct(state), */
@@ -35,7 +35,7 @@ class ProductFull extends React.Component {
     const { name, price, img, description, tag, amount } = product;
     return (
       <div className="full-product__container">
-        <div class="full-product__img-wrapper">
+        <div className="full-product__img-wrapper">
           <img src={`${img}`} alt={`${name}`} />
         </div>
         <div>

@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../../features/Header/Header';
+import Header from '../Header/Header';
 import PageContainer from '../PageContainer/PageContainer';
-import Footer from '../../features/Footer/Footer';
+import Footer from '../Footer/Footer';
 
 const MainLayout = ({ children }) => (
   <div>

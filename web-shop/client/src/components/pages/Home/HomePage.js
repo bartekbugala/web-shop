@@ -1,7 +1,7 @@
-import React from "react";
-import Products from "../../features/Products/ProductsContainer";
-import SortingWidget from "../../features/SortingWidget/SortingWidgetContainer";
-import "./HomePage.scss";
+import React from 'react';
+import Products from '../../features/Home/Products/ProductsContainer';
+import SortingWidget from '../../features/Home/SortingWidget/SortingWidgetContainer';
+import './HomePage.scss';
 
 class HomePage extends React.Component {
   render() {

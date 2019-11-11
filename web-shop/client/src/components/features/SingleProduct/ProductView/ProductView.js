@@ -1,6 +1,6 @@
 import React from 'react';
-import Spinner from '../../common/Spinner/Spinner';
-import Alert from '../../common/Alert/Alert';
+import Spinner from '../../../common/Spinner/Spinner';
+import Alert from '../../../common/Alert/Alert';
 import ProductFull from '../ProductFull/ProductFull';
 
 class ProductView extends React.Component {

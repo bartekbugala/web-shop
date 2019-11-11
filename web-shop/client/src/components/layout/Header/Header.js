@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getMenuLinks } from '../../../redux/shopRedux';
 import MainMenu from '../../layout/MainMenu/MainMenu';
-import Logo from '../../common/Logo/Logo';
+import Logo from '../Logo/Logo';
 import './Header.scss';
 
 const mapStateToProps = state => ({

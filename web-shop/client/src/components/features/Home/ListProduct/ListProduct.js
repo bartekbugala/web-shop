@@ -1,11 +1,10 @@
 import React from 'react';
 import './ListProduct.scss';
 import { Link } from 'react-router-dom';
-import ProductName from '../../common/ProductName/ProductName';
-import ProductTag from '../../common/ProductTag/ProductTag';
-import Price from '../../common/Price/Price';
-import Spinner from '../../common/Spinner/Spinner';
-import Amount from '../../common/Amount/Amount';
+import ProductName from '../../../common/ProductCommons/ProductName/ProductName';
+import ProductTag from '../../../common/ProductCommons/ProductTag/ProductTag';
+import Price from '../../../common/ProductCommons/Price/Price';
+import Spinner from '../../../common/Spinner/Spinner';
 
 class ListProduct extends React.Component {
   constructor(props) {

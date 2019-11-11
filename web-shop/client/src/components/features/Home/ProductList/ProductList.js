@@ -1,8 +1,8 @@
 import React from 'react';
-import { getProducts } from '../../../redux/shopRedux';
+import { getProducts } from '../../../../redux/shopRedux';
 import ListProduct from '../ListProduct/ListProduct';
 import { connect } from 'react-redux';
-import Spinner from '../../common/Spinner/Spinner';
+import Spinner from '../../../common/Spinner/Spinner';
 import './ProductList.scss';
 
 const mapStateToProps = state => ({
@@ -18,7 +18,8 @@ const ProductList = ({ products }) => {
           {products.map(product => (
             <ListProduct key={product.id} {...product} />
           ))}
-        </div>)}
+        </div>
+      )}
     </div>
   );
 };
