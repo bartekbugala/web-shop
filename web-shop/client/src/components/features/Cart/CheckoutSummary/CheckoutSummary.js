@@ -3,8 +3,8 @@ import Button from '../../../common/Button/Button';
 import './CheckoutSummary.scss';
 
 const CheckoutSummary = ({ cart }) => (
-  <div>
-    {' '}
+  <div className="checkout-summary">
+    <h2>Order Summary</h2>
     <table>
       <tbody>
         <tr>

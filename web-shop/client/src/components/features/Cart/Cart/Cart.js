@@ -40,7 +40,6 @@ class Cart extends React.Component {
 
   removeProduct = item => {
     const { removeProductFromCart, cart } = this.props;
-    /* cart.filter(el => el.id !== item.id); */
     removeProductFromCart(cart, item, true);
   };
 
