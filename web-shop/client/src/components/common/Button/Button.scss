@@ -17,6 +17,15 @@
     color: $color-primary;
   }
 
+  &--confirm {
+    background-color: $color-secondary;
+    color: $color-text-bright;
+    &:hover {
+      box-shadow: -5px -5px 20px rgba(0, 0, 0, 0.1);
+      opacity: 1;
+    }
+  }
+
   &--info {
     color: $color-info;
   }

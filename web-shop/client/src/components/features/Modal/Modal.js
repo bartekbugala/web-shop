@@ -9,7 +9,7 @@ const Modal = ({ children, cart, handleModal }) => (
         variant="danger"
         style={{ background: `white`, float: `right` }}
         onClick={handleModal}>
-        X
+        x
       </Button>
       {children}
     </div>

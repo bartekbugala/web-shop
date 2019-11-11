@@ -4,7 +4,7 @@ import './CheckoutSummary.scss';
 
 const CheckoutSummary = ({ cart }) => (
   <div className="checkout-summary">
-    <h2>Order Summary</h2>
+    <h3>Order Summary</h3>
     <table>
       <tbody>
         <tr>
@@ -23,7 +23,7 @@ const CheckoutSummary = ({ cart }) => (
         ))}
       </tbody>
     </table>
-    <Button>Order</Button>
+    <Button variant={`confirm`}>Confrim Order</Button>
   </div>
 );
 
