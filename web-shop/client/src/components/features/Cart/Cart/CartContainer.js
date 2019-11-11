@@ -7,7 +7,7 @@ import {
   getRequest,
   resetRequest,
   removeProductFromCart
-} from '../../../redux/shopRedux';
+} from '../../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
   cart: getCart(state),
