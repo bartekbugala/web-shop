@@ -1,4 +1,5 @@
-const Post = require('./models/product.model');
+const Product = require('./models/product.model');
+const Discount = require('./models/discount.model');
 const uuid = require('uuid');
 
 const loadTestData = async () => {
@@ -139,15 +140,20 @@ const loadTestData = async () => {
   ];
 
   try {
-    let counter = await Post.countDocuments();
-    if (counter === 0) {
+    let counter1 = await Discount.countDocuments();
+    if (counter1 === 0) {
+      console.log('No discounts. Loading test data...');
+      await Discount.create(discounts);
+      console.log('Discounts have been successfully loaded');
+    }
+    let counter2 = await Product.countDocuments();
+    if (counter2 === 0) {
       console.log('No products. Loading test data...');
-      await Post.create(products, discounts);
-      console.log('Test data has been successfully loaded');
+      await Product.create(products);
+      console.log('Products have been successfully loaded');
     }
   } catch (err) {
     console.log("Couldn't load test data", err);
   }
 };
-
 module.exports = loadTestData;

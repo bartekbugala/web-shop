@@ -25,6 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/api', productRoutes);
+app.use('/api', discountRoutes);
 
 // Serve static files from the React app
 //app.use(express.static(path.join(__dirname, '/../client/build')));

@@ -12,7 +12,9 @@ class Cart extends React.Component {
     cart: this.props.cart,
     request: this.props.request,
     total: 0,
-    checkout: false
+    checkout: false,
+    discountCode: '',
+    discount: 0
   };
   componentDidMount() {
     const { resetRequest } = this.props;
@@ -57,8 +59,16 @@ class Cart extends React.Component {
     this.setState({ total: total });
   };
 
+  updateDiscount = async evt => {
+    this.setState({
+      discountCode: evt.target.value
+    });
+    await this.props.loadDiscount(evt.target.value);
+    this.setState({ discount: this.props.discount });
+  };
+
   render() {
-    const { cart, request, checkout, total } = this.state;
+    const { cart, discount, request, checkout, total } = this.state;
     const {
       removeProduct,
       addToCart,
@@ -83,6 +93,7 @@ class Cart extends React.Component {
         {!request.pending && request.success && cart.length > 0 && (
           <CartProductList
             total={total}
+            discount={discount}
             cart={cart}
             removeProduct={removeProduct}
             removeOne={removeOne}
@@ -90,7 +101,10 @@ class Cart extends React.Component {
           />
         )}
         <div className="cart__checkout">
-          <input placeholder="Discount Code"></input>
+          <input
+            value={this.state.discountCode}
+            onChange={this.updateDiscount}
+            placeholder="Discount Code"></input>
           <Button
             variant="confirm"
             onClick={() => {

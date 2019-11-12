@@ -1,5 +1,14 @@
+@import '../../../../styles/settings.scss';
+
 .total {
   font-size: 30px;
   float: right;
+  clear: both;
+  margin-right: 20px;
+}
+.discount {
+  font-size: 20px;
+  float: right;
+  color: $color-warning;
   margin-right: 20px;
 }

@@ -14,6 +14,7 @@ const initialState = {
   ],
   data: [],
   cart: [],
+  discount: 0,
   singleProduct: {},
   updateRequest: {
     pending: false,
@@ -42,6 +43,7 @@ export const getUpdateRequest = ({ shop }) => shop.updateRequest;
 export const getPages = ({ shop }) =>
   Math.ceil(shop.amount / shop.productsPerPage);
 export const getCart = ({ shop }) => shop.cart;
+export const getDiscount = ({ shop }) => shop.discount;
 export const getSort = ({ shop }) => shop.sortParam;
 
 //// Thunks
@@ -64,6 +66,20 @@ export const loadSingleProductRequest = id => {
     try {
       let res = await axios.get(`${API_URL}/products/${id}`);
       dispatch(loadSingleProduct(res.data));
+      dispatch(endRequest());
+    } catch (e) {
+      dispatch(errorRequest(e.message));
+    }
+  };
+};
+
+export const loadDiscountRequest = code => {
+  return async dispatch => {
+    dispatch(startRequest());
+    try {
+      let res = await axios.get(`${API_URL}/discount/${code}`);
+      let payload = res.data.rate ? res.data.rate : 0;
+      dispatch(loadDiscount(payload));
       dispatch(endRequest());
     } catch (e) {
       dispatch(errorRequest(e.message));
@@ -239,6 +255,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 // action exports
 export const LOAD_PRODUCTS = createActionName('LOAD_PRODUCTS');
 export const LOAD_SINGLE_PRODUCT = createActionName('LOAD_SINGLE_PRODUCT');
+export const LOAD_DISCOUNT = createActionName('LOAD_DISCOUNT');
 export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
 export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
 export const ADD_TO_CART = createActionName('ADD_TO_CART');
@@ -258,6 +275,7 @@ export const loadSingleProduct = payload => ({
   payload,
   type: LOAD_SINGLE_PRODUCT
 });
+export const loadDiscount = payload => ({ payload, type: LOAD_DISCOUNT });
 export const loadProductsByPage = payload => ({
   payload,
   type: LOAD_PRODUCTS_PAGE
@@ -291,6 +309,8 @@ export default function reducer(statePart = initialState, action = {}) {
       return { ...statePart, data: action.payload };
     case LOAD_SINGLE_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
+    case LOAD_DISCOUNT:
+      return { ...statePart, discount: action.payload };
     case LOAD_PRODUCTS_PAGE:
       return {
         ...statePart,

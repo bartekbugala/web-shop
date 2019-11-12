@@ -10,7 +10,8 @@ const CartProductList = ({
   removeOne,
   addToCart,
   removeProduct,
-  total
+  total,
+  discount
 }) => (
   <ul className="cart__list">
     {cart.map(item => (
@@ -40,7 +41,9 @@ const CartProductList = ({
         </div>
       </li>
     ))}
-    <li className="total">{`Total: $${total}`}</li>
+    <li className="discount">{`Discount: ${discount}%`}</li>
+    <li className="total">{`Total: $${total /
+      Math.round(1 + discount / 100).toFixed(2)}`}</li>
   </ul>
 );
 
