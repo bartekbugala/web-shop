@@ -1,6 +1,6 @@
 // import model
-const Product = require("../models/product.model");
-const uuid = require("uuid");
+const Product = require('../models/product.model');
+const uuid = require('uuid');
 
 // get all products
 exports.getProducts = async (req, res) => {
@@ -20,24 +20,8 @@ exports.getSingleProduct = async (req, res) => {
   }
 };
 
-// get random product
-exports.getRandomProduct = async (req, res) => {
-  try {
-    Product.countDocuments().exec(function (err, count) {
-      const random = Math.floor(Math.random() * count);
-      Product.findOne()
-        .skip(random)
-        .exec(function (err, result) {
-          res.status(200).json(result);
-        });
-    });
-  } catch (err) {
-    res.status(500).res.json(err);
-  }
-};
-
 // get products by range
-exports.getProductsByRange = async function (req, res) {
+exports.getProductsByRange = async function(req, res) {
   try {
     let { startAt, limit, sortParam } = req.params;
 
@@ -45,7 +29,7 @@ exports.getProductsByRange = async function (req, res) {
     limit = parseInt(limit);
     const products = await Product.find()
       .sort(sortParam)
-      .collation({ locale: "pl", strength: 1 })
+      .collation({ locale: 'pl', strength: 1 })
       .skip(startAt)
       .limit(limit);
     // return total amount of documents in collection
@@ -98,16 +82,17 @@ exports.editProduct = async (req, res) => {
   }
 };
 
-////////////
 exports.removeOneAmount = async (req, res) => {
   try {
-    const productUpdated = await Product.findOneAndUpdate({ id: req.params.id }, { $inc: { amount: -1 } });
+    const productUpdated = await Product.findOneAndUpdate(
+      { id: req.params.id },
+      { $inc: { amount: -1 } }
+    );
     res.status(200).json(productUpdated);
   } catch (err) {
     res.status(500).json(err);
   }
 };
-////////////
 
 exports.deleteProduct = async (req, res) => {
   try {
@@ -115,7 +100,7 @@ exports.deleteProduct = async (req, res) => {
       id: req.params.id
     });
     if (productDeleted === null) {
-      let noProduct = { error: "already removed or not in database" };
+      let noProduct = { error: 'already removed or not in database' };
       res.status(404).json(noProduct);
     } else res.status(200).json(productDeleted);
   } catch (err) {
