@@ -9,6 +9,7 @@ const loadTestData = require('./testData');
 
 // import routes
 const productRoutes = require('./routes/product.routes');
+const discountRoutes = require('./routes/discount.routes');
 
 const app = express();
 

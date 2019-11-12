@@ -3,8 +3,8 @@ const uuid = require('uuid');
 
 const loadTestData = async () => {
   const discounts = [
-    { code: 'kodilla', rate: 20, products: 'all' },
-    { code: 'duck', rate: 50, products: '' }
+    { code: 'kodilla', rate: 20 },
+    { code: 'duck', rate: 50, products: ['123', '123'] }
   ];
   const products = [
     {
