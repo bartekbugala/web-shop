@@ -1,0 +1,10 @@
+@import '../../../../styles/settings.scss';
+
+.amount {
+  font-size: 18px;
+  color: $color-text-lightest;
+  font-weight: 400;
+  &:hover {
+    color: $color-text-light;
+  }
+}
