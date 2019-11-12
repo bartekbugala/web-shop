@@ -20,7 +20,7 @@ class Cart extends React.Component {
     resetRequest();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.state.cart !== this.props.cart) {
       this.setState({ cart: this.props.cart });
       this.checkoutTotal(this.props.cart);
