@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../../common/Button/Button';
 import './CheckoutSummary.scss';
 
-const CheckoutSummary = ({ cart }) => (
+const CheckoutSummary = ({ cart, total }) => (
   <div className="checkout-summary">
     <h3>Order Summary</h3>
     <table>
@@ -13,17 +13,23 @@ const CheckoutSummary = ({ cart }) => (
           <th>Price</th>
           <th>Subtotal</th>
         </tr>
-        {cart.map((el, i) => (
-          <tr key={i}>
-            <td>{el.name}</td>
-            <td>{el.amount}</td>
-            <td>{el.price}</td>
-            <td>{el.price * el.amount}</td>
-          </tr>
-        ))}
+        {cart.map((el, i) => {
+          let subtotal = el.price * el.amount;
+          return (
+            <tr key={i}>
+              <td>{el.name}</td>
+              <td>{el.amount}</td>
+              <td>{el.price}</td>
+              <td>{subtotal}</td>
+            </tr>
+          );
+        })}
+        <tr>
+          <td className="checkout-total" colSpan="4">{`Total: ${total}`}</td>
+        </tr>
       </tbody>
     </table>
-    <Button variant={`confirm`}>Confrim Order</Button>
+    <Button variant="confirm">Confrim Order</Button>
   </div>
 );
 

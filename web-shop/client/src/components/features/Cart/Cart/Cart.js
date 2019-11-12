@@ -16,15 +16,14 @@ class Cart extends React.Component {
   };
   componentDidMount() {
     const { resetRequest } = this.props;
+    this.checkoutTotal();
     resetRequest();
-    if (this.state.cart !== this.props.cart) {
-      this.setState({ cart: this.props.cart });
-    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.state.cart !== this.props.cart) {
       this.setState({ cart: this.props.cart });
+      this.checkoutTotal(this.props.cart);
     }
   }
 
@@ -47,8 +46,8 @@ class Cart extends React.Component {
     this.setState({ checkout: false });
   };
 
-  checkout = cart => {
-    let { total } = this.state;
+  checkoutTotal = (cart = this.state.cart) => {
+    let total = 0;
     cart.forEach(el => {
       return (total += el.price * el.amount);
     });
@@ -56,13 +55,23 @@ class Cart extends React.Component {
   };
 
   render() {
-    const { cart, request, checkout } = this.state;
-    const { removeProduct, addToCart, removeOne, closeCheckout } = this;
+    const { cart, request, checkout, total } = this.state;
+    const {
+      removeProduct,
+      addToCart,
+      removeOne,
+      closeCheckout,
+      checkoutTotal
+    } = this;
     return (
       <div className="cart">
         {checkout && (
           <Modal cart={cart} handleModal={closeCheckout}>
-            <CheckoutSummary cart={cart} />
+            <CheckoutSummary
+              cart={cart}
+              /* checkoutTotal={checkoutTotal} */
+              total={total}
+            />
           </Modal>
         )}
         {request.pending && <Spinner />}
@@ -74,6 +83,7 @@ class Cart extends React.Component {
         )}
         {!request.pending && request.success && cart.length > 0 && (
           <CartProductList
+            total={total}
             cart={cart}
             removeProduct={removeProduct}
             removeOne={removeOne}
@@ -82,7 +92,11 @@ class Cart extends React.Component {
         )}
         <div className="cart__checkout">
           <input placeholder="Discount Code"></input>
-          <Button onClick={() => this.setState({ checkout: true })}>
+          <Button
+            onClick={() => {
+              checkoutTotal();
+              this.setState({ checkout: true });
+            }}>
             Checkout
           </Button>
         </div>

@@ -5,7 +5,13 @@ import Price from '../../../common/ProductCommons/Price/Price';
 import { cutText } from '../../../../utils/cutText';
 import './CartProductList.scss';
 
-const CartProductList = ({ cart, removeOne, addToCart, removeProduct }) => (
+const CartProductList = ({
+  cart,
+  removeOne,
+  addToCart,
+  removeProduct,
+  total
+}) => (
   <ul className="cart__list">
     {cart.map(item => (
       <li key={item.id} className="cart__list-item">
@@ -34,6 +40,7 @@ const CartProductList = ({ cart, removeOne, addToCart, removeProduct }) => (
         </div>
       </li>
     ))}
+    <li>{`Total: ${total}`}</li>
   </ul>
 );
 
