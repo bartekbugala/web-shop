@@ -112,4 +112,18 @@ finish:
 
 start:
 - task-25
-- task-26 
+- task-26
+
+## 11.11.2019
+continue:
+- task-25
+- task-28
+- task-29
+
+## 12.11.2019
+finish:
+- task-25
+
+start: 
+- task-26
+- task-32
