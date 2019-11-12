@@ -40,7 +40,7 @@ const CartProductList = ({
         </div>
       </li>
     ))}
-    <li>{`Total: ${total}`}</li>
+    <li className="total">{`Total: $${total}`}</li>
   </ul>
 );
 

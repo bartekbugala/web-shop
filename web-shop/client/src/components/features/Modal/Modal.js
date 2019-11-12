@@ -2,7 +2,7 @@ import React from 'react';
 import './Modal.scss';
 import Button from '../../common/Button/Button';
 
-const Modal = ({ children, cart, handleModal }) => (
+const Modal = ({ children, handleModal }) => (
   <div className="modal__overlay">
     <div className="modal__modal-window">
       <Button

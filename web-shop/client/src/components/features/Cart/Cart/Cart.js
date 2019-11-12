@@ -27,19 +27,22 @@ class Cart extends React.Component {
     }
   }
 
-  addToCart = item => {
+  addToCart = async item => {
     const { addProductToCart, cart } = this.props;
-    addProductToCart(cart, item);
+    await addProductToCart(cart, item);
+    this.checkoutTotal();
   };
 
-  removeOne = item => {
+  removeOne = async item => {
     const { cart, removeOneFromCart } = this.props;
-    removeOneFromCart(cart, item);
+    await removeOneFromCart(cart, item);
+    this.checkoutTotal();
   };
 
-  removeProduct = item => {
+  removeProduct = async item => {
     const { removeProductFromCart, cart } = this.props;
-    removeProductFromCart(cart, item, true);
+    await removeProductFromCart(cart, item, true);
+    this.checkoutTotal();
   };
 
   closeCheckout = () => {
@@ -67,11 +70,7 @@ class Cart extends React.Component {
       <div className="cart">
         {checkout && (
           <Modal cart={cart} handleModal={closeCheckout}>
-            <CheckoutSummary
-              cart={cart}
-              /* checkoutTotal={checkoutTotal} */
-              total={total}
-            />
+            <CheckoutSummary cart={cart} total={total} />
           </Modal>
         )}
         {request.pending && <Spinner />}
@@ -93,6 +92,7 @@ class Cart extends React.Component {
         <div className="cart__checkout">
           <input placeholder="Discount Code"></input>
           <Button
+            variant="confirm"
             onClick={() => {
               checkoutTotal();
               this.setState({ checkout: true });
