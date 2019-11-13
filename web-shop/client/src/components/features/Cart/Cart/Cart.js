@@ -1,11 +1,11 @@
-import React from 'react';
-import Button from '../../../common/Button/Button';
-import Spinner from '../../../common/Spinner/Spinner';
-import Alert from '../../../common/Alert/Alert';
-import Modal from '../../../features/Modal/Modal';
-import './Cart.scss';
-import CartProductList from '../CartProductList/CartProductList';
-import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
+import React from "react";
+import Button from "../../../common/Button/Button";
+import Spinner from "../../../common/Spinner/Spinner";
+import Alert from "../../../common/Alert/Alert";
+import Modal from "../../../features/Modal/Modal";
+import "./Cart.scss";
+import CartProductList from "../CartProductList/CartProductList";
+import CheckoutSummary from "../CheckoutSummary/CheckoutSummary";
 
 class Cart extends React.Component {
   state = {
@@ -13,9 +13,10 @@ class Cart extends React.Component {
     request: this.props.request,
     total: 0,
     checkout: false,
-    discountCode: '',
+    discountCode: "",
     discount: 0
   };
+
   componentDidMount() {
     const { resetRequest } = this.props;
     this.checkoutTotal();
@@ -64,6 +65,12 @@ class Cart extends React.Component {
       discountCode: evt.target.value
     });
     await this.props.loadDiscount(evt.target.value);
+    console.log(
+      "props disc:",
+      this.props.discount,
+      "state disc:",
+      this.state.discount
+    );
     this.setState({ discount: this.props.discount });
   };
 
@@ -90,7 +97,7 @@ class Cart extends React.Component {
         {!request.pending && cart.length === 0 && (
           <Alert variant="info">Cart is empty</Alert>
         )}
-        {!request.pending && request.success && cart.length > 0 && (
+        {!request.pending && (request.success || cart.length > 0) && (
           <CartProductList
             total={total}
             discount={discount}
@@ -104,13 +111,15 @@ class Cart extends React.Component {
           <input
             value={this.state.discountCode}
             onChange={this.updateDiscount}
-            placeholder="Discount Code"></input>
+            placeholder="Discount Code"
+          ></input>
           <Button
             variant="confirm"
             onClick={() => {
               checkoutTotal();
               this.setState({ checkout: true });
-            }}>
+            }}
+          >
             Checkout
           </Button>
         </div>
