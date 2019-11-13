@@ -1,11 +1,12 @@
-import React from "react";
-import Button from "../../../common/Button/Button";
-import Spinner from "../../../common/Spinner/Spinner";
-import Alert from "../../../common/Alert/Alert";
-import Modal from "../../../features/Modal/Modal";
-import "./Cart.scss";
-import CartProductList from "../CartProductList/CartProductList";
-import CheckoutSummary from "../CheckoutSummary/CheckoutSummary";
+import React from 'react';
+import Button from '../../../common/Button/Button';
+import Spinner from '../../../common/Spinner/Spinner';
+import Alert from '../../../common/Alert/Alert';
+import Modal from '../../../features/Modal/Modal';
+import './Cart.scss';
+import CartProductList from '../CartProductList/CartProductList';
+import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
+import { roundMoney } from '../../../../utils/roundMoney';
 
 class Cart extends React.Component {
   state = {
@@ -13,8 +14,8 @@ class Cart extends React.Component {
     request: this.props.request,
     total: 0,
     checkout: false,
-    discountCode: "",
-    discount: 0
+    discountCode: '',
+    discount: this.props.discount
   };
 
   componentDidMount() {
@@ -53,11 +54,13 @@ class Cart extends React.Component {
   };
 
   checkoutTotal = (cart = this.state.cart) => {
+    const { discount } = this.state;
     let total = 0;
     cart.forEach(el => {
       return (total += el.price * el.amount);
     });
-    this.setState({ total: total });
+    let currentDiscount = total * (discount / 100);
+    this.setState({ total: roundMoney(total - currentDiscount) });
   };
 
   updateDiscount = async evt => {
@@ -65,23 +68,26 @@ class Cart extends React.Component {
       discountCode: evt.target.value
     });
     await this.props.loadDiscount(evt.target.value);
-    console.log(
-      "props disc:",
-      this.props.discount,
-      "state disc:",
-      this.state.discount
-    );
-    this.setState({ discount: this.props.discount });
+    await this.setState({ discount: this.props.discount });
+    this.checkoutTotal();
   };
 
   render() {
-    const { cart, discount, request, checkout, total } = this.state;
+    const {
+      cart,
+      discount,
+      request,
+      checkout,
+      total,
+      discountCode
+    } = this.state;
     const {
       removeProduct,
       addToCart,
       removeOne,
       closeCheckout,
-      checkoutTotal
+      checkoutTotal,
+      updateDiscount
     } = this;
     return (
       <div className="cart">
@@ -108,18 +114,17 @@ class Cart extends React.Component {
           />
         )}
         <div className="cart__checkout">
+          <p>demo codes: duck, kodilla</p>
           <input
-            value={this.state.discountCode}
-            onChange={this.updateDiscount}
-            placeholder="Discount Code"
-          ></input>
+            value={discountCode}
+            onChange={updateDiscount}
+            placeholder={discountCode ? discountCode : `Enter Code`}></input>
           <Button
             variant="confirm"
             onClick={() => {
               checkoutTotal();
               this.setState({ checkout: true });
-            }}
-          >
+            }}>
             Checkout
           </Button>
         </div>

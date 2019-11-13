@@ -42,8 +42,7 @@ const CartProductList = ({
       </li>
     ))}
     <li className="discount">{`Discount: ${discount}%`}</li>
-    <li className="total">{`Total: $${total /
-      Math.round(1 + discount / 100).toFixed(2)}`}</li>
+    <li className="total">{`Total: $${total}`}</li>
   </ul>
 );
 

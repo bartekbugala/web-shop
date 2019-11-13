@@ -28,7 +28,4 @@ const mapDispatchToProps = dispatch => ({
   loadDiscount: code => dispatch(loadDiscountRequest(code))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
