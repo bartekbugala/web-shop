@@ -6,12 +6,17 @@ import {
   removeOneFromCart,
   getRequest,
   resetRequest,
-  removeProductFromCart
+  removeProductFromCart,
+  loadDiscountRequest,
+  getDiscount,
+  getDiscountCode
 } from '../../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
   cart: getCart(state),
-  request: getRequest(state)
+  request: getRequest(state),
+  discount: getDiscount(state) || 0,
+  discountCode: getDiscountCode(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -21,10 +26,8 @@ const mapDispatchToProps = dispatch => ({
   removeOneFromCart: (cart, product, removeAll) =>
     dispatch(removeOneFromCart(cart, product, removeAll)),
   removeProductFromCart: (cart, product, removeAll) =>
-    dispatch(removeProductFromCart(cart, product, removeAll))
+    dispatch(removeProductFromCart(cart, product, removeAll)),
+  loadDiscount: code => dispatch(loadDiscountRequest(code))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
