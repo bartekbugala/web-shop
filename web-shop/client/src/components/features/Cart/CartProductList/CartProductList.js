@@ -10,7 +10,8 @@ const CartProductList = ({
   removeOne,
   addToCart,
   removeProduct,
-  total
+  total,
+  discount
 }) => (
   <ul className="cart__list">
     {cart.map(item => (
@@ -40,6 +41,7 @@ const CartProductList = ({
         </div>
       </li>
     ))}
+    <li className="discount">{`Discount: ${discount}%`}</li>
     <li className="total">{`Total: $${total}`}</li>
   </ul>
 );
