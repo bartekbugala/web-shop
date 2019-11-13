@@ -1,11 +1,11 @@
-import React from 'react';
-import Button from '../../../common/Button/Button';
-import Spinner from '../../../common/Spinner/Spinner';
-import Alert from '../../../common/Alert/Alert';
-import Modal from '../../../features/Modal/Modal';
-import './Cart.scss';
-import CartProductList from '../CartProductList/CartProductList';
-import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
+import React from "react";
+import Button from "../../../common/Button/Button";
+import Spinner from "../../../common/Spinner/Spinner";
+import Alert from "../../../common/Alert/Alert";
+import Modal from "../../../features/Modal/Modal";
+import "./Cart.scss";
+import CartProductList from "../CartProductList/CartProductList";
+import CheckoutSummary from "../CheckoutSummary/CheckoutSummary";
 
 class Cart extends React.Component {
   state = {
@@ -96,7 +96,8 @@ class Cart extends React.Component {
             onClick={() => {
               checkoutTotal();
               this.setState({ checkout: true });
-            }}>
+            }}
+          >
             Checkout
           </Button>
         </div>
