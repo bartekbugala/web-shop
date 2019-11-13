@@ -3,22 +3,24 @@ import Button from '../../../common/Button/Button';
 import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';
 import Modal from '../../../features/Modal/Modal';
-import './Cart.scss';
 import CartProductList from '../CartProductList/CartProductList';
 import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
 import { roundMoney } from '../../../../utils/roundMoney';
+import './Cart.scss';
 
 class Cart extends React.Component {
+  _isMounted = false;
   state = {
     cart: this.props.cart,
     request: this.props.request,
     total: 0,
     checkout: false,
-    discountCode: '',
+    discountCode: this.props.discountCode,
     discount: this.props.discount
   };
 
   componentDidMount() {
+    this._isMounted = true;
     const { resetRequest } = this.props;
     this.checkoutTotal();
     resetRequest();
@@ -29,6 +31,10 @@ class Cart extends React.Component {
       this.setState({ cart: this.props.cart });
       this.checkoutTotal(this.props.cart);
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   addToCart = async item => {
@@ -63,13 +69,18 @@ class Cart extends React.Component {
     this.setState({ total: roundMoney(total - currentDiscount) });
   };
 
-  updateDiscount = async evt => {
+  handleInputChange = e => {
     this.setState({
-      discountCode: evt.target.value
+      discountCode: e.target.value
     });
-    await this.props.loadDiscount(evt.target.value);
-    await this.setState({ discount: this.props.discount });
-    this.checkoutTotal();
+  };
+
+  handleKeyDown = async e => {
+    if (e.key === 'Enter') {
+      await this.props.loadDiscount(e.target.value);
+      await this.setState({ discount: this.props.discount });
+      this.checkoutTotal();
+    }
   };
 
   render() {
@@ -87,7 +98,8 @@ class Cart extends React.Component {
       removeOne,
       closeCheckout,
       checkoutTotal,
-      updateDiscount
+      handleInputChange,
+      handleKeyDown
     } = this;
     return (
       <div className="cart">
@@ -117,8 +129,9 @@ class Cart extends React.Component {
           <p>demo codes: duck, kodilla</p>
           <input
             value={discountCode}
-            onChange={updateDiscount}
-            placeholder={discountCode ? discountCode : `Enter Code`}></input>
+            onKeyDown={handleKeyDown}
+            onChange={handleInputChange}
+            placeholder={`Enter Code`}></input>
           <Button
             variant="confirm"
             onClick={() => {

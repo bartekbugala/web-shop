@@ -45,6 +45,7 @@ export const getPages = ({ shop }) =>
   Math.ceil(shop.amount / shop.productsPerPage);
 export const getCart = ({ shop }) => shop.cart;
 export const getDiscount = ({ shop }) => shop.discount;
+export const getDiscountCode = ({ shop }) => shop.discountCode;
 export const getSort = ({ shop }) => shop.sortParam;
 
 //// Thunks
@@ -79,8 +80,7 @@ export const loadDiscountRequest = code => {
     dispatch(startRequest());
     try {
       let res = await axios.get(`${API_URL}/discount/${code}`);
-      let payload = res ? res.data.rate : 0;
-      console.log('payload', payload || 0);
+      let payload = res ? res.data : 0;
       dispatch(loadDiscount(payload || 0));
       dispatch(endRequest());
     } catch (e) {
@@ -312,7 +312,11 @@ export default function reducer(statePart = initialState, action = {}) {
     case LOAD_SINGLE_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
     case LOAD_DISCOUNT:
-      return { ...statePart, discount: action.payload };
+      return {
+        ...statePart,
+        discount: action.payload.rate,
+        discountCode: action.payload.code
+      };
     case LOAD_PRODUCTS_PAGE:
       return {
         ...statePart,

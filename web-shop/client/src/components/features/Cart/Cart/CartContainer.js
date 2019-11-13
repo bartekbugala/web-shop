@@ -8,13 +8,15 @@ import {
   resetRequest,
   removeProductFromCart,
   loadDiscountRequest,
-  getDiscount
+  getDiscount,
+  getDiscountCode
 } from '../../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
   cart: getCart(state),
   request: getRequest(state),
-  discount: getDiscount(state) || 0
+  discount: getDiscount(state) || 0,
+  discountCode: getDiscountCode(state)
 });
 
 const mapDispatchToProps = dispatch => ({
