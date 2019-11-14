@@ -15,6 +15,7 @@ import {
 import './ProductFull.scss';
 
 const mapStateToProps = state => ({
+  /*   product: getSingleProduct(state), */
   cart: getCart(state),
   request: getRequest(state)
 });
@@ -24,12 +25,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class ProductFull extends React.Component {
-  addToCart = async () => {
-    /*     e.preventDefault(); */
+  addToCart = e => {
+    e.preventDefault();
     const { addProductToCart, cart, product } = this.props;
     addProductToCart(cart, product);
     this.updateCartProducts(cart);
-    console.log(cart)
   };
 
   updateCartProducts = cart => {
