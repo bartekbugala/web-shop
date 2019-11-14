@@ -143,3 +143,7 @@ finish:
 - task-40
 - fix-console-warnings-1
 
+## 15.11.2019
+finish:
+- task-40-2
+
