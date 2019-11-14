@@ -139,4 +139,7 @@ finish:
 finish:
 - task-33
 - task-34
+- task-36
+- task-40
+- fix-console-warnings-1
 
