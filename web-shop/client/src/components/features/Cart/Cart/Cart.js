@@ -37,12 +37,8 @@ class Cart extends React.Component {
 
   componentWillUnmount() {
     // Cart Cleanup
-    const { cart, cartProducts, removeProductFromCart } = this.props;
-    if (cartProducts === 0) {
-      cart.forEach(el => {
-        removeProductFromCart(cart, el, true);
-      });
-    }
+    const { cart, cleanUpCart } = this.props;
+    cleanUpCart(cart);
   }
 
   addToCart = async item => {
