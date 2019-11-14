@@ -9,20 +9,32 @@ import { connect } from 'react-redux';
 import {
   addToCartRequest,
   getRequest,
-  getCart
+  getCart,
+  countCartProducts
 } from '../../../../redux/shopRedux';
 import './ProductFull.scss';
 
 const mapStateToProps = state => ({
-  /*   product: getSingleProduct(state), */
   cart: getCart(state),
   request: getRequest(state)
 });
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (cart, product) => dispatch(addToCartRequest(cart, product))
+  addProductToCart: (cart, product) =>
+    dispatch(addToCartRequest(cart, product)),
+  countCartProducts: cart => dispatch(countCartProducts(cart))
 });
 
 class ProductFull extends React.Component {
+  componentDidMount() {
+    const { countCartProducts, cart } = this.props;
+    countCartProducts(cart);
+  }
+
+  componentDidUpdate() {
+    const { countCartProducts, cart } = this.props;
+    countCartProducts(cart);
+  }
+
   addToCart = e => {
     e.preventDefault();
     const { addProductToCart, cart, product } = this.props;
@@ -58,7 +70,4 @@ class ProductFull extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductFull);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductFull);

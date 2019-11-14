@@ -14,6 +14,7 @@ const initialState = {
   ],
   data: [],
   cart: [],
+  cartProducts: 0,
   discountCode: '',
   discount: 0,
   singleProduct: {},
@@ -22,7 +23,6 @@ const initialState = {
     error: null,
     success: null
   },
-  amount: 0,
   productsPerPage: 10,
   presentPage: 1,
   request: {
@@ -38,12 +38,12 @@ export const getLogo = ({ shop }) => shop.logo;
 export const getProducts = ({ shop }) => shop.data;
 export const getSingleProduct = ({ shop }) =>
   shop.singleProduct === null ? {} : shop.singleProduct;
-export const countProducts = ({ shop }) => shop.amount;
 export const getRequest = ({ shop }) => shop.request;
 export const getUpdateRequest = ({ shop }) => shop.updateRequest;
 export const getPages = ({ shop }) =>
   Math.ceil(shop.amount / shop.productsPerPage);
 export const getCart = ({ shop }) => shop.cart;
+export const getCartProducts = ({ shop }) => shop.cartProducts;
 export const getDiscount = ({ shop }) => shop.discount;
 export const getDiscountCode = ({ shop }) => shop.discountCode;
 export const getSort = ({ shop }) => shop.sortParam;
@@ -249,6 +249,16 @@ export const deleteProductRequest = id => {
   };
 };
 
+export const countCartProducts = cart => {
+  return dispatch => {
+    let products = 0;
+    cart.forEach(el => {
+      products += el.amount;
+    });
+    dispatch(updateCartCount(products));
+  };
+};
+
 //// Actions
 // action name creator
 const reducerName = 'products';
@@ -262,6 +272,7 @@ export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
 export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
 export const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const UPDATE_CART = createActionName('UPDATE_CART');
+export const UPDATE_CART_COUNT = createActionName('UPDATE_CART_COUNT');
 export const CHANGE_SORTING = createActionName('CHANGE_SORTING');
 export const START_REQUEST = createActionName('START_REQUEST');
 export const END_REQUEST = createActionName('END_REQUEST');
@@ -290,6 +301,10 @@ export const loadRandomProduct = payload => ({
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const changeSorting = payload => ({ payload, type: CHANGE_SORTING });
 export const updateCart = payload => ({ payload, type: UPDATE_CART });
+export const updateCartCount = payload => ({
+  payload,
+  type: UPDATE_CART_COUNT
+});
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });
@@ -334,6 +349,8 @@ export default function reducer(statePart = initialState, action = {}) {
       };
     case UPDATE_CART:
       return { ...statePart, cart: action.payload };
+    case UPDATE_CART_COUNT:
+      return { ...statePart, cartProducts: action.payload };
     case CHANGE_SORTING:
       return { ...statePart, sortParam: action.payload };
     case START_REQUEST:
