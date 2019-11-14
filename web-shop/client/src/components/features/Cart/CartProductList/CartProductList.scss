@@ -1,4 +1,4 @@
-@import '../../../../styles/settings.scss';
+@import "../../../../styles/settings.scss";
 
 .total {
   font-size: 30px;
@@ -9,6 +9,6 @@
 .discount {
   font-size: 20px;
   float: right;
-  color: $color-warning;
+  color: $color-discount;
   margin-right: 20px;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdAutorenew } from 'react-icons/md';
 import Button from '../../../common/Button/Button';
 import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';
@@ -60,12 +61,11 @@ class Cart extends React.Component {
   };
 
   checkoutTotal = (cart = this.state.cart) => {
-    const { discount } = this.state;
     let total = 0;
     cart.forEach(el => {
       return (total += el.price * el.amount);
     });
-    let currentDiscount = total * (discount / 100);
+    let currentDiscount = total * (this.state.discount / 100);
     this.setState({ total: roundMoney(total - currentDiscount) });
   };
 
@@ -81,6 +81,12 @@ class Cart extends React.Component {
       await this.setState({ discount: this.props.discount });
       this.checkoutTotal();
     }
+  };
+
+  handleClick = async e => {
+    await this.props.loadDiscount(this.state.discountCode);
+    await this.setState({ discount: this.props.discount });
+    this.checkoutTotal();
   };
 
   render() {
@@ -99,13 +105,14 @@ class Cart extends React.Component {
       closeCheckout,
       checkoutTotal,
       handleInputChange,
-      handleKeyDown
+      handleKeyDown,
+      handleClick
     } = this;
     return (
       <div className="cart">
         {checkout && (
           <Modal cart={cart} handleModal={closeCheckout}>
-            <CheckoutSummary cart={cart} total={total} />
+            <CheckoutSummary cart={cart} total={total} discount={discount} />
           </Modal>
         )}
         {request.pending && <Spinner />}
@@ -127,11 +134,15 @@ class Cart extends React.Component {
         )}
         <div className="cart__checkout">
           <p>demo codes: duck, kodilla</p>
-          <input
-            value={discountCode}
-            onKeyDown={handleKeyDown}
-            onChange={handleInputChange}
-            placeholder={`Enter Code`}></input>
+          <span className="cart__checkout__code-input">
+            <input
+              value={discountCode}
+              onKeyDown={handleKeyDown}
+              onChange={handleInputChange}
+              placeholder={`Enter Code`} />
+            <Button onClick={handleClick} variant="primary"><MdAutorenew /></Button>
+          </span>
+
           <Button
             variant="confirm"
             onClick={() => {

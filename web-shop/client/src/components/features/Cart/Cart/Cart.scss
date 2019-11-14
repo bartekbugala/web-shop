@@ -1,3 +1,5 @@
+@import "../../../../styles/settings.scss";
+
 .cart {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,29 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  .cart__checkout__code-input {
+    input {
+      width: 200px;
+      height: 40px;
+      padding: 2px;
+      vertical-align: middle;
+      border: 1px solid $color-textfield-border;
+      border-radius: 5px;
+    }
+    .button {
+      margin-left: 0;
+      padding: 0;
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 25px;
+      svg {
+        transform: translate(0px, 2px);
+      }
+    }
+  }
 }
 .cart__list {
   list-style: none;
@@ -43,7 +68,7 @@
     }
   }
   .cart__list-item__remove {
-    color: red;
+    color: $color-danger;
     cursor: pointer;
     text-align: center;
   }
