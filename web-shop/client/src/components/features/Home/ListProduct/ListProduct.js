@@ -40,7 +40,7 @@ class ListProduct extends React.Component {
               <ProductTag>{`Last pieces`}</ProductTag>
             </div>
           )}
-          {amount === 0 && (
+          {amount == 0 && (
             <div className="list-product__last-tag out-of-stock">
               <ProductTag>{`Out of stock`}</ProductTag>
             </div>
@@ -53,6 +53,7 @@ class ListProduct extends React.Component {
           <div className="list-product__name">
             <ProductName>{name}</ProductName>
           </div>
+          {/* <p className="list-product__price">{`price: ${price}`}</p> */}
           <div className="list-product__price">
             <Price>{price}</Price>
           </div>
