@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../../common/Button/Button';
 import './CheckoutSummary.scss';
 
-const CheckoutSummary = ({ cart, total }) => (
+const CheckoutSummary = ({ cart, total, discount }) => (
   <div className="checkout-summary">
     <h3>Order Summary</h3>
     <table>
@@ -24,6 +24,9 @@ const CheckoutSummary = ({ cart, total }) => (
             </tr>
           );
         })}
+        <tr>
+          <td className="checkout-discount" colSpan="4">{`Discount: ${discount}%`}</td>
+        </tr>
         <tr>
           <td className="checkout-total" colSpan="4">{`Total: ${total}`}</td>
         </tr>

@@ -1,3 +1,5 @@
+@import "../../../../styles/settings.scss";
+
 .checkout-summary {
   h3 {
     text-align: center;
@@ -5,21 +7,27 @@
   table {
     margin: 0 auto;
     margin-bottom: 20px;
-    border: black solid 1px;
+    border: $color-text solid 1px;
     border-spacing: 0;
     border-collapse: collapse;
     text-align: center;
     tr,
     td,
     th {
-      border: black solid 1px;
+      border: $color-text solid 1px;
       padding: 10px;
     }
   }
-  .button {
+  .button-discount-code {
     float: right;
     font-size: 1.1em;
     padding: 12px;
+  }
+  .checkout-discount {
+    font-size: 17px;
+    color: $color-warning;
+    font-weight: bold;
+    text-align: right;
   }
   .checkout-total {
     font-size: 20px;
