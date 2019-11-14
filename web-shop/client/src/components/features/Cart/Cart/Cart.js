@@ -41,19 +41,32 @@ class Cart extends React.Component {
     const { addProductToCart, cart } = this.props;
     await addProductToCart(cart, item);
     this.checkoutTotal();
+    this.updateCartProducts(cart);
   };
 
   removeOne = async item => {
     const { cart, removeOneFromCart } = this.props;
     await removeOneFromCart(cart, item);
+    this.updateCartProducts(cart);
     this.checkoutTotal();
+    this.updateCartProducts(cart);
   };
 
   removeProduct = async item => {
     const { removeProductFromCart, cart } = this.props;
     await removeProductFromCart(cart, item, true);
     this.checkoutTotal();
+    this.updateCartProducts(cart);
+
   };
+
+  updateCartProducts = cart => {
+    let products = 0;
+    cart.forEach(el => {
+      products += el.amount
+    });
+    this.props.countCartProducts(products);
+  }
 
   closeCheckout = () => {
     this.setState({ checkout: false });

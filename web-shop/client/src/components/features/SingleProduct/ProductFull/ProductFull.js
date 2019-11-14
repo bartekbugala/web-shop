@@ -9,25 +9,36 @@ import { connect } from 'react-redux';
 import {
   addToCartRequest,
   getRequest,
-  getCart
+  getCart,
+  countCartProducts
 } from '../../../../redux/shopRedux';
 import './ProductFull.scss';
 
 const mapStateToProps = state => ({
-  /*   product: getSingleProduct(state), */
   cart: getCart(state),
   request: getRequest(state)
 });
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (cart, product) => dispatch(addToCartRequest(cart, product))
+  addProductToCart: (cart, product) => dispatch(addToCartRequest(cart, product)),
+  countCartProducts: (products) => dispatch(countCartProducts(products))
 });
 
 class ProductFull extends React.Component {
-  addToCart = e => {
-    e.preventDefault();
+  addToCart = async () => {
+    /*     e.preventDefault(); */
     const { addProductToCart, cart, product } = this.props;
     addProductToCart(cart, product);
+    this.updateCartProducts(cart);
+    console.log(cart)
   };
+
+  updateCartProducts = cart => {
+    let products = 0;
+    cart.forEach(el => {
+      products += el.amount
+    });
+    this.props.countCartProducts(products);
+  }
 
   render() {
     const { addToCart } = this;
