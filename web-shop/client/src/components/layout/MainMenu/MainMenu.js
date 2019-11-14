@@ -26,7 +26,7 @@ const MainMenu = ({ menuLinks, location, cartProducts }) => (
         );
       }
       return (
-        <li className="header__menu__cart-icon">
+        <li key={index} className="header__menu__cart-icon">
           <Link
             className={(location.pathname === link.path && 'active') || ''}
             to="/cart">

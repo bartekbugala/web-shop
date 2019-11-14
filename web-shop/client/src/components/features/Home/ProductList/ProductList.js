@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 const ProductList = ({ products }) => {
   return (
     <div>
-      {products.length == 0 && <Spinner />}
+      {products.length === 0 && <Spinner />}
       {products && (
         <div className="main__product-list">
           {products.map(product => (
