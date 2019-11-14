@@ -35,6 +35,16 @@ class Cart extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    // Cart Cleanup
+    const { cart, cartProducts, removeProductFromCart } = this.props;
+    if (cartProducts === 0) {
+      cart.forEach(el => {
+        removeProductFromCart(cart, el, true);
+      });
+    }
+  }
+
   addToCart = async item => {
     const { addProductToCart, cart } = this.props;
     await addProductToCart(cart, item);
@@ -139,12 +149,16 @@ class Cart extends React.Component {
               value={discountCode}
               onKeyDown={handleKeyDown}
               onChange={handleInputChange}
-              placeholder={`Enter Code`} />
-            <Button onClick={handleClick} variant="primary"><MdAutorenew /></Button>
+              placeholder={`Enter Code`}
+            />
+            <Button onClick={handleClick} variant="primary">
+              <MdAutorenew />
+            </Button>
           </span>
 
           <Button
-            variant="confirm"
+            disabled={!this.props.cartProducts}
+            variant={!this.props.cartProducts ? 'disabled' : 'confirm'}
             onClick={() => {
               checkoutTotal();
               this.setState({ checkout: true });
