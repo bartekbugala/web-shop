@@ -10,11 +10,13 @@ import {
   loadDiscountRequest,
   getDiscount,
   getDiscountCode,
-  countCartProducts
+  countCartProducts,
+  getCartProducts
 } from '../../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
   cart: getCart(state),
+  cartProducts: getCartProducts(state),
   request: getRequest(state),
   discount: getDiscount(state) || 0,
   discountCode: getDiscountCode(state)
