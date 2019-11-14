@@ -17,7 +17,7 @@ const CartProductList = ({
     {cart.map(item => (
       <li key={item.id} className="cart__list-item">
         <div className="cart__list-item__col-container">
-          <img src={item.img} />
+          <img src={item.img} alt={`${item.name}`} />
         </div>
         <div className="cart__list-item__col-container cart__list-item__description">
           <ProductName>{item.name}</ProductName>
