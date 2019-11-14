@@ -11,7 +11,8 @@ import {
   getDiscount,
   getDiscountCode,
   countCartProducts,
-  getCartProducts
+  getCartProducts,
+  cleanUpCart
 } from '../../../../redux/shopRedux';
 
 const mapStateToProps = state => ({
@@ -31,7 +32,8 @@ const mapDispatchToProps = dispatch => ({
   removeProductFromCart: (cart, product, removeAll) =>
     dispatch(removeProductFromCart(cart, product, removeAll)),
   loadDiscount: code => dispatch(loadDiscountRequest(code)),
-  countCartProducts: cart => dispatch(countCartProducts(cart))
+  countCartProducts: cart => dispatch(countCartProducts(cart)),
+  cleanUpCart: cart => dispatch(cleanUpCart(cart))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

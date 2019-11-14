@@ -259,6 +259,15 @@ export const countCartProducts = cart => {
   };
 };
 
+export const cleanUpCart = cart => {
+  return dispatch => {
+    const payload = cart.filter(el => {
+      return el !== 0;
+    });
+    dispatch(removeZeroAmountProducts(payload));
+  };
+};
+
 //// Actions
 // action name creator
 const reducerName = 'products';
@@ -272,6 +281,9 @@ export const LOAD_PRODUCTS_PAGE = createActionName('LOAD_PRODUCTS_PAGE');
 export const LOAD_RANDOM_PRODUCT = createActionName('LOAD_RANDOM_PRODUCT');
 export const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const UPDATE_CART = createActionName('UPDATE_CART');
+export const REMOVE_ZERO_AMOUNT_PRODUCTS = createActionName(
+  'REMOVE_ZERO_AMOUNT_PRODUCTS'
+);
 export const UPDATE_CART_COUNT = createActionName('UPDATE_CART_COUNT');
 export const CHANGE_SORTING = createActionName('CHANGE_SORTING');
 export const START_REQUEST = createActionName('START_REQUEST');
@@ -299,6 +311,10 @@ export const loadRandomProduct = payload => ({
 });
 
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
+export const removeZeroAmountProducts = payload => ({
+  payload,
+  type: REMOVE_ZERO_AMOUNT_PRODUCTS
+});
 export const changeSorting = payload => ({ payload, type: CHANGE_SORTING });
 export const updateCart = payload => ({ payload, type: UPDATE_CART });
 export const updateCartCount = payload => ({
@@ -326,6 +342,8 @@ export default function reducer(statePart = initialState, action = {}) {
       return { ...statePart, data: action.payload };
     case LOAD_SINGLE_PRODUCT:
       return { ...statePart, singleProduct: action.payload };
+    case REMOVE_ZERO_AMOUNT_PRODUCTS:
+      return { ...statePart, cart: action.payload };
     case LOAD_DISCOUNT:
       return {
         ...statePart,
