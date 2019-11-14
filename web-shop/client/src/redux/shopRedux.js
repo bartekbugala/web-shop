@@ -262,7 +262,7 @@ export const countCartProducts = cart => {
 export const cleanUpCart = cart => {
   return dispatch => {
     const payload = cart.filter(el => {
-      return el !== 0;
+      return el.amount !== 0;
     });
     dispatch(removeZeroAmountProducts(payload));
   };
