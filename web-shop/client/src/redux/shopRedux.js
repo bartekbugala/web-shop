@@ -249,11 +249,15 @@ export const deleteProductRequest = id => {
   };
 };
 
-export const countCartProducts = products => {
+export const countCartProducts = cart => {
   return dispatch => {
+    let products = 0;
+    cart.forEach(el => {
+      products += el.amount;
+    });
     dispatch(updateCartCount(products));
-  }
-}
+  };
+};
 
 //// Actions
 // action name creator
@@ -297,7 +301,10 @@ export const loadRandomProduct = payload => ({
 export const addToCart = payload => ({ payload, type: ADD_TO_CART });
 export const changeSorting = payload => ({ payload, type: CHANGE_SORTING });
 export const updateCart = payload => ({ payload, type: UPDATE_CART });
-export const updateCartCount = payload => ({ payload, type: UPDATE_CART_COUNT });
+export const updateCartCount = payload => ({
+  payload,
+  type: UPDATE_CART_COUNT
+});
 
 export const startRequest = () => ({ type: START_REQUEST });
 export const endRequest = () => ({ type: END_REQUEST });

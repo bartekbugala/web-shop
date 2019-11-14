@@ -15,30 +15,31 @@ import {
 import './ProductFull.scss';
 
 const mapStateToProps = state => ({
-  /*   product: getSingleProduct(state), */
   cart: getCart(state),
   request: getRequest(state)
 });
 const mapDispatchToProps = dispatch => ({
-  addProductToCart: (cart, product) => dispatch(addToCartRequest(cart, product)),
-  countCartProducts: (products) => dispatch(countCartProducts(products))
+  addProductToCart: (cart, product) =>
+    dispatch(addToCartRequest(cart, product)),
+  countCartProducts: cart => dispatch(countCartProducts(cart))
 });
 
 class ProductFull extends React.Component {
+  componentDidMount() {
+    const { countCartProducts, cart } = this.props;
+    countCartProducts(cart);
+  }
+
+  componentDidUpdate() {
+    const { countCartProducts, cart } = this.props;
+    countCartProducts(cart);
+  }
+
   addToCart = e => {
     e.preventDefault();
     const { addProductToCart, cart, product } = this.props;
     addProductToCart(cart, product);
-    this.updateCartProducts(cart);
   };
-
-  updateCartProducts = cart => {
-    let products = 0;
-    cart.forEach(el => {
-      products += el.amount
-    });
-    this.props.countCartProducts(products);
-  }
 
   render() {
     const { addToCart } = this;
@@ -69,7 +70,4 @@ class ProductFull extends React.Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductFull);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductFull);

@@ -9,7 +9,6 @@ import { roundMoney } from '../../../../utils/roundMoney';
 import './Cart.scss';
 
 class Cart extends React.Component {
-  _isMounted = false;
   state = {
     cart: this.props.cart,
     request: this.props.request,
@@ -20,53 +19,41 @@ class Cart extends React.Component {
   };
 
   componentDidMount() {
-    this._isMounted = true;
-    const { resetRequest } = this.props;
+    const { resetRequest, countCartProducts, cart } = this.props;
     this.checkoutTotal();
+    countCartProducts(cart);
     resetRequest();
   }
 
   componentDidUpdate() {
-    if (this.state.cart !== this.props.cart) {
-      this.setState({ cart: this.props.cart });
-      this.checkoutTotal(this.props.cart);
+    const { cart } = this.props;
+    if (this.state.cart !== cart) {
+      this.setState({ cart: cart });
+      this.checkoutTotal(cart);
+      this.props.countCartProducts(cart);
     }
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   addToCart = async item => {
     const { addProductToCart, cart } = this.props;
     await addProductToCart(cart, item);
     this.checkoutTotal();
-    this.updateCartProducts(cart);
+    this.props.countCartProducts(cart);
   };
 
   removeOne = async item => {
     const { cart, removeOneFromCart } = this.props;
     await removeOneFromCart(cart, item);
-    this.updateCartProducts(cart);
     this.checkoutTotal();
-    this.updateCartProducts(cart);
+    this.props.countCartProducts(cart);
   };
 
   removeProduct = async item => {
     const { removeProductFromCart, cart } = this.props;
     await removeProductFromCart(cart, item, true);
     this.checkoutTotal();
-    this.updateCartProducts(cart);
-
+    this.props.countCartProducts(this.state.cart);
   };
-
-  updateCartProducts = cart => {
-    let products = 0;
-    cart.forEach(el => {
-      products += el.amount
-    });
-    this.props.countCartProducts(products);
-  }
 
   closeCheckout = () => {
     this.setState({ checkout: false });

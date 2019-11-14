@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
   removeProductFromCart: (cart, product, removeAll) =>
     dispatch(removeProductFromCart(cart, product, removeAll)),
   loadDiscount: code => dispatch(loadDiscountRequest(code)),
-  countCartProducts: (products) => dispatch(countCartProducts(products))
+  countCartProducts: cart => dispatch(countCartProducts(cart))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
