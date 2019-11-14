@@ -25,15 +25,19 @@ const MainMenu = ({ menuLinks, location, cartProducts }) => (
           </li>
         );
       }
+      return (
+        <li className="header__menu__cart-icon">
+          <Link
+            className={(location.pathname === link.path && 'active') || ''}
+            to="/cart">
+            <MdShoppingCart />
+            {cartProducts > 0 && (
+              <div className="cart-icon__products">{cartProducts}</div>
+            )}
+          </Link>
+        </li>
+      );
     })}
-    <li>
-      <Link
-        className={(location.pathname === menuLinks.path && 'active') || ''}
-        to="/cart">
-        <MdShoppingCart />
-        <div className="shopping_cart_products">{cartProducts}</div>
-      </Link>
-    </li>
   </ul>
 );
 
