@@ -1,11 +1,20 @@
+@import '../../../styles/settings.scss';
+
 .pagination__list {
   list-style: none;
   display: flex;
   justify-content: flex-end;
-  &:hover {
-    cursor: pointer;
+
+  li {
+    color: $color-text-lightest;
+    margin: 0 5px;
+    font-size: 25px;
+    &:hover {
+      cursor: pointer;
+      color: $color-text;
+    }
   }
 }
 .pagination__list__item--hidden {
-  display: none;
+  visibility: hidden;
 }
