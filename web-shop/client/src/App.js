@@ -1,17 +1,17 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 // layout
-import MainLayout from "./components/layout/MainLayout/MainLayout";
+import MainLayout from './components/layout/MainLayout/MainLayout';
 
-// routes to pages
-import Home from "./components/pages/Home/HomePage";
-import Faq from "./components/pages/Faq/FaqPage";
-import Terms from "./components/pages/Terms/TermsPage";
-import Contact from "./components/pages/Contact/ContactPage";
-import Cart from "./components/pages/Cart/CartPage";
-import SingleProduct from "./components/pages/SingleProduct/SingleProductPage";
-import NotFound from "./components/pages/NotFound/NotFoundPage";
+// routes
+import Home from './components/pages/Home/HomePage';
+import Faq from './components/pages/Faq/FaqPage';
+import Terms from './components/pages/Terms/TermsPage';
+import Contact from './components/pages/Contact/ContactPage';
+import Cart from './components/pages/Cart/CartPage';
+import SingleProduct from './components/pages/SingleProduct/SingleProductPage';
+import NotFound from './components/pages/NotFound/NotFoundPage';
 
 class App extends React.Component {
   render() {
