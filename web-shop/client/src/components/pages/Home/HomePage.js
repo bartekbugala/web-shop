@@ -6,11 +6,11 @@ import './HomePage.scss';
 class HomePage extends React.Component {
   render() {
     return (
-      <section className="main__main-section">
-        <div className="main__sorting-widget-container">
+      <section className="main-section">
+        <div className="sorting-widget-container">
           <SortingWidget />
         </div>
-        <div className="main__product-list-container">
+        <div className="product-list-container">
           <Products initialPage={1} productsPerPage={6} pagination={true} />
         </div>
       </section>

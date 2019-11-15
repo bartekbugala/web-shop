@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
-
+import { PaginationItem, PaginationLink } from 'reactstrap';
+import { Pagination as BootstrapPagination } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Pagination.scss';
 
 class Pagination extends React.Component {
   state = {
-    presentPage: this.props.presentPage || (this.props.initialPage || 1)
+    presentPage: this.props.presentPage || this.props.initialPage || 1
   };
 
   changePage = page => {
@@ -28,36 +30,46 @@ class Pagination extends React.Component {
     const { changePage } = this;
 
     return (
-      <div className="pagination">
-        <ul className="pagination__list">
-          <li
-            className={`pagination__list__item${
-              presentPage === 1 ? ' pagination__list__item--hidden' : ''
+      <BootstrapPagination className="home-pagination" aria-label="Pagination">
+        <PaginationItem disabled={presentPage === 1}>
+          <PaginationLink first onClick={() => changePage(1)} />
+        </PaginationItem>
+        <PaginationItem disabled={presentPage === 1}>
+          <PaginationLink
+            previous
+            className={`pagination-item${
+              presentPage === 1 ? ' pagination-item--hidden' : ''
             }`}
             onClick={() => changePage(presentPage - 1)}>
             <MdArrowBack />
-          </li>
-
-          {[...Array(pages)].map((el, page) => (
-            <li
+          </PaginationLink>
+        </PaginationItem>
+        {[...Array(pages)].map((el, page) => (
+          <PaginationItem key={page} active={page === presentPage - 1}>
+            <PaginationLink
               key={++page}
               onClick={() => changePage(page)}
-              className={`pagination__list__item${
-                page === presentPage ? ' pagination__list__item--active' : ''
+              className={`pagination-item${
+                page === presentPage ? ' pagination-item--active' : ''
               }`}>
               {page}
-            </li>
-          ))}
-
-          <li
-            className={`pagination__list__item${
-              presentPage === pages ? ' pagination__list__item--hidden' : ''
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+        <PaginationItem disabled={presentPage === pages}>
+          <PaginationLink
+            next
+            className={`pagination-item${
+              presentPage === pages ? ' pagination-item--hidden' : ''
             }`}
             onClick={() => changePage(presentPage + 1)}>
             <MdArrowForward />
-          </li>
-        </ul>
-      </div>
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem disabled={presentPage === pages}>
+          <PaginationLink last onClick={() => changePage(pages)} />
+        </PaginationItem>
+      </BootstrapPagination>
     );
   }
 }

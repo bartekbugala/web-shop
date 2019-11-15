@@ -46,16 +46,14 @@ class ProductFull extends React.Component {
     const { product } = this.props;
     const { name, price, img, description, tag, amount } = product;
     return (
-      <div className="full-product__container">
-        <div className="full-product__img-wrapper">
+      <div className="full-product-container">
+        <div className="full-product-img-wrapper">
           <img src={`${img}`} alt={`${name}`} />
         </div>
         <div>
-          <div className="full-product__title-wrapper">
+          <div className="full-product-title-wrapper">
             <ProductName>{name}</ProductName>
-            {tag && (
-              <ProductTag className="full-product__tag">{tag}</ProductTag>
-            )}
+            {tag && <ProductTag className="full-product-tag">{tag}</ProductTag>}
           </div>
           <Price>{price}</Price>
           <Amount>{amount}</Amount>

@@ -5,11 +5,13 @@ import { withRouter } from 'react-router-dom';
 import './FooterMenu.scss';
 
 const FooterMenu = ({ menuLinks, location }) => (
-  <ul className="footer__menu">
+  <ul className="footer-menu">
     {menuLinks.map((link, index) =>
       link.path === '/cart' ? null : (
         <li key={index}>
-          <Link className={location.pathname === menuLinks.path || ''} to={link.path}>
+          <Link
+            className={location.pathname === menuLinks.path || ''}
+            to={link.path}>
             {link.title}
           </Link>
         </li>

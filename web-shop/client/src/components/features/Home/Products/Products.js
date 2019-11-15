@@ -4,6 +4,7 @@ import ProductList from '../ProductList/ProductList';
 import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';
 import Pagination from '../../../common/Pagination/Pagination';
+import './Products.scss';
 
 class Products extends React.Component {
   state = {
@@ -32,35 +33,33 @@ class Products extends React.Component {
     const { loadProductsPage } = this;
     const { presentPage } = this.state;
     return (
-      <div>
-        <div>
-          {request.pending && <Spinner />}
-          {!request.pending && request.error !== null && (
-            <Alert variant="error">{`Error: ${request.error}`}</Alert>
-          )}
-          {!request.pending && request.success && products.length === 0 && (
-            <Alert variant="info">No products found</Alert>
-          )}
-          {pagination && !request.pending && request.success && (
-            <Pagination
-              presentPage={presentPage}
-              initialPage={initialPage}
-              pages={pages}
-              onPageChange={loadProductsPage}
-            />
-          )}
-          {!request.pending && request.success && products.length > 0 && (
-            <ProductList products={products} />
-          )}
-          {pagination && !request.pending && request.success && (
-            <Pagination
-              presentPage={presentPage}
-              initialPage={initialPage}
-              pages={pages}
-              onPageChange={loadProductsPage}
-            />
-          )}
-        </div>
+      <div className="products-container">
+        {request.pending && <Spinner />}
+        {!request.pending && request.error !== null && (
+          <Alert variant="error">{`Error: ${request.error}`}</Alert>
+        )}
+        {!request.pending && request.success && products.length === 0 && (
+          <Alert variant="info">No products found</Alert>
+        )}
+        {pagination && !request.pending && request.success && (
+          <Pagination
+            presentPage={presentPage}
+            initialPage={initialPage}
+            pages={pages}
+            onPageChange={loadProductsPage}
+          />
+        )}
+        {!request.pending && request.success && products.length > 0 && (
+          <ProductList products={products} />
+        )}
+        {pagination && !request.pending && request.success && (
+          <Pagination
+            presentPage={presentPage}
+            initialPage={initialPage}
+            pages={pages}
+            onPageChange={loadProductsPage}
+          />
+        )}
       </div>
     );
   }

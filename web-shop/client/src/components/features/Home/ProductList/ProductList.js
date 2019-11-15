@@ -14,7 +14,7 @@ const ProductList = ({ products }) => {
     <div>
       {products.length === 0 && <Spinner />}
       {products && (
-        <div className="main__product-list">
+        <div className="product-list">
           {products.map(product => (
             <ListProduct key={product.id} {...product} />
           ))}

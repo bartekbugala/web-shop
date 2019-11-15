@@ -1,13 +1,13 @@
-.full-product__container {
+.full-product-container {
   position: relative;
   display: flex;
-  .full-product__title-wrapper {
+  .full-product-title-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
   }
   margin: 5px 12px;
-  .full-product__img-wrapper {
+  .full-product-img-wrapper {
     flex: 1 0 400px;
     padding: 20px;
     display: flex;

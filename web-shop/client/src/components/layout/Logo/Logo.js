@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 const Logo = props => {
   const { logo } = props;
   return (
-    <span className="header__logo">
+    <span className="header-logo">
       <img src={logo.path} alt={logo.alt} />
     </span>
   );

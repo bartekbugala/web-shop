@@ -1,7 +1,7 @@
-.main__main-section {
+.main-section {
   margin: 50px 0;
   display: flex;
-  .main__sorting-widget-container {
+  .sorting-widget-container {
     flex: 1 1 20%;
     p {
       display: block;
@@ -10,7 +10,13 @@
       }
     }
   }
-  .main__product-list-container {
+  .product-list-container {
     flex: 1 1 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-section {
+    flex-direction: column;
   }
 }

@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 
 const SingleProduct = props => {
   return (
-    <section className="main__main-section">
-      <div className="main__single-product-container">
+    <section className="main-section">
+      <div className="single-product-container">
         <ProductView productId={props.match.params.id} />
       </div>
     </section>
