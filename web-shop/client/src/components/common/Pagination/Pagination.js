@@ -30,9 +30,19 @@ class Pagination extends React.Component {
     const { changePage } = this;
 
     return (
-      <BootstrapPagination className="home-pagination" aria-label="Pagination">
+      <BootstrapPagination
+        shape="circle"
+        size="lg"
+        className="home-pagination"
+        aria-label="Pagination">
         <PaginationItem disabled={presentPage === 1}>
-          <PaginationLink first onClick={() => changePage(1)} />
+          <PaginationLink
+            first
+            onClick={() => changePage(1)}
+            className={`pagination-item${
+              presentPage === 1 ? ' pagination-item--hidden' : ''
+            }`}
+          />
         </PaginationItem>
         <PaginationItem disabled={presentPage === 1}>
           <PaginationLink
@@ -67,7 +77,13 @@ class Pagination extends React.Component {
           </PaginationLink>
         </PaginationItem>
         <PaginationItem disabled={presentPage === pages}>
-          <PaginationLink last onClick={() => changePage(pages)} />
+          <PaginationLink
+            last
+            onClick={() => changePage(pages)}
+            className={`pagination-item${
+              presentPage === pages ? ' pagination-item--hidden' : ''
+            }`}
+          />
         </PaginationItem>
       </BootstrapPagination>
     );

@@ -25,7 +25,7 @@ const MainMenu = ({ menuLinks, location, cartProducts }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <Navbar className="container-fluid" light color="light" expand="md">
+    <Navbar className="container-fluid" light expand="md">
       <NavbarBrand href="/">
         <Logo />
       </NavbarBrand>
@@ -56,7 +56,9 @@ const MainMenu = ({ menuLinks, location, cartProducts }) => {
                   to="/cart">
                   <MdShoppingCart />
                   {cartProducts > 0 && (
-                    <div className="cart-icon-products">{cartProducts}</div>
+                    <div className="cart-icon-products">
+                      <span>{cartProducts}</span>
+                    </div>
                   )}
                 </Link>
               </NavItem>

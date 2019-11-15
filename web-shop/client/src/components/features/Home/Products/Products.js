@@ -43,6 +43,7 @@ class Products extends React.Component {
         )}
         {pagination && !request.pending && request.success && (
           <Pagination
+            className={'hello'}
             presentPage={presentPage}
             initialPage={initialPage}
             pages={pages}
