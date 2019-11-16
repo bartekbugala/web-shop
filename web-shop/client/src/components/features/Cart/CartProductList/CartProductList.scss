@@ -54,7 +54,7 @@
   margin-right: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $media-query-2) {
   .cart-list {
     padding: 0;
   }

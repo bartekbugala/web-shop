@@ -36,6 +36,9 @@ $radius: 5px;
 $base-size: 14px;
 $transition: all 0.5s;
 
+$media-query-1: 767px;
+$media-query-2: 768px;
+
 @mixin p-el($element) {
   &:#{$element},
   &::#{$element} {

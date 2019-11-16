@@ -1,4 +1,5 @@
 @import '../../../../styles/settings.scss';
+
 .full-product-container {
   position: relative;
   display: flex;
@@ -37,7 +38,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $media-query-2) {
   .full-product-container {
     margin-top: 0;
     flex-direction: column;

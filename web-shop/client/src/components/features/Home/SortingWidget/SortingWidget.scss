@@ -1,4 +1,5 @@
 @import '../../../../styles/settings.scss';
+
 .sorting-widget {
   display: flex;
   flex-direction: column;
@@ -9,6 +10,8 @@
 }
 .btn-outline-secondary {
   display: none;
+  padding: 15px;
+  font-size: 25px;
   background-color: $color-background;
   border: $border-width-duck solid $color-duck;
   &:hover {
@@ -16,8 +19,9 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $media-query-2) {
   .sorting-widget {
+    margin: 0;
     .sorting-title {
       display: none;
     }
