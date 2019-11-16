@@ -1,35 +1,67 @@
 @import '../../../styles/settings.scss';
 
-.header__menu {
-  display: flex;
-  flex: 1 1;
-  flex-direction: row;
-  list-style: none;
-  justify-content: space-between;
-  align-items: center;
-  li {
-    text-transform: uppercase;
+.navbar-brand {
+  padding: 0;
+}
+.nav-item {
+  margin: 0 10px;
+  &:last-of-type {
+    margin-right: 20px;
   }
-  .header__menu__cart-icon {
-    position: relative;
-    font-size: 30px;
-    .cart-icon__products {
-      font-weight: normal;
-      position: absolute;
-      top: 10px;
-      left: 25px;
-      padding: 2px;
-      font-size: 16px;
-      border-radius: 50%;
-      height: 25px;
-      min-width: 25px;
-      line-height: 20px;
-      text-align: center;
-      color: $color-text-bright;
-      background: $color-cart-count-back;
+}
+.navbar-nav .nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 50px;
+  line-height: 50px;
+  font-size: 28px;
+}
+.header-menu-cart-icon {
+  position: relative;
+  font-size: 25px;
+  .cart-icon-products {
+    font-weight: bold;
+    position: absolute;
+    top: 17px;
+    left: 32px;
+    font-size: 12px;
+    padding: 0 2px 0 2px;
+    height: 22px;
+    min-width: 22px;
+    line-height: 22px;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+    color: $color-text;
+    background: $color-duck;
+    span {
+      display: inline-block;
+      line-height: 22px;
+      height: 22px;
     }
   }
-  a.active {
-    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .header-menu-cart-icon .cart-icon-products {
+    top: 18px;
+    left: 34px;
+  }
+  .navbar-light .navbar-toggler {
+    height: 55px;
+    border: $border-width-duck solid $color-duck;
+    background-color: $color-duck;
+  }
+  .nav-item {
+    width: 100%;
+    padding: 0 10px;
+
+    border-bottom: 1px solid $color-text-lightest;
+    &:first-of-type {
+      margin-top: 20px;
+    }
+    &:last-of-type {
+      border-bottom: 1px solid $color-text-lightest;
+    }
   }
 }

@@ -1,0 +1,23 @@
+.terms-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-end;
+  align-items: center;
+  margin-bottom: 40px;
+  .header-logo {
+    img {
+      max-width: 250px;
+    }
+  }
+  * {
+    margin: 10px;
+  }
+  h2 {
+    font-size: 40px;
+  }
+  ol {
+    li {
+      font-size: 25px;
+    }
+  }
+}

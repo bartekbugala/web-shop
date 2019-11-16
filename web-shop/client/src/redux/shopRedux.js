@@ -3,7 +3,7 @@ import { API_URL } from '../config';
 
 //// Initial state
 const initialState = {
-  logo: { path: '/images/creativity_logo.jpg', alt: 'Creativity' },
+  logo: { path: '/images/duck_it_logo.svg', alt: 'Creativity' },
   sortParam: 'default',
   menuLinks: [
     { path: '/', title: 'Home' },

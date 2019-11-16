@@ -1,4 +1,6 @@
-.footer__menu {
+@import '../../../styles/settings.scss';
+
+.footer-menu {
   display: flex;
   flex: 1 1 80%;
   flex-direction: row;
@@ -8,8 +10,12 @@
   li {
     text-transform: uppercase;
     margin: 0 15px;
-  }
-  a.active {
-    font-weight: bold;
+    a {
+      color: $color-text-lightest;
+    }
+    &:hover {
+      font-weight: bold;
+      color: $color-text-bright;
+    }
   }
 }

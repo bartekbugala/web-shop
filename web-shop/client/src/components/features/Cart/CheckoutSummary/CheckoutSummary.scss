@@ -1,4 +1,4 @@
-@import "../../../../styles/settings.scss";
+@import '../../../../styles/settings.scss';
 
 .checkout-summary {
   h3 {
@@ -18,11 +18,6 @@
       padding: 10px;
     }
   }
-  .button-discount-code {
-    float: right;
-    font-size: 1.1em;
-    padding: 12px;
-  }
   .checkout-discount {
     font-size: 17px;
     color: $color-discount;
@@ -33,5 +28,15 @@
     font-size: 20px;
     font-weight: bold;
     text-align: right;
+  }
+  .button--confirm {
+    border-color: $color-duck;
+    background-color: $color-duck;
+    color: $color-text;
+    &:hover {
+      background-color: $color-duck-nose;
+      border-color: $color-duck-nose;
+      color: $color-text-bright;
+    }
   }
 }

@@ -1,20 +1,44 @@
 @import '../../../styles/settings.scss';
-
-.pagination__list {
-  list-style: none;
-  display: flex;
-  justify-content: flex-end;
-
+.pagination {
   li {
-    color: $color-text-lightest;
-    margin: 0 5px;
-    font-size: 25px;
-    &:hover {
-      cursor: pointer;
-      color: $color-text;
+    button {
+      color: $color-text-light;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      width: 10px;
+      user-select: none;
+      &:hover,
+      &:active,
+      &:focus {
+        background: none;
+        border: none;
+        box-shadow: none;
+      }
     }
   }
+  .page-link:hover svg,
+  .page-link:hover {
+    color: $color-text;
+    text-shadow: 0 0 1px grey;
+  }
+  .page-link svg,
+  .page-link span {
+    color: $color-text-light;
+  }
+  .disabled svg,
+  .disabled span {
+    color: $color-text-disabled;
+  }
+  .page-item.active .page-link {
+    background: none;
+    color: $color-text;
+    font-weight: bold;
+    text-shadow: none;
+  }
 }
-.pagination__list__item--hidden {
+
+.pagination-item--hidden {
   visibility: hidden;
 }

@@ -1,9 +1,11 @@
+@import '../../../../styles/settings.scss';
+
 .product-tag-container {
   .product-tag {
     padding: 5px 10px;
     margin: 0 10px;
-    background: black;
-    color: white;
+    background: $color-text-light;
+    color: $color-text-bright;
     font-size: 15px;
   }
 }

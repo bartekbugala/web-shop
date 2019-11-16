@@ -1,2 +1,11 @@
 .product-description {
+  margin: 20px 0;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .product-description {
+    margin: 20px 0;
+    text-align: justify;
+  }
 }

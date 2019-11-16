@@ -13,28 +13,30 @@ const CartProductList = ({
   total,
   discount
 }) => (
-  <ul className="cart__list">
+  <ul className="cart-list">
     {cart.map(item => (
-      <li key={item.id} className="cart__list-item">
-        <div className="cart__list-item__col-container">
+      <li key={item.id} className="cart-list-item">
+        <div className="cart-list-item-col-container">
           <img src={item.img} alt={item.name} />
         </div>
-        <div className="cart__list-item__col-container cart__list-item__description">
+        <div className="cart-list-item-col-container cart-list-item-caption">
           <ProductName>{item.name}</ProductName>
-          <article>{cutText(item.description, 200)}</article>
+          <p className="cart-list-item-description">
+            {cutText(item.description, 200)}
+          </p>
         </div>
-        <div className="cart__list-item__col-container">
+        <div className="cart-list-item-col-container">
           <Price>{item.price}</Price>
         </div>
-        <div className="cart__list-item__col-container">
-          <div className="cart__list-item__amount-container">
+        <div className="cart-list-item-col-container">
+          <div className="cart-list-item-amount-container">
             {<Button onClick={() => removeOne(item)}>-</Button>}
-            <span className="cart__list-item__amount">{`${item.amount}`}</span>
+            <span className="cart-list-item-amount">{`${item.amount}`}</span>
             {<Button onClick={() => addToCart(item)}>+</Button>}
             <span>pcs.</span>
           </div>
           <div
-            className="cart__list-item__remove"
+            className="cart-list-item-remove"
             onClick={() => removeProduct(item)}>
             remove item
           </div>
