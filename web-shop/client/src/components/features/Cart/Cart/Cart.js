@@ -1,6 +1,5 @@
 import React from 'react';
 import { MdAutorenew } from 'react-icons/md';
-//import Button from '../../../common/Button/Button';
 import { Button } from 'reactstrap';
 import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';

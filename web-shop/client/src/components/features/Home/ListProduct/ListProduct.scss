@@ -1,20 +1,31 @@
 @import '../../../../styles/settings.scss';
 
-.list-product__container {
+.product-wrapper {
+  padding: 10px;
+  margin: 8px;
+  background: $color-text-bright;
+  border: solid 1px $color-editor-border;
+  box-shadow: 5px 5px 8px $color-text-light;
+  border-radius: 10px;
+}
+.list-product-container {
   position: relative;
   display: block;
   width: 400px;
   height: 500px;
-  margin: 10px;
-  .list-product__img {
+  margin: 0;
+  border: solid 1px $color-editor-border;
+
+  .list-product-img {
     max-width: 100%;
+    height: 100%;
     background-color: lightgray;
   }
   div[class^='list-product'] {
     display: inline-block;
     position: absolute;
   }
-  .list-product__last-tag {
+  .list-product-last-tag {
     left: 5px;
     top: 15px;
     .product-tag {
@@ -27,21 +38,20 @@
       background: $color-error;
     }
   }
-  .list-product__tag {
+  .list-product-tag {
     right: 5px;
     top: 15px;
   }
-  .list-product__name {
+  .list-product-name {
     left: 10px;
-    bottom: 5px;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 0 10px;
-    .product-name {
-      font-size: 20px;
-    }
+    bottom: 15px;
+    background-color: $color-background-transparent;
+    padding: 5px;
   }
-  .list-product__price {
+  .list-product-price {
     right: 10px;
-    bottom: 5px;
+    bottom: 15px;
+    background-color: $color-background-transparent;
+    padding: 5px;
   }
 }

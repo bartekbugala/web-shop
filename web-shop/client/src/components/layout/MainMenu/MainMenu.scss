@@ -48,8 +48,9 @@
     left: 34px;
   }
   .navbar-light .navbar-toggler {
-    height: 50px;
+    height: 55px;
     border: $border-width-duck solid $color-duck;
+    background-color: $color-duck;
   }
   .nav-item {
     width: 100%;

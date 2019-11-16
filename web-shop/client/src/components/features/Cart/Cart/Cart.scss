@@ -17,8 +17,13 @@
       border: 1px solid $color-textfield-border;
       border-radius: 5px;
     }
+    .btn-secondary {
+      display: inline-flex;
+      height: 40px;
+    }
   }
   .btn-secondary {
+    margin: 20px 0;
     border-color: $color-duck;
     background-color: $color-duck;
     color: $color-text;
@@ -27,9 +32,6 @@
       border-color: $color-duck-nose;
       color: $color-text-bright;
     }
-  }
-  > .btn-secondary {
-    margin: 20px 0;
     &.disabled,
     &.disabled:hover {
       background-color: $color-text-bright;
