@@ -147,3 +147,9 @@ finish:
 finish:
 - task-40-2
 
+## 16.11.2019
+finish:
+- task-39
+- task-27
+- task-reactstrap
+
