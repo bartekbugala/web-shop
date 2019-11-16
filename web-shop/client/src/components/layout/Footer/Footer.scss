@@ -1,6 +1,25 @@
-.footer-copyright {
-  flex: 1 1 20%;
+@import '../../../styles/settings.scss';
+
+.footer {
+  display: flex;
+  .footer-copyright {
+    flex: 1 1 20%;
+    text-align: center;
+  }
+  .footer-nav {
+    flex: 1 1 80%;
+    text-align: center;
+  }
 }
-.footer-nav {
-  flex: 1 1 80%;
+
+@media (max-width: $media-query-2) {
+  .footer {
+    flex-direction: column-reverse;
+    .footer-copyright {
+      align-self: center;
+    }
+    .footer-nav {
+      align-self: center;
+    }
+  }
 }

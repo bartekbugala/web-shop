@@ -1,9 +1,11 @@
+@import '../../../../styles/settings.scss';
+
 .product-description {
   margin: 20px 0;
   text-align: justify;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $media-query-2) {
   .product-description {
     margin: 20px 0;
     text-align: justify;

@@ -23,39 +23,37 @@ class ListProduct extends React.Component {
     const { loading, handleError, handleLoading } = this.state;
     return (
       <Link to={`products/${id}`}>
-        <div className="product-wrapper">
-          <div className="list-product-container">
-            {!loading && (
-              <img
-                onLoad={handleLoading}
-                onError={handleError}
-                className="list-product-img"
-                src={img}
-                alt={`${name}`}
-              />
-            )}
-            {amount < 5 && amount > 0 && (
-              <div className="list-product-last-tag">
-                <ProductTag>{`Last pieces`}</ProductTag>
-              </div>
-            )}
-            {amount === 0 && (
-              <div className="list-product-last-tag out-of-stock">
-                <ProductTag>{`Out of stock`}</ProductTag>
-              </div>
-            )}
-            {tag && (
-              <div className="list-product-tag">
-                <ProductTag>{tag}</ProductTag>
-              </div>
-            )}
-            <div className="list-product-name">
-              <ProductName>{name}</ProductName>
+        <div className="list-product-container">
+          {!loading && (
+            <img
+              onLoad={handleLoading}
+              onError={handleError}
+              className="list-product-img"
+              src={img}
+              alt={`${name}`}
+            />
+          )}
+          {amount < 5 && amount > 0 && (
+            <div className="list-product-last-tag">
+              <ProductTag>{`Last pieces`}</ProductTag>
             </div>
-            {/* <p className="list-product__price">{`price: ${price}`}</p> */}
-            <div className="list-product-price">
-              <Price>{price}</Price>
+          )}
+          {amount === 0 && (
+            <div className="list-product-last-tag out-of-stock">
+              <ProductTag>{`Out of stock`}</ProductTag>
             </div>
+          )}
+          {tag && (
+            <div className="list-product-tag">
+              <ProductTag>{tag}</ProductTag>
+            </div>
+          )}
+          <div className="list-product-name">
+            <ProductName>{name}</ProductName>
+          </div>
+          {/* <p className="list-product__price">{`price: ${price}`}</p> */}
+          <div className="list-product-price">
+            <Price>{price}</Price>
           </div>
         </div>
       </Link>

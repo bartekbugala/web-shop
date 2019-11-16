@@ -12,7 +12,7 @@ const Footer = props => {
   const { menuLinks } = props;
   return (
     <footer>
-      <div className="container">
+      <div className="container footer">
         <div className="footer-copyright">{'All rights reserved'}</div>
         <nav className="footer-nav">
           <FooterMenu menuLinks={menuLinks} />

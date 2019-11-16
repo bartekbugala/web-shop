@@ -1,3 +1,5 @@
+@import '../../../styles/settings.scss';
+
 .main-section {
   display: flex;
   .sorting-widget-container {
@@ -15,7 +17,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $media-query-2) {
   .main-section {
     flex-direction: column;
     .sorting-widget-container {

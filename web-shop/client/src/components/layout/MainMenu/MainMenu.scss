@@ -42,7 +42,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $media-query-2) {
   .header-menu-cart-icon .cart-icon-products {
     top: 18px;
     left: 34px;
