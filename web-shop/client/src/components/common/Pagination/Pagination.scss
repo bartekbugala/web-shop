@@ -33,12 +33,12 @@
   }
   .page-item.active .page-link {
     background: none;
-    color: $color-success;
+    color: $color-text;
     font-weight: bold;
     text-shadow: none;
   }
 }
 
-/* .pagination-item--hidden {
+.pagination-item--hidden {
   visibility: hidden;
-} */
+}

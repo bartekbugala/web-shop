@@ -34,7 +34,7 @@ class Products extends React.Component {
     const { presentPage } = this.state;
     return (
       <div className="products-container">
-        {request.pending && <Spinner />}
+        {/*  {request.pending && <Spinner />} */}
         {!request.pending && request.error !== null && (
           <Alert variant="error">{`Error: ${request.error}`}</Alert>
         )}

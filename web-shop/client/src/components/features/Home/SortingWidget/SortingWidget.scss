@@ -1,0 +1,33 @@
+@import '../../../../styles/settings.scss';
+.sorting-widget {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  .sorting-title {
+    margin-bottom: 10px;
+  }
+}
+.btn-outline-secondary {
+  display: none;
+  background-color: $color-background;
+  border: $border-width-duck solid $color-duck;
+  &:hover {
+    background-color: $color-text-light;
+  }
+}
+
+@media (max-width: 768px) {
+  .sorting-widget {
+    .sorting-title {
+      display: none;
+    }
+    flex-direction: row;
+    justify-content: space-evenly;
+    span {
+      display: none;
+    }
+  }
+  .btn-outline-secondary {
+    display: inline-block;
+  }
+}

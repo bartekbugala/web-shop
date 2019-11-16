@@ -11,7 +11,7 @@ const Logo = props => {
   const { logo } = props;
   return (
     <span className="header-logo">
-      <img src={logo.path} alt={logo.alt} />
+      <img src="/images/duck_it_logo.svg" alt="duck it logo" />
     </span>
   );
 };
