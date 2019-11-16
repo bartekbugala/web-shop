@@ -16,19 +16,17 @@ import NotFound from './components/pages/NotFound/NotFoundPage';
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <MainLayout>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/products/:id" exact component={SingleProduct} />
-            <Route path="/faq" exact component={Faq} />
-            <Route path="/terms" exact component={Terms} />
-            <Route path="/contact" exact component={Contact} />
-            <Route path="/cart" exact component={Cart} />
-            <Route component={NotFound} />
-          </Switch>
-        </MainLayout>
-      </div>
+      <MainLayout>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/products/:id" exact component={SingleProduct} />
+          <Route path="/faq" exact component={Faq} />
+          <Route path="/terms" exact component={Terms} />
+          <Route path="/contact" exact component={Contact} />
+          <Route path="/cart" exact component={Cart} />
+          <Route component={NotFound} />
+        </Switch>
+      </MainLayout>
     );
   }
 }

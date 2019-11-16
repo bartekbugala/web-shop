@@ -53,10 +53,12 @@ class ProductFull extends React.Component {
         </div>
         <div className="full-product-caption">
           <div className="full-product-title-wrapper">
-            <ProductName>{name}</ProductName>
-            <Price>{price}</Price>
+            <ProductName>
+              {name}
+              <Amount>{amount}</Amount>
+            </ProductName>
             {tag && <ProductTag className="full-product-tag">{tag}</ProductTag>}
-            <Amount>{amount}</Amount>
+            <Price>{price}</Price>
           </div>
 
           {description && (

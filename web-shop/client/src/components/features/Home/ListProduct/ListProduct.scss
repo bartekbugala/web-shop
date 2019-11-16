@@ -18,12 +18,13 @@
     left: 5px;
     top: 15px;
     .product-tag {
-      background: $color-warning-back;
+      background: $color-duck-nose;
+      color: $color-text-bright;
     }
   }
   .out-of-stock {
     .product-tag {
-      background: $color-error-back;
+      background: $color-error;
     }
   }
   .list-product__tag {

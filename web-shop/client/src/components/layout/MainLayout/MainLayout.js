@@ -4,13 +4,13 @@ import PageContainer from '../PageContainer/PageContainer';
 import Footer from '../Footer/Footer';
 
 const MainLayout = ({ children }) => (
-  <div>
-    <PageContainer>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </PageContainer>
-  </div>
+  <PageContainer>
+    <Header />
+    <main>
+      <div class="container">{children}</div>
+    </main>
+    <Footer />
+  </PageContainer>
 );
 
 export default MainLayout;

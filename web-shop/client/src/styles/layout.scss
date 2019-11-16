@@ -1,13 +1,39 @@
 header,
 main,
 footer {
-  margin: 0 auto;
-  padding: 0 10px;
-  max-width: 1170px;
   justify-content: space-between;
+  width: 100%;
+}
+
+main {
+  margin-top: 20px;
+  justify-self: stretch;
+  flex: 1 1 100%;
 }
 
 header,
 footer {
   display: flex;
+}
+
+footer {
+  background-color: $color-text;
+  color: $color-background;
+  padding: 20px 10px;
+  justify-self: flex-end;
+}
+.page-container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 10px;
+  max-width: 1170px;
 }

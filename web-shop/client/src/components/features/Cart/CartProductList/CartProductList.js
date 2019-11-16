@@ -19,9 +19,11 @@ const CartProductList = ({
         <div className="cart-list-item-col-container">
           <img src={item.img} alt={item.name} />
         </div>
-        <div className="cart-list-item-col-container cart-list-item-description">
+        <div className="cart-list-item-col-container cart-list-item-caption">
           <ProductName>{item.name}</ProductName>
-          <article>{cutText(item.description, 200)}</article>
+          <p className="cart-list-item-description">
+            {cutText(item.description, 200)}
+          </p>
         </div>
         <div className="cart-list-item-col-container">
           <Price>{item.price}</Price>

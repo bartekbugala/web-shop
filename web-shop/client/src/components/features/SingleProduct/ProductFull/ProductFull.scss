@@ -1,3 +1,4 @@
+@import '../../../../styles/settings.scss';
 .full-product-container {
   position: relative;
   display: flex;
@@ -20,6 +21,20 @@
       background-color: lightgray;
     }
   }
+  .full-product-caption {
+    display: flex;
+    flex-direction: column;
+    .btn-secondary {
+      border-color: $color-duck;
+      background-color: $color-duck;
+      color: $color-text;
+      &:hover {
+        background-color: $color-duck-nose;
+        border-color: $color-duck-nose;
+        color: $color-text-bright;
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -27,11 +42,25 @@
     margin-top: 0;
     flex-direction: column;
     margin: 5px 12px;
+    .full-product-caption {
+      display: flex;
+      flex-direction: column;
+      .btn-secondary {
+        order: 2;
+      }
+      .product-description {
+        order: 3;
+      }
+      .full-product-title-wrapper {
+        order: 1;
+      }
+    }
+
     .full-product-img-wrapper {
       flex: 1 0 400px;
       padding: 20px;
       display: flex;
-      flex-direction: column;
+
       align-items: center;
       img {
         max-width: 80%;

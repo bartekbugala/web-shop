@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdAutorenew } from 'react-icons/md';
-import Button from '../../../common/Button/Button';
+//import Button from '../../../common/Button/Button';
+import { Button } from 'reactstrap';
 import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';
 import Modal from '../../../features/Modal/Modal';
@@ -153,6 +154,7 @@ class Cart extends React.Component {
           </span>
 
           <Button
+            className="btn-lg"
             disabled={!this.props.cartProducts}
             variant={!this.props.cartProducts ? 'disabled' : 'confirm'}
             onClick={() => {

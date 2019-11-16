@@ -25,14 +25,18 @@ const CheckoutSummary = ({ cart, total, discount }) => (
           );
         })}
         <tr>
-          <td className="checkout-discount" colSpan="4">{`Discount: ${discount}%`}</td>
+          <td
+            className="checkout-discount"
+            colSpan="4">{`Discount: ${discount}%`}</td>
         </tr>
         <tr>
           <td className="checkout-total" colSpan="4">{`Total: ${total}`}</td>
         </tr>
       </tbody>
     </table>
-    <Button variant="confirm">Confrim Order</Button>
+    <Button className="confirm-button" variant="confirm">
+      Confrim Order
+    </Button>
   </div>
 );
 
