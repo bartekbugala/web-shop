@@ -1,17 +1,19 @@
 import React from 'react';
+import './ContactPage.scss';
+import { MdPhone } from 'react-icons/md';
 
 const ContactPage = () => (
-  <div>
+  <div className="contact-wrapper">
     <h1>Contact</h1>
-    <p>
-      Your Favourite Online Shop Ltd.
-      <br />
-      22 321 Texas
-      <br />
-      Mc'Kinney, Tx 30083
-    </p>
-
-    <p>Phone: 777-777-777</p>
+    <ul>
+      <li>DUCK IT - Online Shop Ltd.</li>
+      <li>22 321 Texas</li>
+      <li>Mc'Kinney, Tx 30083</li>
+      <li>
+        <MdPhone />
+        777-777-777
+      </li>
+    </ul>
   </div>
 );
 

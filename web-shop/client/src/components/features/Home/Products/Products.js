@@ -1,7 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import ProductList from '../ProductList/ProductList';
-import Spinner from '../../../common/Spinner/Spinner';
 import Alert from '../../../common/Alert/Alert';
 import Pagination from '../../../common/Pagination/Pagination';
 import './Products.scss';
@@ -34,7 +33,6 @@ class Products extends React.Component {
     const { presentPage } = this.state;
     return (
       <div className="products-container">
-        {/*  {request.pending && <Spinner />} */}
         {!request.pending && request.error !== null && (
           <Alert variant="error">{`Error: ${request.error}`}</Alert>
         )}
