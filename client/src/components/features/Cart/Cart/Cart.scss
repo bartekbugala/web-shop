@@ -35,6 +35,9 @@
     &:active {
       background-color: $color-duck-nose !important;
     }
+    &:focus {
+      border-color: $color-info;
+    }
     &.disabled,
     &.disabled:hover {
       background-color: $color-text-bright;
