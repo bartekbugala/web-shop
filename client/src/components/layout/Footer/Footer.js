@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getMenuLinks } from '../../../redux/shopRedux';
+import { getMenuLinks } from '../../../redux/reduxSelectors';
 import FooterMenu from '../../layout/FooterMenu/FooterMenu';
 import './Footer.scss';
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Logo from '../Logo/Logo';
 import { Link, withRouter } from 'react-router-dom';
 import { MdShoppingCart } from 'react-icons/md';
-import { getCart, getCartProducts } from '../../../redux/shopRedux';
+import { getCart, getCartProducts } from '../../../redux/reduxSelectors';
 import { connect } from 'react-redux';
 import {
   Collapse,

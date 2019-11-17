@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProducts } from '../../../../redux/shopRedux';
+import { getProducts } from '../../../../redux/reduxSelectors';
 import ListProduct from '../ListProduct/ListProduct';
 import { connect } from 'react-redux';
 import Spinner from '../../../common/Spinner/Spinner';

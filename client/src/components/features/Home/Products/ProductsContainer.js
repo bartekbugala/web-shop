@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
+import { loadProductsByPageRequest } from '../../../../redux/reduxThunks';
 import {
   getProducts,
   getRequest,
-  loadProductsByPageRequest,
   getPages,
   getSort
-} from '../../../../redux/shopRedux';
+} from '../../../../redux/reduxSelectors';
 import Products from './Products';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -23,7 +23,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loadProductsByPageRequest(page, productsPerPage, sortParam))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

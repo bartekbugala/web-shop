@@ -1,19 +1,21 @@
 import { connect } from 'react-redux';
 import Cart from './Cart';
 import {
-  getCart,
   addToCartRequest,
   removeOneFromCart,
-  getRequest,
-  resetRequest,
   removeProductFromCart,
   loadDiscountRequest,
-  getDiscount,
-  getDiscountCode,
   countCartProducts,
-  getCartProducts,
   cleanUpCart
-} from '../../../../redux/shopRedux';
+} from '../../../../redux/reduxThunks';
+import { resetRequest } from '../../../../redux/reduxActions';
+import {
+  getCart,
+  getCartProducts,
+  getRequest,
+  getDiscount,
+  getDiscountCode
+} from '../../../../redux/reduxSelectors';
 
 const mapStateToProps = state => ({
   cart: getCart(state),
