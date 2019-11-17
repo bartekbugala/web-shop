@@ -4,15 +4,13 @@ import Price from '../../../common/ProductCommons/Price/Price';
 import Amount from '../../../common/ProductCommons/Amount/Amount';
 import ProductDescription from '../../../common/ProductCommons/ProductDescription/ProductDescription';
 import ProductTag from '../../../common/ProductCommons/ProductTag/ProductTag';
-//import Button from '../../../common/Button/Button';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
   addToCartRequest,
-  getRequest,
-  getCart,
   countCartProducts
-} from '../../../../redux/shopRedux';
+} from '../../../../redux/reduxThunks';
+import { getRequest, getCart } from '../../../../redux/reduxSelectors';
 import './ProductFull.scss';
 
 const mapStateToProps = state => ({
