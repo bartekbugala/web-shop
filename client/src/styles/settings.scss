@@ -16,8 +16,8 @@ $border-width-duck: 3px;
 
 $color-success: #01916d;
 $color-success-back: #00bc8c;
-$color-info: #2b7cb3;
-$color-info-back: #3598db;
+$color-info: #5ea7bd;
+$color-info-back: #589aad;
 $color-warning: #f0932b;
 $color-warning-back: #d68529;
 $color-danger: #f0932b;
@@ -36,7 +36,7 @@ $radius: 5px;
 $base-size: 14px;
 $transition: all 0.5s;
 
-$media-query-1: 767px;
+$media-query-1: 330px;
 $media-query-2: 768px;
 
 @mixin p-el($element) {

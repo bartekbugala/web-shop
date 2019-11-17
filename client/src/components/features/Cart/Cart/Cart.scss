@@ -32,6 +32,9 @@
       border-color: $color-duck-nose;
       color: $color-text-bright;
     }
+    &:active {
+      background-color: $color-duck-nose !important;
+    }
     &.disabled,
     &.disabled:hover {
       background-color: $color-text-bright;
