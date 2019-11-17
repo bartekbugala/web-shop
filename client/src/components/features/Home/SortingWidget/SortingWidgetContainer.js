@@ -1,6 +1,6 @@
 import SortingWidget from './SortingWidget';
 import { connect } from 'react-redux';
-import { loadSortedProductsByPageRequest } from '../../../../redux/shopRedux';
+import { loadSortedProductsByPageRequest } from '../../../../redux/reduxThunks';
 import { getSort } from '../../../../redux/reduxSelectors';
 
 const mapStateToProps = state => ({
