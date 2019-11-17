@@ -153,3 +153,12 @@ finish:
 - task-27
 - task-reactstrap
 
+## 17.11.2019
+finish:
+- task-redux
+- task-korekta-stylu
+- task-heroku
+- task-wysłanie
+
+
+
