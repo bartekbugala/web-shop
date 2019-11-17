@@ -1,15 +1,16 @@
 @import '../../../../styles/settings.scss';
 
 .list-product-container {
-  margin: 8px;
+  margin: 8px 8px 28px 8px;
   position: relative;
   display: block;
   box-shadow: 6px 6px 8px $color-text-light;
   padding-bottom: 65px;
 
   .list-product-img {
-    max-width: 100%;
-    height: 100%;
+    max-width: 400px;
+    width: 100%;
+    height: auto;
     background-color: lightgray;
     border-bottom: 1px solid $color-text-disabled;
   }

@@ -12,10 +12,16 @@
   display: none;
   padding: 15px;
   font-size: 25px;
-  background-color: $color-background;
+  background-color: $color-duck;
   border: $border-width-duck solid $color-duck;
   &:hover {
-    background-color: $color-text-light;
+    background-color: $color-duck-nose;
+  }
+  &:active {
+    background-color: $color-duck-nose;
+  }
+  &:focus {
+    border-color: $color-info;
   }
 }
 
