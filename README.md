@@ -23,14 +23,11 @@ Install dependencies
 yarn install
 ```
 
-Before running make sure to create a mongoDB database
+Before running make sure to have a mongoDB database,
+Currently the project is using an online cluster,
+To run local DB change config
 
-```
-// In mongo prompt - terminal
-use webshop
-```
-
-Running
+Running Development
 
 ```
 // in the main folder run
