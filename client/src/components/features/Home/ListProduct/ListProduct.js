@@ -51,7 +51,6 @@ class ListProduct extends React.Component {
           <div className="list-product-name">
             <ProductName>{name}</ProductName>
           </div>
-          {/* <p className="list-product__price">{`price: ${price}`}</p> */}
           <div className="list-product-price">
             <Price>{price}</Price>
           </div>

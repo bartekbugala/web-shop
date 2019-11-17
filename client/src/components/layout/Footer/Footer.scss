@@ -2,24 +2,32 @@
 
 .footer {
   display: flex;
-  .footer-copyright {
-    flex: 1 1 20%;
-    text-align: center;
-  }
+  flex-direction: row;
+  justify-content: space-between;
   .footer-nav {
-    flex: 1 1 80%;
+    display: flex;
+    justify-content: center;
+  }
+  .footer-copyright {
     text-align: center;
   }
 }
 
 @media (max-width: $media-query-2) {
   .footer {
+    justify-content: center;
     flex-direction: column-reverse;
+    flex-wrap: wrap;
+
     .footer-copyright {
       align-self: center;
     }
-    .footer-nav {
-      align-self: center;
+  }
+}
+
+@media (max-width: $media-query-1) {
+  .footer-nav {
+    .footer-menu {
     }
   }
 }

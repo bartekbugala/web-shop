@@ -78,3 +78,10 @@
     display: none;
   }
 }
+
+@media (max-width: $media-query-1) {
+  .cart-list-item {
+    flex-wrap: wrap;
+    border-bottom: 1px solid $color-editor-border;
+  }
+}
