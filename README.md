@@ -1,6 +1,6 @@
 # web-shop
 
-Kodilla - Projekt Końcowy - MERN STACK
+MERN STACK - web shop
 https://duckit.herokuapp.com/
 
 Daily-log:
